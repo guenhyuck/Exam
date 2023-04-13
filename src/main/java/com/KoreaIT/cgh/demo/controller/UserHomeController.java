@@ -38,4 +38,10 @@ public class UserHomeController {
 
 		return count++;
 	}
+	@RequestMapping("/usr/home/main5")
+	@ResponseBody
+	public String showMain5() {
+		count = 0;
+		return "count의 값이 0으로 초기화 됨";
+	}
 }
