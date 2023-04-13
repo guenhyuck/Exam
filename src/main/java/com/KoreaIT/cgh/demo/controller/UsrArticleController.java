@@ -51,4 +51,26 @@ public class UsrArticleController {
 
 		return articles;
 	}
+
+	@RequestMapping("/usr/article/doDelete")
+	@ResponseBody
+	private void doDelete() {
+		if(articles.size() == 0) {
+			return;
+		
+		}
+		
+		articles.remove(lastArticleId);
+
+	}
+
+	@RequestMapping("/usr/article/doModify")
+	@ResponseBody
+	private void doModify() {
+		if(articles.size() == 0) {
+			return;
+			
+		}
+
+	}
 }
