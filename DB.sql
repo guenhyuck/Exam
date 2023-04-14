@@ -28,7 +28,17 @@ title = '제목 2',
 INSERT INTO article 
 SET regDate = NOW(),
 updateDate = NOW(),
+
 title = '제목 3',
+
 `body` = '내용 3';
 
+
+
+
 SELECT * FROM article;
+
+
+
+
+SELECT LAST_INSERT_ID();
