@@ -75,7 +75,7 @@ public class UsrHomeController {
 	@RequestMapping("/usr/home/getString")
 	@ResponseBody
 	public String getString() {
-		return "안녕";
+		return "없어";
 	}
 	@RequestMapping("/usr/home/getFloat")
 	@ResponseBody
