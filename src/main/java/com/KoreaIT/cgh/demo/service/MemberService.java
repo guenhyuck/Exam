@@ -14,13 +14,17 @@ public class MemberService {
 	}
 	// 서비스 메서드
 	public int Join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
-
+      //로그인 아이디 중복체크
 		Member existsMember = getMemberByLoginId(loginId);
 
 		if (existsMember != null) {
 			return -1;
 		}
-
+		
+       //이름 + 이메일 중복체크 
+		
+		
+		
 		memberRepository.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		return memberRepository.getLastInsertId();
