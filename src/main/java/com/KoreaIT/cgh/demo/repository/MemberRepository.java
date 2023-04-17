@@ -44,5 +44,15 @@ public interface MemberRepository {
 
 
 	Member getMemberByLoginId(String loginId);
+	
+	
+	@Select("""
+			   SELECT COUNT(*) > 0;
+			   FROM `member`;
+			   WHERE `name` = #{name}
+			   AND email = #{email};
+				""")
+
+	Member getMemberByNameAndEmail(String loginId, String email);
 
 }
