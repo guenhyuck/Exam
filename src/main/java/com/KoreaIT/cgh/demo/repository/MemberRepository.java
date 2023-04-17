@@ -33,5 +33,16 @@ public interface MemberRepository {
 			SELECT LAST_INSERT_ID()
 			""")
 	int getLastInsertId();
+	
+	
+	
+	@Select("""
+		   SELECT COUNT(*) > 0;
+		   FROM `member`;
+		   WHERE loginId = #{loginId};
+			""")
+
+
+	Member getMemberByLoginId(String loginId);
 
 }
