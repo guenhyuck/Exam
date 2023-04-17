@@ -13,5 +13,10 @@ public class Member {
 	private String loginId;
 	private String loginPw;
 	private String name;
+	private int age;
+	private String nickname;
+	private String cellphonenum;
+	private String email;
+	private String address;
 
 }

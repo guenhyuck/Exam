@@ -16,12 +16,16 @@ CREATE TABLE article(
 CREATE TABLE `member`(
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
-    loginId  CHAR(100) NOT NULL,
-    loginPw CHAR(100) NOT NULL,
-    `name` TEXT NOT NULL,
-    nickname TEXT NOT NULL,
-    cellphonenum INT(100) NOT NULL,
-    email TEXT NOT NULL
+    updateDate DATETIME NOT NULL,
+    loginId  CHAR(20) NOT NULL,
+    loginPw CHAR(60) NOT NULL,
+    `authLevel` SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '권한 레벨(3=일반,7=관리자)',
+    `name` CHAR(20) NOT NULL,
+    nickname CHAR(20) NOT NULL,
+    cellphoneNum CHAR(20) NOT NULL,
+    email CHAR(50) NOT NULL,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부(0=탈퇴 전, 1 = 탈퇴 후 )',
+    delDate DATETIME COMMENT '탈퇴날짜'
 );
 
 # 게시물 테스트데이터 생성
@@ -47,32 +51,39 @@ title = '제목 3',
 
 INSERT INTO `member` 
 SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'admin',
+loginPw = 'admin',
+`authLevel` = 7,
+`name` = '관리자',
+nickname = '관리자',
+cellphoneNum = '01012341234',
+email = 'abcdef@gmail.com';
+
+
+
+INSERT INTO `member` 
+SET regDate = NOW(),
+updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
+`authLevel` = 3,
 `name` = 'test1',
 nickname = 'test1',
-cellphonenum = '1234',
-email = 'test1';
+cellphoneNum = '01012341235',
+email = 'aadwq@gmail.com';
 
 
 INSERT INTO `member` 
 SET regDate = NOW(),
+updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
+`authLevel` = 3,
 `name` = 'test2',
 nickname = 'test2',
-cellphonenum = '12345',
-email = 'test2';
-
-
-INSERT INTO `member` 
-SET regDate = NOW(),
-loginId = 'test3',
-loginPw = 'test3',
-`name` = 'test3',
-nickname = 'test3',
-cellphonenum = '123456',
-email = 'test3';
+cellphoneNum = '01012341236',
+email = 'absdfsdf@gmail.com';
 
 
 
@@ -80,6 +91,8 @@ email = 'test3';
 SELECT * FROM article;
 
 SELECT * FROM `member`;
+
+DESC `member`;
 
 
 
