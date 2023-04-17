@@ -8,7 +8,7 @@ import com.KoreaIT.cgh.demo.vo.Member;
 
 @Mapper
 public interface MemberRepository {
-
+   //회원가입
 	@Insert("""
 			INSERT INTO `member`
 			SET regDate = NOW(),
@@ -21,7 +21,7 @@ public interface MemberRepository {
 			email = #{email}
 			""")
 	void join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email);
-
+  //
 	@Select("""
 			SELECT *
 			FROM `member`
@@ -34,7 +34,7 @@ public interface MemberRepository {
 			""")
 	int getLastInsertId();
 	
-	
+	//아이디 중복체크
 	
 	@Select("""
 		   SELECT COUNT(*) > 0;
@@ -45,7 +45,7 @@ public interface MemberRepository {
 
 	Member getMemberByLoginId(String loginId);
 	
-	
+	//이름,이메일 중복체크
 	@Select("""
 			   SELECT COUNT(*) > 0;
 			   FROM `member`;

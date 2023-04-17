@@ -11,10 +11,12 @@ import com.KoreaIT.cgh.demo.vo.Member;
 public class UsrMemberController {
 	@Autowired
 	private MemberService memberService;
+	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
 			String email) {
+		// 입구컷
 		
 		if (Ut.empty(loginId)) {
 			return "아이디를 입력해주세요";
@@ -36,6 +38,8 @@ public class UsrMemberController {
 		}
 		
 		int id = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
+		
+		//중복체크
 		
 		if(id == -1) { 
 			return Ut.f("이미 사용중인 아이디(%s)입니다", loginId);
