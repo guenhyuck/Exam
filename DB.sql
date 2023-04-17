@@ -94,6 +94,11 @@ SELECT * FROM `member`;
 
 DESC `member`;
 
+SELECT COUNT(*) > 0
+FROM `member`
+WHERE `name` = '관리자'
+AND email = 'abcdef@gmail.com';
+
 
 
 

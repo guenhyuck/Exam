@@ -13,7 +13,7 @@ public class MemberService {
 		this.memberRepository = memberRepository;
 	}
 	// 서비스 메서드
-	public int Join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
+	public int join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
       //로그인 아이디 중복체크
 		Member existsMember = getMemberByLoginId(loginId);
 
