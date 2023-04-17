@@ -4,13 +4,16 @@
 <mapper
 	namespace="com.KoreaIT.cgh.demo.repository.ArticleRepository">
 
-	<insert id="writeArticle">
+	<insert id="doJoin">
 		INSERT INTO article
 		SET regDate = NOW(),
-		updateDate=
-		NOW(),
-		title =#{title},
-		`body`= #{body}
+		loginId= #{loginId},
+		loginPw= #{loginPw},
+		`name`= #{name},
+		nickname = #{nickname},
+	    cellphonenum = #{cellphonenum},
+		email = #{email}
+
 	</insert>
 
 	<select id="getArticles" resultType="Article">

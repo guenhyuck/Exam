@@ -12,11 +12,13 @@ public class Member {
 	private int id;
 	private String loginId;
 	private String loginPw;
+	private String authLeverl;
 	private String name;
-	private int age;
 	private String nickname;
 	private String cellphonenum;
 	private String email;
-	private String address;
+	private String delStatus;
+	private String delDate;
+	
 
 }
