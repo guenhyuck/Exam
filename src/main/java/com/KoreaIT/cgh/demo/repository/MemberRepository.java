@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.KoreaIT.cgh.demo.vo.Member;
-import com.KoreaIT.cgh.demo.vo.ResultData;
 
 @Mapper
 public interface MemberRepository {

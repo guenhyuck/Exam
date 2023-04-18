@@ -1,22 +1,25 @@
 package com.KoreaIT.cgh.demo.vo;
 
 import lombok.Getter;
-
-public class ResultData {
+//DT 제네렉 데이터 타입
+public class ResultData<DT> {
 	@Getter
 	private String resultCode;
 	@Getter
 	private String msg;
 	@Getter
-	private Object data1;
+	
+	//private Object data1;
+	//뭐 들어올지 정하기 싫다
+	private DT data1;
 	
 	//
-	public static ResultData from(String resultCode, String msg) {
+	public static <DT> ResultData<DT> from(String resultCode, String msg) {
 		return from(resultCode,msg,null);
 	}
 	
-	public static ResultData from(String resultCode,String msg,Object data1) {
-		ResultData rd = new ResultData();
+	public static <DT>ResultData<DT> from(String resultCode,String msg,DT data1) {
+		ResultData<DT> rd = new ResultData<DT>();
 		rd.resultCode = resultCode;
 		rd.msg = msg;
 		rd.data1 = data1;
@@ -34,8 +37,8 @@ public class ResultData {
 		return isSuccess() == false;
 	}
 
-	public static ResultData newData(ResultData joinRd, Object newData) {
-		return from(joinRd.getResultCode(),joinRd.getMsg(),newData);
+	public static <DT>ResultData<DT> newData(ResultData joinRd, DT member) {
+		return from(joinRd.getResultCode(),joinRd.getMsg(),member);
 	}
 	
 
