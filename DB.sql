@@ -86,6 +86,20 @@ cellphoneNum = '01012341236',
 email = 'absdfsdf@gmail.com';
 
 
+# 게시물 테이블 구조 변경 memberID 추가
+
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
+
+
+UPDATE article
+SET memberId = 2
+WHERE id IN(1,2);
+
+UPDATE article
+SET memberId = 3
+WHERE id =3;
+
+######################################
 
 
 SELECT * FROM article;
@@ -98,6 +112,13 @@ SELECT COUNT(*) > 0
 FROM `member`
 WHERE `name` = '관리자'
 AND email = 'abcdef@gmail.com';
+
+
+SELECT A.*, M.name AS 작성자
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.loginedMemberId = M.id
+WHERE A.id = M.id;
 
 
 
