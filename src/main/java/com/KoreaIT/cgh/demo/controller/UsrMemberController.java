@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.KoreaIT.cgh.demo.service.MemberService;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Member;
+import com.KoreaIT.cgh.demo.vo.ResultData;
 @Controller
 public class UsrMemberController {
 	@Autowired
@@ -52,7 +53,7 @@ public class UsrMemberController {
 		
 		Member member = memberService.getMemberById(id);
 		
-		return member;
+		return ResultData.from("S-1", Ut.f("%d번회원이 가입 되었습니다",id),member);
 		
 	}
 	
