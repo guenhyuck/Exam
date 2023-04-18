@@ -44,6 +44,7 @@ public class UsrArticleController {
 		ResultData<Integer> doDeleteRd = articleService.deleteArticle(id);
 		
 		return ResultData.from(doDeleteRd.getResultCode(),doDeleteRd.getMsg(),article);
+		
 
 	}
 
@@ -62,7 +63,8 @@ public class UsrArticleController {
 
 		Article article = articleService.getArticle(id);
 
-		return ResultData.from(writeArticleRd.getResultCode(),writeArticleRd.getMsg(),article);
+
+		return ResultData.newData(writeArticleRd, article);
 	}
 
 	@RequestMapping("/usr/article/getArticles")

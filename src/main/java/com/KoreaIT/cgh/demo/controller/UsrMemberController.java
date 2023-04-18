@@ -82,4 +82,22 @@ public class UsrMemberController {
 		Member member = memberService.getMemberById(joinRd.getData1());
 		return ResultData.newData(joinRd, member);
 	}
+
+	@RequestMapping("/usr/member/doLoout")
+	@ResponseBody
+	public ResultData<Member> doLogout(HttpSession httpsession) {
+		boolean isLogined = false;
+
+		if (httpsession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+		}
+		if (isLogined) {
+			return ResultData.from("F-9", "이미 로그아웃 되었습니다.");
+		}
+
+		httpsession.removeAttribute("loginedMemberId");
+
+		return ResultData.from("S-1", "로그아웃 되었습니다.");
+	}
+
 }
