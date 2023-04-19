@@ -10,6 +10,7 @@ import com.KoreaIT.cgh.demo.vo.ResultData;
 
 @Service
 public class ArticleService {
+
 	@Autowired
 	private ArticleRepository articleRepository;
 
@@ -20,14 +21,14 @@ public class ArticleService {
 	// 서비스 메서드
 	public ResultData<Integer> writeArticle(int memberId, String title, String body) {
 
-		articleRepository.writeArticle(memberId,title, body);
+		articleRepository.writeArticle(memberId, title, body);
 
 		int id = articleRepository.getLastInsertId();
-		
-		return ResultData.from("S-1", Ut.f("%번글이 생성 되었습니다", id),id);
+
+		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), id);
 
 	}
-	
+
 	public ResultData actorCanModify(int loginedMemberId, Article article) {
 		if (article.getMemberId() != loginedMemberId) {
 			return ResultData.from("F-2", Ut.f("해당 글에 대한 권한이 없습니다"));
@@ -36,29 +37,24 @@ public class ArticleService {
 	}
 
 	public Article getArticle(int id) {
-
 		return articleRepository.getArticle(id);
 	}
 
-	public ResultData<Integer> deleteArticle(int id) {
+	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
-
-		
-		return ResultData.from("S-1", Ut.f("%d번게시글을 삭제했습니다",id),id);
 	}
 
 	public ResultData modifyArticle(int id, String title, String body) {
-		
+
 		articleRepository.modifyArticle(id, title, body);
-		
+
 		Article article = getArticle(id);
-		
+
 		return ResultData.from("S-1", Ut.f("%d번 글을 수정 했습니다", id), article);
 	}
 
 	public List<Article> articles() {
 		return articleRepository.getArticles();
 	}
-
 
 }
