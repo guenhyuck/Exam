@@ -8,7 +8,7 @@
 		<version>2.7.11-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.KoreaIT.cgh</groupId>
+	<groupId>com.KoreaIT.cwy</groupId>
 	<artifactId>demo-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
