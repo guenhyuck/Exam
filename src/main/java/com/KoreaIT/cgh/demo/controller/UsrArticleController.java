@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.cgh.demo.service.ArticleService;
+import com.KoreaIT.cgh.demo.service.MemberService;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Article;
+import com.KoreaIT.cgh.demo.vo.Member;
 import com.KoreaIT.cgh.demo.vo.ResultData;
 
 @Controller
 public class UsrArticleController {
-
 	@Autowired
 	private ArticleService articleService;
 
@@ -28,55 +29,49 @@ public class UsrArticleController {
 		if (article == null) {
 			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id), id);
 		}
-
 		articleService.modifyArticle(id, title, body);
-
 		return ResultData.from("S-1", Ut.f("%d번 글을 수정 했습니다", id), id);
 	}
+
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData<Article> doDelete(int id) {
+	public ResultData<Integer> doDelete(int id) {
 		Article article = articleService.getArticle(id);
-
 		if (article == null) {
-			//ResultData 1번실행
-			return ResultData.from("F-1", Ut.f("%d번게시물은 존재하지 않습니다",id));
+			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id), id);
 		}
-
-		ResultData<Integer> doDeleteRd = articleService.deleteArticle(id);
-		
-		return ResultData.from(doDeleteRd.getResultCode(),doDeleteRd.getMsg(),article);
-		
-
+		articleService.deleteArticle(id);
+		return ResultData.from("S-1", Ut.f("%d번 글을 삭제 했습니다", id), id);
 	}
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public ResultData<Article> doWrite(HttpSession httpsession,String title, String body) {
+	public ResultData<Article> doWrite(HttpSession httpSession, String title, String body) {
+
 		boolean isLogined = false;
 		int loginedMemberId = 0;
-		
-		if (httpsession.getAttribute("loginedMemberId") != null) {
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
-			loginedMemberId =(int) httpsession.getAttribute("loginedMemberId");
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
 		}
-		
-		if(isLogined == false) {
+
+		if (isLogined == false) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
-		if(Ut.empty(title)) {
+
+		if (Ut.empty(title)) {
 			return ResultData.from("F-1", "제목을 입력해주세요");
 		}
-		if(Ut.empty(body)) {
+		if (Ut.empty(body)) {
 			return ResultData.from("F-2", "내용을 입력해주세요");
 		}
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId,title, body);
-		
-		int id =(int) writeArticleRd.getData1();
+
+		ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId, title, body);
+
+		int id = (int) writeArticleRd.getData1();
 
 		Article article = articleService.getArticle(id);
-
-
 		return ResultData.newData(writeArticleRd, article);
 	}
 
@@ -84,21 +79,16 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<List<Article>> getArticles() {
 		List<Article> articles = articleService.articles();
-		return ResultData.from("S-1", "Article list",articles);
+		return ResultData.from("S-1", "Article List", articles);
 	}
 
 	@RequestMapping("/usr/article/getArticle")
 	@ResponseBody
 	public ResultData<Article> getArticle(int id) {
-
 		Article article = articleService.getArticle(id);
-
 		if (article == null) {
-			//ResultData 1번실행
-			return ResultData.from("F-1", Ut.f("%d번게시물은 존재하지 않습니다",id));
+			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다", id));
 		}
-         //ResultData 2번 실행
-		return ResultData.from("S-1", Ut.f("%d번게시물 입니다",id),article);
+		return ResultData.from("S-1", Ut.f("%d번 게시물입니다", id), article);
 	}
-
 }
