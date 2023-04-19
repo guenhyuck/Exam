@@ -39,7 +39,7 @@ public class UsrArticleController {
 
 		Article article = articleService.getArticle(id);
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id), id);
+			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id),"id", id);
 		}
 
 		ResultData actorCanModifyRd = articleService.actorCanModify(loginedMemberId, article);
@@ -69,7 +69,7 @@ public class UsrArticleController {
 
 		Article article = articleService.getArticle(id);
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id), id);
+			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id),"id", id);
 		}
 
 		if (article.getMemberId() != loginedMemberId) {
@@ -78,7 +78,7 @@ public class UsrArticleController {
 
 		articleService.deleteArticle(id);
 
-		return ResultData.from("S-1", Ut.f("%d번 글을 삭제 했습니다", id), id);
+		return ResultData.from("S-1", Ut.f("%d번 글을 삭제 했습니다", id),"id", id);
 
 	}
 
@@ -103,14 +103,14 @@ public class UsrArticleController {
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId, title, body);
 		int id = (int) writeArticleRd.getData1();
 		Article article = articleService.getArticle(id);
-		return ResultData.newData(writeArticleRd, article);
+		return ResultData.newData(writeArticleRd,"article", article);
 	}
 
 	@RequestMapping("/usr/article/getArticles")
 	@ResponseBody
 	public ResultData<List<Article>> getArticles() {
 		List<Article> articles = articleService.articles();
-		return ResultData.from("S-1", "Article List", articles);
+		return ResultData.from("S-1", "Article List","List<Artifcle>", articles);
 	}
 
 	@RequestMapping("/usr/article/getArticle")
@@ -118,8 +118,8 @@ public class UsrArticleController {
 	public ResultData<Article> getArticle(int id) {
 		Article article = articleService.getArticle(id);
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다", id));
+			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다","id", id));
 		}
-		return ResultData.from("S-1", Ut.f("%d번 게시물입니다", id), article);
+		return ResultData.from("S-1", Ut.f("%d번 게시물입니다", id),"article", article);
 	}
 }
