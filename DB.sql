@@ -99,7 +99,7 @@ UPDATE article
 SET memberId = 3
 WHERE id =3;
 
-######################################
+###테이블 확인
 
 
 SELECT * FROM article;
@@ -117,7 +117,7 @@ AND email = 'abcdef@gmail.com';
 SELECT A.*, M.name AS 작성자
 FROM article AS A
 INNER JOIN `member` AS M
-ON A.loginedMemberId = M.id
+ON A.memberId = M.id
 WHERE A.id = M.id;
 
 
