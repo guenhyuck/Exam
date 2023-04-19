@@ -117,8 +117,9 @@ public class UsrArticleController {
 	@ResponseBody
 	public ResultData<Article> getArticle(int id) {
 		Article article = articleService.getArticle(id);
+		
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다","id", id));
+			return ResultData.from("F-1", Ut.f("%d번 게시물은 존재하지 않습니다", id));
 		}
 		return ResultData.from("S-1", Ut.f("%d번 게시물입니다", id),"article", article);
 	}
