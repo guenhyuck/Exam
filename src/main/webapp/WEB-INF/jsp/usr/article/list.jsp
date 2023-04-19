@@ -8,18 +8,30 @@
 </head>
 <body>
 		<h1>LIST</h1>
+		<header>
+				<a href="/">로고</a>
 
+				<ul>
+						<li>
+								<a href="/">HOME</a>
+						</li>
+						<li>
+								<a href="../article/list">LIST</a>
+						</li>
+				</ul>
+		</header>
 		<hr />
 		<table border="1">
 				<thead>
 						<tr>
 								<th>번호</th>
 								<th>날짜</th>
-								<th>제목</th>
+					    		<th>제목</th>
 								<th>작성자</th>
 						</tr>
 				</thead>
 				<tbody>
+
 						<c:forEach var="article" items="${articles }">
 								<tr>
 										<td>${article.id }</td>
@@ -27,12 +39,14 @@
 										<td>
 												<a href="detail?id=${article.id }">${article.title }</a>
 										</td>
+
 										<td>${article.memberId }</td>
 								</tr>
 						</c:forEach>
 				</tbody>
+
 		</table>
 
-
 </body>
+
 </html>
