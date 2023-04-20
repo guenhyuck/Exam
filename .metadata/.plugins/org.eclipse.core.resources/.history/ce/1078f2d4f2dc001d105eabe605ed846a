@@ -1,0 +1,9 @@
+package com.KoreaIT.cgh.demo.util;
+
+public class Ut {
+
+	public static boolean empty(String loginId) {
+		return false;
+	}
+
+}

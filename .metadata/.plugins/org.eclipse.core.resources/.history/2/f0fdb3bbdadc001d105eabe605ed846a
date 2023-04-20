@@ -1,0 +1,10 @@
+package com.KoreaIT.cgh.demo.vo;
+
+public class Member {
+	
+	private int id;
+	private String loginId;
+	private String loginPw;
+	private String name;
+
+}
