@@ -16,7 +16,9 @@ public class Article {
 	private String body;
 	
 	private String extra__writer;
+	
 	private boolean actorCanDelete;
+	private boolean actorCanModify;
 	
 
 
