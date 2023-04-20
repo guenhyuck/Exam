@@ -23,7 +23,7 @@ public class Ut {
 		return String.format(format, args);
 	}
 
-	public static String jsHitoryBack(String resultCode, String msg) {
+	public static String JsHistoryBack(String resultCode, String msg) {
 
 		if (msg == null) {
 			msg = "";
@@ -40,7 +40,7 @@ public class Ut {
 				""", msg);
 	}
 
-	public static String jsReplace(String msg, String uri) {
+	public static String JsReplace(String msg, String uri) {
 		if (msg == null) {
 			msg = "";
 		}
