@@ -31,9 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 
 ### 커스텀 ###
 bin/
 
 LOG_PATH_IS_UNDEFINED/
 log/
+=======
+>>>>>>> 04a697974c3f91acbf6e2e85fa1e24f61931288f
