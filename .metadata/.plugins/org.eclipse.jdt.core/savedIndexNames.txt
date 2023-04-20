@@ -72,7 +72,6 @@ INDEX VERSION 1.132+C:\workspace_cgh\sts-4.18.0.RELEASE-workspace\.metadata\.plu
 1299969112.index
 284787054.index
 1148901813.index
-1084035290.index
 1889450037.index
 2851067232.index
 492926448.index

@@ -15,7 +15,7 @@
 
 	<delete id="deleteArticle">
 		DELETE FROM
-		article
+        article
 		WHERE id = #{id}
 	</delete>
 	<update id="modifyArticle">

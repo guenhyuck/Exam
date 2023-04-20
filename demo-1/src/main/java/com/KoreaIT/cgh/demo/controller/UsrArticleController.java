@@ -1,5 +1,4 @@
 package com.KoreaIT.cgh.demo.controller;
-
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,10 @@ import com.KoreaIT.cgh.demo.service.ArticleService;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Article;
 import com.KoreaIT.cgh.demo.vo.ResultData;
-
 @Controller
 public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
-
 	// 액션메서드
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
@@ -40,7 +37,6 @@ public class UsrArticleController {
 		}
 		return articleService.modifyArticle(id, title, body);
 	}
-
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public ResultData<Integer> doDelete(HttpSession httpSession, int id) {
@@ -63,7 +59,6 @@ public class UsrArticleController {
 		articleService.deleteArticle(id);
 		return ResultData.from("S-1", Ut.f("%d번 글을 삭제 했습니다", id), "id", id);
 	}
-
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public ResultData<Article> doWrite(HttpSession httpSession, String title, String body) {
@@ -90,7 +85,7 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
-		List<Article> articles = articleService.articles();
+		List<Article> articles = articleService.getForPrintArticles();
 
 		model.addAttribute("articles", articles);
 
@@ -98,12 +93,21 @@ public class UsrArticleController {
 	}
 
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, int id) {
+	public String showDetail(HttpSession httpSession, Model model, int id) {
+		boolean isLogined = false;
+		int loginedMemberId = 0;
 
-		Article article = articleService.getArticle(id);
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+
+		Article article = articleService.getForPrintArticle(loginedMemberId, id);
 
 		model.addAttribute("article", article);
 
+
+  
 		return "usr/article/detail";
 	}
 }

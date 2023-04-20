@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+2023_04_JSP_AM2
+Exam/src/main
 
 ### STS ###
 .apt_generated
@@ -12,7 +14,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+.metadata
+.mvn
 ### IntelliJ IDEA ###
 .idea
 *.iws
