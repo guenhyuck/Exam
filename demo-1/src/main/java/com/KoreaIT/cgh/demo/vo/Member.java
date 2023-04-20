@@ -22,5 +22,6 @@ public class Member {
 	private boolean delStatus;
 	private String delDate;
 	
+	
 
 }

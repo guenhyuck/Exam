@@ -27,7 +27,7 @@
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<td>${article.memberId }</td>
+						<td>${article.extra__writer}</td>
 					</tr>
 					<tr>
 						<th>제목</th>
@@ -41,9 +41,11 @@
 
 			</table>
 		</div>
-		<div class="btns">
-			<button type="button" onclick="history.back();">뒤로가기</button>
-		</div>
+				<div class="btns">
+			<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
+			<a class="btn-text-link" href="../article/modify?id=${article.id }">수정</a>
+			<a class="btn-text-link" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+				href="../article/doDelete?id=${article.id }">삭제</a>
 	</div>
 </section>
 

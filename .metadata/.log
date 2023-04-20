@@ -1658,3 +1658,42 @@ Binding(CTRL+SHIFT+/,
 
 !ENTRY org.eclipse.lsp4e 1 0 2023-04-20 13:22:16.789
 !MESSAGE [Info]	Typescript Server version info: {version=4.9.5, source=user-setting}
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 13:45:59.602
+!MESSAGE [Info]	ESLint server running in node v18.13.0
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:07:12.976
+!MESSAGE [Info]	ESLint server running in node v18.13.0
+
+!ENTRY org.eclipse.lsp4e 2 0 2023-04-20 14:07:13.113
+!MESSAGE [Warning]	Using Typescript version (user-setting) 4.9.5 from path "C:\workspace_cgh\sts-4.18.0.RELEASE\plugins\org.eclipse.wildwebdeveloper_1.0.3.202303081618\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:07:13.115
+!MESSAGE [Info]	Typescript Server version info: {version=4.9.5, source=user-setting}
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:21:20.085
+!MESSAGE [Info]	ESLint server running in node v18.13.0
+
+!ENTRY org.eclipse.lsp4e 2 0 2023-04-20 14:21:20.187
+!MESSAGE [Warning]	Using Typescript version (user-setting) 4.9.5 from path "C:\workspace_cgh\sts-4.18.0.RELEASE\plugins\org.eclipse.wildwebdeveloper_1.0.3.202303081618\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:21:20.190
+!MESSAGE [Info]	Typescript Server version info: {version=4.9.5, source=user-setting}
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:26:08.450
+!MESSAGE [Info]	ESLint server running in node v18.13.0
+
+!ENTRY org.eclipse.lsp4e 2 0 2023-04-20 14:26:08.552
+!MESSAGE [Warning]	Using Typescript version (user-setting) 4.9.5 from path "C:\workspace_cgh\sts-4.18.0.RELEASE\plugins\org.eclipse.wildwebdeveloper_1.0.3.202303081618\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:26:08.554
+!MESSAGE [Info]	Typescript Server version info: {version=4.9.5, source=user-setting}
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:28:12.900
+!MESSAGE [Info]	ESLint server running in node v18.13.0
+
+!ENTRY org.eclipse.lsp4e 2 0 2023-04-20 14:28:13.001
+!MESSAGE [Warning]	Using Typescript version (user-setting) 4.9.5 from path "C:\workspace_cgh\sts-4.18.0.RELEASE\plugins\org.eclipse.wildwebdeveloper_1.0.3.202303081618\node_modules\typescript\lib\tsserver.js"
+
+!ENTRY org.eclipse.lsp4e 1 0 2023-04-20 14:28:13.003
+!MESSAGE [Info]	Typescript Server version info: {version=4.9.5, source=user-setting}

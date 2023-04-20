@@ -11,10 +11,12 @@ import com.KoreaIT.cgh.demo.service.ArticleService;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Article;
 import com.KoreaIT.cgh.demo.vo.ResultData;
+
 @Controller
 public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
+
 	// 액션메서드
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
@@ -38,6 +40,7 @@ public class UsrArticleController {
 		}
 		return articleService.modifyArticle(id, title, body);
 	}
+
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public ResultData<Integer> doDelete(HttpSession httpSession, int id) {
@@ -60,6 +63,7 @@ public class UsrArticleController {
 		articleService.deleteArticle(id);
 		return ResultData.from("S-1", Ut.f("%d번 글을 삭제 했습니다", id), "id", id);
 	}
+
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public ResultData<Article> doWrite(HttpSession httpSession, String title, String body) {
@@ -90,11 +94,9 @@ public class UsrArticleController {
 
 		model.addAttribute("articles", articles);
 
-    
-
-  
 		return "usr/article/list";
 	}
+
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 
