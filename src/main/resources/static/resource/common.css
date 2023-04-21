@@ -56,4 +56,46 @@ html>body {
 	text-decoration:underline;
 	color: blue;
 }
+/* 로그인페이지 */
+* {
+  box-sizing: border-box;
+}
 
+body h1{
+	color:green;
+}
+
+/* 로그아웃 버튼 숨기기 */
+.logout {
+  display: none;
+}
+
+/* 로그인 상태일 때 로그아웃 버튼 보이기 */
+.login .logout {
+  display: block;
+}
+
+/* 로그인 버튼 숨기기 */
+.logout {
+  display: none;
+}
+
+/* 로그아웃 상태일 때 로그인 버튼 보이기 */
+.login .logout {
+  display: block;
+}
+
+
+.login{
+	display:block;
+}
+.login:hover{
+	color: blue;
+	
+}
+.button{
+	display:inline-block;
+}
+.button:hover{
+	color:red;
+}
