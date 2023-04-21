@@ -14,11 +14,24 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 	@Autowired
 	BeforeActionInterceptor beforeActionInterceptor;
 	
+	// NeedLoginInterceptor 불러오기(연결)
+	@Autowired
+	BeforeActionInterceptor NeedLoginInterceptor;
+	
 	// /resource/common.css 등 제외 exclude
 	// 인터셉터 적용
 	public void addInterceptor(InterceptorRegistry registry) {
 		                                                    //여기까지 실행    // 제외목록
 		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**").excludePathPatterns("/error");
+		
+		registry.addInterceptor(NeedLoginInterceptor)
+		
+		.addPathPatterns("/usr/article/write").addPathPatterns("/usr/article/doWrite")
+		.addPathPatterns("/usr/article/dodify").addPathPatterns("/usr/article/doModify")
+	
+		
+		
+		.excludePathPatterns("/resource/**").excludePathPatterns("/error");
 		
 		
 	}
