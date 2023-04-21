@@ -1,0 +1,57 @@
+package com.KoreaIT.cgh.demo.controller;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class UsrHomeController {
+	private int count;
+	private String abc;
+    private double abcd;
+    private Map abced;
+	private String article;
+	private int list;
+
+	public UsrHomeController() {
+		count = count;
+	}
+
+	@RequestMapping("/usr/home/getInt")
+	@ResponseBody
+	public int getInt() {
+		return count++;
+	}
+	@RequestMapping("/usr/home/setString")
+	@ResponseBody
+	public String setString(String abc) {
+		this.abc = abc;
+		return this.abc;
+	}
+	@RequestMapping("/usr/home/getDouble")
+	@ResponseBody
+	public double getDouble() {
+		this.abcd = abcd;
+		return this.abcd;
+	}
+	@RequestMapping("/usr/home/getMap")
+	@ResponseBody
+	public Map getMap() {
+		this.abced = abced;
+		return this.abced;
+	}
+	@RequestMapping("/usr/home/getArticle")
+	@ResponseBody
+	public String getArticle() {
+		this.article = article;
+		return this.article;
+	}
+	@RequestMapping("/usr/home/getList")
+	@ResponseBody
+	public int getList() {
+		this.list = list;
+		return this.list;
+	}
+}

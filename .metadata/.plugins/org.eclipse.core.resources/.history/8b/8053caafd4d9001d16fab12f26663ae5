@@ -1,0 +1,5 @@
+package com.KoreaIT.cgh.demo.vo;
+
+public class Article {
+
+}

@@ -1,0 +1,16 @@
+package com.KoreaIT.cgh.demo.util;
+
+public class Ut {
+
+	public static boolean empty(Object obj) {
+		if(obj == null) {
+			return true;
+		}
+		if(obj instanceof String == false) { // obj instanceof String 오브젝트가 스트링이야?
+			
+		}
+		
+		return;
+	}
+
+}

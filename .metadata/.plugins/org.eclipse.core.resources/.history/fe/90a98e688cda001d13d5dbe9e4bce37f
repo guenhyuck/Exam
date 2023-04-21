@@ -1,0 +1,5 @@
+package com.KoreaIT.cgh.demo.repository;
+
+public class ArticleRepository {
+
+}

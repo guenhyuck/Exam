@@ -1,0 +1,13 @@
+INDEX VERSION 1.4+C:\workspace_cgh\sts-4.18.0.RELEASE-workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1341164706.index
+1882199243.index
+1882199243.index
+1120563413.index
+3242137127.index
+2523068524.index
+1084035290.index
+3652565483.index
+2591868761.index
+3239932111.index
+3914652746.index
+2107232958.index
