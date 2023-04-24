@@ -35,10 +35,10 @@
 							</td>
 							<td>${article.extra__writer}</td>
 														<td>
-								<a class="hover:underline" href="../article/delete?id=${article.id}">수정</a>
+								<a class="hover:underline" href="../article/modify?id=${article.id}">수정</a>
 							</td>
 														<td>
-								<a class="hover:underline" href="../article/modify>id=${article.id}">삭제</a>
+								<a class="hover:underline" href="../article/delete?id=${article.id}">삭제</a>
 							</td>
 
 						</tr>

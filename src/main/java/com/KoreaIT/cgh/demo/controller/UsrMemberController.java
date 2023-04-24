@@ -17,11 +17,14 @@ import com.KoreaIT.cgh.demo.vo.Rq;
 @Controller
 public class UsrMemberController {
 
-    
-          
-  
+	@RequestMapping("/usr/member/join")
+	public String showJogin(HttpSession httpSession) {
+		return "usr/member/join";
+	}
+
 	@Autowired
 	private MemberService memberService;
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public ResultData<Member> doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
@@ -51,6 +54,7 @@ public class UsrMemberController {
 		Member member = memberService.getMemberById(joinRd.getData1());
 		return ResultData.newData(joinRd, "member", member);
 	}
+
 	@RequestMapping("/usr/member/login")
 	public String showLogin(HttpSession httpSession) {
 		return "usr/member/login";
@@ -65,8 +69,6 @@ public class UsrMemberController {
 			return Ut.jsHitoryBack("F-5", "이미 로그인 상태입니다");
 		}
 
-
-  
 		if (Ut.empty(loginId)) {
 			return Ut.jsHitoryBack("F-1", "아이디를 입력해주세요");
 		}

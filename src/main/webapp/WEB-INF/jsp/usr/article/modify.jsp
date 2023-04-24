@@ -3,56 +3,39 @@
 <c:set var="pageTitle" value="ARTICLE MODIFY" />
 <%@ include file="../common/head.jspf"%>
 
-<hr />
+<title>수정 페이지</title>
 
-<section class="mt-8 text-xl">
-		<div class="container mx-auto px-3">
-				<div class="table-box-type-1">
-		<a href="../home/main">메인페이지로 이동</a>
+</head>
+<body>
 
+    <h1>게시글 수정</h1>
+    <form method="post" action="doModify"
+		onsubmit="ModifyForm__submit(this); return false;">
 
-	<div class="container mx-auto px-3">
-		<div class="table-box-type-1">
-			<table border="1">
-				<colgroup>
-					<col width="200" />
-				</colgroup>
-
-				<tbody>
-					<tr>
-						<th>번호</th>
-						<td>${article.id }</td>
-					</tr>
-					<tr>
-						<th>작성날짜</th>
-						<td>${article.regDate }</td>
-					</tr>
-					<tr>
-						<th>수정날짜</th>
-						<td>${article.updateDate }</td>
-					</tr>
-					<tr>
-						<th>작성자</th>
-						<td>${article.memberId }</td>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td>${article.title }</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td>${article.body }</td>
-					</tr>
-				</tbody>
-
-			</table>
+		<div class="modify">
+			글 번호 : <td>${article.id}</td>
 		</div>
+		<div class="modify">
+			새 제목 : <input autocomplete="off" type="text" placeholder="새 제목을 입력해주세요"
+				name="newtitle" />
+		</div>
+				<div class="modify">
+			새 내용 : <input autocomplete="off" type="text" placeholder="새 내용을 입력해주세요"
+				name="newbody" />
+		</div>
+    
+
 		<div class="btns">
-			<button type="button" onclick="history.back();">뒤로가기</button>
+			<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
+           <c:if test="${article.actorCanModify }">
+			<a class="btn-text-link" href="../article/modify?id=${article.id }">수정</a>
+			</c:if>
+			<c:if test="${article.actorCanDelete }">
+				<a class="btn-text-link" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+					href="../article/doDelete?id=${article.id }">삭제</a>
+			</c:if>
 		</div>
-	</div>
-</section>
 
-
-
+	</form>
+</body>
 <%@ include file="../common/foot.jspf"%>

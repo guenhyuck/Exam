@@ -3,6 +3,8 @@ package com.KoreaIT.cgh.demo.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,21 +21,44 @@ public class UsrArticleController {
 	@Autowired
 	private ArticleService articleService;
 
+	@RequestMapping("/usr/article/modify")
+	public String showModify(HttpServletRequest req, int id, String title, String body) {
+		Rq rq = (Rq) req.getAttribute("rq");
+
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+
+		if (article == null) {
+			return rq.jsHistoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
+		}
+
+		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
+
+		if (actorCanModifyRd.isFail()) {
+			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
+		}
+
+		return "usr/article/modify";
+	}
+
 	@RequestMapping("/usr/article/doModify")
-	@ResponseBody
-	public ResultData<Integer> doModify(HttpServletRequest req, int id, String title, String body) {
+	public String doModify(HttpServletRequest req, int id, String title, String body) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Article article = articleService.getArticle(id);
 		if (article == null) {
-			return ResultData.from("F-1", Ut.f("%d번 글은 존재하지 않습니다", id), "id", id);
+			return Ut.jsHitoryBack("F-1", Ut.f("%d번 글은 존재하지 않습니다@", id));
+		}
 
-		}
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
+
 		if (actorCanModifyRd.isFail()) {
-			return actorCanModifyRd;
+			return Ut.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
 		}
-		return articleService.modifyArticle(id, title, body);
+
+		articleService.modifyArticle(id, title, body);
+
+		return Ut.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), "/");
+
 	}
 
 	@RequestMapping("/usr/article/doDelete")

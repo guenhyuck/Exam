@@ -1,10 +1,18 @@
 package com.KoreaIT.cgh.demo.util;
 
-import com.KoreaIT.cgh.demo.vo.ResultData;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class Ut {
+
+	private HttpServletRequest req;
+	private HttpServletResponse resp;
+
 	public static boolean empty(Object obj) {
+
 		if (obj == null) {
+
+  
 			return true;
 		}
 		if (obj instanceof String == false) {
@@ -46,9 +54,7 @@ public class Ut {
 					location.replace('%s');
 				</script>
 				""", msg, uri);
-
 	}
-
 	public static String jsReplace(String resultCode, String msg, String uri) {
 		if (msg == null) {
 			msg = "";
@@ -56,7 +62,6 @@ public class Ut {
 		if (uri == null) {
 			uri = "/";
 		}
-
 		return Ut.f("""
 					<script>
 					const msg = '%s'.trim();
@@ -69,8 +74,14 @@ public class Ut {
 
 	}
 
-}
+	public static String jsHistoryBackOnView(HttpServletRequest req, String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
 
+		return "usr/common/js";
+	}
+
+}
 
 
 

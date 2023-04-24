@@ -24,10 +24,29 @@
 			로그인 비밀번호 확인 : <input autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요"
 				name="loginPw" />
 		</div>
+				<div class="login">
+			이름 : <input autocomplete="off" type="text" placeholder="이름을 입력해주세요"
+				name="name" />
+		</div>
+				<div class="login">
+			닉네임 : <input autocomplete="off" type="text" placeholder="닉네임을 입력해주세요"
+				name="nickname" />
+		</div>
+				<div class="login">
+			전화번호 : <input autocomplete="off" type="text" placeholder="전화번호를 입력해주세요"
+				name="cellphoneNum" />
+		</div>
+				<div class="login">
+			이메일 주소 : <input autocomplete="off" type="text" placeholder="이메일 주소를 입력해주세요"
+				name="email" />
+		</div>
 
 
 		<button class="button" type="submit">회원 아이디 찾기</button>
 		<button class="button" type="submit">회원 비밀번호 찾기</button>
+		<br>
+		<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>>
+		<button class="button" type="submit">회원가입</button>
 
 	</form>
 </body>
