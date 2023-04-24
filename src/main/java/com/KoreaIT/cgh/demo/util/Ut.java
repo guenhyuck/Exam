@@ -12,6 +12,8 @@ public class Ut {
 
 		if (obj == null) {
 
+            
+
   
 			return true;
 		}
@@ -24,7 +26,7 @@ public class Ut {
 	public static String f(String format, Object... args) {
 		return String.format(format, args);
 	}
-	public static String jsHitoryBack(String resultCode, String msg) {
+	public static String jsHistoryBack(String resultCode, String msg) {
 		if (msg == null) {
 			msg = "";
 		}
@@ -82,7 +84,6 @@ public class Ut {
 	}
 
 }
-
 
 
 //empty(Object obj) 메서드

@@ -19,12 +19,14 @@ public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
+	
 	public Rq(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
 		boolean isLogined = false;
 		int loginedMemberId = 0;
+		
 		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
@@ -35,7 +37,7 @@ public class Rq {
 
 	public void printHistoryBackJs(String msg) throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");
-		print(Ut.jsHitoryBack("F-B", msg));
+		print(Ut.jsHistoryBack("F-B", msg));
 	}
 
 	public void print(String str) {

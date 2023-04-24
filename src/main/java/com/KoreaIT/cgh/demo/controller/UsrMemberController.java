@@ -66,21 +66,21 @@ public class UsrMemberController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (rq.isLogined()) {
-			return Ut.jsHitoryBack("F-5", "이미 로그인 상태입니다");
+			return Ut.jsHistoryBack("F-5", "이미 로그인 상태입니다");
 		}
 
 		if (Ut.empty(loginId)) {
-			return Ut.jsHitoryBack("F-1", "아이디를 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "아이디를 입력해주세요");
 		}
 		if (Ut.empty(loginPw)) {
-			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
 		}
 		Member member = memberService.getMemberByLoginId(loginId);
 		if (member == null) {
-			return Ut.jsHitoryBack("F-3", Ut.f("%s는 존재하지 않는 아이디입니다", loginId));
+			return Ut.jsHistoryBack("F-3", Ut.f("%s는 존재하지 않는 아이디입니다", loginId));
 		}
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return Ut.jsHitoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
+			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
 		}
 
 		rq.login(member);
@@ -95,7 +95,7 @@ public class UsrMemberController {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (!rq.isLogined()) {
-			return Ut.jsHitoryBack("F-1", "이미 로그아웃 상태입니다");
+			return Ut.jsHistoryBack("F-1", "이미 로그아웃 상태입니다");
 		}
 
 		rq.logout();
