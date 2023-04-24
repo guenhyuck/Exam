@@ -118,19 +118,19 @@ CREATE TABLE board(
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'notice',
+`code` = 'NOTICE',
 `name` = '공지사항';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'free',
+`code` = 'FREE',
 `name` = '자유';
 
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'qna',
+`code` = 'QnA',
 `name` = '질의응답';
 
 
@@ -151,7 +151,9 @@ SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 
+DESC `article`;
 DESC `member`;
+DESC `board`;
 
 SELECT COUNT(*) > 0
 FROM `member`

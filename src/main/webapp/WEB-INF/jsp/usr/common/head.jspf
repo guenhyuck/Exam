@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="/resource/common.css" />
 <script src="/resource/common.js" defer="defer"></script>
 </head>
-<body>
+<body></body>
 
 
 		<header>
@@ -39,6 +39,11 @@
 										<a class="h-full px-3 flex items-center" href="/usr/article/list">
 												<span>LIST</span>
 										</a>
+										<ul>
+											<li class="hover:underline"><a href="/usr/article/list">공지사항</a></li>
+											<li class="hover:underline"><a href="/usr/article/list">자유</a></li>
+											<li class="hover:underline"><a href="/usr/article/list">QnA</a></li>
+										</ul>
 								</li>
 								</li>
 								<li class="hover:underline">

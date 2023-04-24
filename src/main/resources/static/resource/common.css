@@ -1,4 +1,3 @@
-
 @font-face {
 	font-family: 'LotteMartDream';
 	font-style: normal;
@@ -48,54 +47,65 @@ html>body {
 	text-align: center;
 }
 
-.btns-text-link{
+.btns-text-link {
 	color: #1f1f1f;
 }
 
-.btns-text-link:hover{
-	text-decoration:underline;
+.btns-text-link:hover {
+	text-decoration: underline;
 	color: blue;
 }
 /* 로그인페이지 */
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-body h1{
-	color:orange;
+body h1 {
+	color: orange;
 }
 
 /* 로그아웃 버튼 숨기기 */
 .logout {
-  display: none;
+	display: none;
 }
 
 /* 로그인 상태일 때 로그아웃 버튼 보이기 */
 .login .logout {
-  display: block;
+	display: block;
 }
 
 /* 로그인 버튼 숨기기 */
 .logout {
-  display: none;
+	display: none;
 }
 
 /* 로그아웃 상태일 때 로그인 버튼 보이기 */
 .login .logout {
-  display: block;
+	display: block;
 }
 
-
-.login{
-	display:block;
+.login {
+	display: block;
 }
-.login:hover{
+
+.login:hover {
 	color: blue;
-	
 }
-.button{
-	display:inline-block;
+
+.button {
+	display: inline-block;
 }
-.button:hover{
-	color:red;
+
+.button:hover {
+	color: red;
+}
+
+header>div>ul>li>ul {
+	display: none;
+	position: absolute;
+	background-color: white;
+}
+
+header>div>ul>li:hover>ul {
+	display: block;
 }
