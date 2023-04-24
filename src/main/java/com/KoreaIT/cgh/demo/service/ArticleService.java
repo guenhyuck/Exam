@@ -80,5 +80,8 @@ public class ArticleService {
 	public List<Article> getForPrintArticles() {
 		return articleRepository.getForPrintArticles();
 	}
+	public void writeArticle(int loginedMemberId) {
+		articleRepository.writeArticle(loginedMemberId);
+	}
 
 }

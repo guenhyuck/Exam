@@ -19,6 +19,11 @@ public class UsrMemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@RequestMapping("/usr/member/join")
+	public String showJoin(HttpSession httpSession) {
+		return "usr/member/join";
+	}
 
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody

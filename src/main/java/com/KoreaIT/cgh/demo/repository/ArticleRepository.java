@@ -50,4 +50,6 @@ public interface ArticleRepository {
 
 	public int getLastInsertId();
 
+	public void writeArticle(int loginedMemberId);
+
 }
