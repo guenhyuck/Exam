@@ -6,31 +6,27 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.KoreaIT.cgh.demo.interceptor.BeforeActionInterceptor;
+import com.KoreaIT.cgh.demo.interceptor.NeedLoginInterceptor;
 
-@Configuration //설정역할 spring bean에 자동으로 추가해줘
+@Configuration
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
-	
-	// BeforeActionInterceptor 불러오기(연결)
+	// BeforeActionInterceptor 불러오기
 	@Autowired
 	BeforeActionInterceptor beforeActionInterceptor;
-	
-	// NeedLoginInterceptor 불러오기(연결)
+
+	// NeedLoginInterceptor 불러오기
 	@Autowired
-	BeforeActionInterceptor NeedLoginInterceptor;
-	
-	// /resource/common.css 등 제외 exclude
+	NeedLoginInterceptor needLoginInterceptor;
+
+	// /resource/common.css
 	// 인터셉터 적용
-	public void addInterceptor(InterceptorRegistry registry) {
-		                                                    //여기까지 실행    // 제외목록
-		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**").excludePathPatterns("/error");
-		
-		registry.addInterceptor(NeedLoginInterceptor)
-		
-		.addPathPatterns("/usr/article/doWrite").addPathPatterns("/usr/article/write")
-		.addPathPatterns("/usr/article/doModify").addPathPatterns("/usr/article/modify")
-		.addPathPatterns("/usr/article/doDelete");
-		
-		
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**")
+				.excludePathPatterns("/error");
+
+		registry.addInterceptor(needLoginInterceptor).addPathPatterns("/usr/article/write")
+				.addPathPatterns("/usr/article/doWrite").addPathPatterns("/usr/article/modify")
+				.addPathPatterns("/usr/article/doModify").addPathPatterns("/usr/article/doDelete");
 	}
 
 }

@@ -45,7 +45,7 @@
 		<button class="button" type="submit">회원 아이디 찾기</button>
 		<button class="button" type="submit">회원 비밀번호 찾기</button>
 		<br>
-		<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>>
+		<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
 		<button class="button" type="submit">회원가입</button>
 
 	</form>

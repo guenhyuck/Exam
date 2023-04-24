@@ -10,6 +10,7 @@ import com.KoreaIT.cgh.demo.vo.Rq;
 
 @Component
 public class BeforeActionInterceptor implements HandlerInterceptor {
+
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler) throws Exception {
 
@@ -17,7 +18,6 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 		req.setAttribute("rq", rq);
 
 		return HandlerInterceptor.super.preHandle(req, resp, handler);
-
-  
 	}
+
 }

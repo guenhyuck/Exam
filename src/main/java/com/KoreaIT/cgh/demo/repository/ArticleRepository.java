@@ -1,8 +1,12 @@
 package com.KoreaIT.cgh.demo.repository;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
 import com.KoreaIT.cgh.demo.vo.Article;
+
 @Mapper
 public interface ArticleRepository {
 
@@ -33,7 +37,6 @@ public interface ArticleRepository {
 
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
- 
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
