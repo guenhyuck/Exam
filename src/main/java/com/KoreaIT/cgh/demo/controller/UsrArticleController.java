@@ -81,23 +81,25 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String doWrite(HttpServletRequest req, String title, String body) {
+	public String doWrite(HttpServletRequest req, String title, String body, String replaceUri) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		if (Ut.empty(title)) {
+
 			return rq.jsHitoryBack("F-1", "제목을 입력해주세요");
 		}
 		if (Ut.empty(body)) {
 			return rq.jsHitoryBack("F-2", "내용을 입력해주세요");
 		}
-
 		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 
 		int id = (int) writeArticleRd.getData1();
 
-		Article article = articleService.getArticle(id);
+		if (Ut.empty(replaceUri)) {
+			replaceUri = Ut.f("../article/detail?id=%d", id);
+		}
 
-		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), "/");
+		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
 	}
 
 	@RequestMapping("/usr/article/list")
