@@ -9,13 +9,16 @@ import com.KoreaIT.cgh.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
+
 	public void writeArticle(int memberId, int boardId, String title, String body);
+
 	@Select("""
 			SELECT *
 			FROM article
 			ORDER BY id DESC
 				""")
 	public List<Article> getArticles();
+
 	@Select("""
 			<script>
 			SELECT A.*, M.nickname AS extra__writer
@@ -27,7 +30,7 @@ public interface ArticleRepository {
 				AND A.boardId = #{boardId}
 			</if>
 			ORDER BY A.id DESC
-			<if test="limitFrom > 0">
+			<if test="limitFrom >= 0">
 				LIMIT #{limitFrom}, #{limitTake}
 			</if>
 			</script>
@@ -36,11 +39,11 @@ public interface ArticleRepository {
 
 	@Select("""
 			SELECT *
- 
 			FROM article
 			WHERE id = #{id}
 			""")
 	public Article getArticle(int id);
+
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
@@ -49,9 +52,13 @@ public interface ArticleRepository {
 			WHERE A.id = #{id}
 			""")
 	public Article getForPrintArticle(int id);
+
 	public void deleteArticle(int id);
+
 	public void modifyArticle(int id, String title, String body);
+
 	public int getLastInsertId();
+
 	@Select("""
 			<script>
 			SELECT COUNT(*) AS cnt
@@ -63,4 +70,5 @@ public interface ArticleRepository {
 			</script>
 				""")
 	public int getArticlesCount(int boardId);
+
 }
