@@ -80,5 +80,8 @@ public class ArticleService {
 	public List<Article> getForPrintArticles(int boardId) {
 		return articleRepository.getForPrintArticles(boardId);
 	}
+	public int getArticleCount(int boardId) {
+		return articleRepository.getArticleCount((int) boardId);
+	}
 
 }
