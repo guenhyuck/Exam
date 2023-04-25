@@ -144,8 +144,30 @@ UPDATE article
 SET boardId =2
 WHERE id =3;
 
-###테이블 확인
+###게시물 갯수 늘리기
 
+INSERT INTO article 
+(
+    regDate,updateDate , memberId , boardId , title, `body`
+) 
+SELECT NOW(),NOW(),
+FLOOR(RAND() * 2) + 2,  
+FLOOR(RAND() * 2) + 1, 
+CONCAT('제목_' ,RAND()),CONCAT( '내용_',RAND())
+FROM article;
+
+SELECT *
+FROM article
+WHERE boardId = 1
+ORDER BY id DESC
+LIMIT 0, 10
+
+
+
+SELECT NOW()
+
+SELECT FLOOR(RAND() * 2) + 1
+###테이블 확인
 
 SELECT * FROM article;
 SELECT * FROM `member`;
@@ -167,6 +189,13 @@ INNER JOIN `member` AS M
 ON A.memberId = M.id
 WHERE A.id = M.id;
 
+############################################
+
+SELECT A.id,A.memberId, B.code AS 게시판이름
+FROM article AS A
+INNER JOIN `board` AS B
+ON A.boardId = B.id
+WHERE A.id = B.id;
 
 
 

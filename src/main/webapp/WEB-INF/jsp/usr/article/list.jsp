@@ -3,7 +3,6 @@
 <c:set var="pageTitle" value="${board.code}" />
 <%@ include file="../common/head.jspf"%>
 <hr />
-
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -23,7 +22,6 @@
 						<th>작성자</th>
 					</tr>
 				</thead>
-
 				<tbody>
 					<c:forEach var="article" items="${articles }">
 						<tr class="hover">
@@ -35,21 +33,19 @@
 								<a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a>
 							</td>
 							<td>${article.extra__writer}</td>
-
 						</tr>
 					</c:forEach>
 				</tbody>
-
 			</table>
+		</div>
 		<div class="pagination flex justify-center mt-3">
 			<div class="btn-group">
-				<c:forEach begin="1" end="20" var="i">
-					<a class="btn ${param.page == i ? 'btn-active' : '' }" href="?page=${i }">${i }</a>
+				<c:forEach begin="1" end="${pagesCount }" var="i">
+					<a class="btn ${page == i ? 'btn-active' : '' }" href="?page=${i }">${i }</a>
 				</c:forEach>
 
 			</div>
 		</div>
 	</div>
 </section>
-
 <%@ include file="../common/foot.jspf"%>
