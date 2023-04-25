@@ -101,7 +101,7 @@ public class UsrArticleController {
 		Board board = boardService.getBoardById(boardId);
 		
 		if (board == null) {
-			return rq.jsHitoryBackOnView("없는 게시판이야");
+			return rq.jsHitoryBackOnView("존재하지 않는 게시판 입니다.");
 		}
 		
 		int articlesCount = articleService.getArticleCount(boardId);

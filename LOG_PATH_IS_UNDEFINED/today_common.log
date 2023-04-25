@@ -6584,3 +6584,61 @@ ORDER BY A.id DESC
 2023-04-25 13:17:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@4fb1f541
 2023-04-25 13:17:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@2928bd8f
 2023-04-25 13:17:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - After adding stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:17:43 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:17:43 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Fill pool skipped, pool is at sufficient level.
+2023-04-25 13:18:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:18:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Fill pool skipped, pool is at sufficient level.
+2023-04-25 13:18:43 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:18:43 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Fill pool skipped, pool is at sufficient level.
+2023-04-25 13:19:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:19:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Fill pool skipped, pool is at sufficient level.
+2023-04-25 13:19:43 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:19:43 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Fill pool skipped, pool is at sufficient level.
+2023-04-25 13:20:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:20:13 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Fill pool skipped, pool is at sufficient level.
+2023-04-25 13:20:22 [INFO ] o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-04-25 13:20:22 [DEBUG] o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Change set: [C:\workspace_cgh\sts-4.18.0.RELEASE-workspace\demo-1\target\classes [C:\workspace_cgh\sts-4.18.0.RELEASE-workspace\demo-1\target\classes\com\KoreaIT\cgh\demo\controller\UsrArticleController.class (MODIFY)]]
+2023-04-25 13:20:22 [DEBUG] o.s.boot.devtools.restart.Restarter - Restarting application
+2023-04-25 13:20:22 [DEBUG] o.s.boot.devtools.restart.Restarter - Stopping application
+2023-04-25 13:20:22 [DEBUG] o.s.b.a.ApplicationAvailabilityBean - Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2023-04-25 13:20:22 [DEBUG] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7f22b71c, started on Tue Apr 25 13:16:15 GMT+09:00 2023
+2023-04-25 13:20:22 [DEBUG] o.s.c.s.DefaultLifecycleProcessor - Stopping beans in phase 2147483647
+2023-04-25 13:20:22 [DEBUG] o.s.c.s.DefaultLifecycleProcessor - Bean 'webServerGracefulShutdown' completed its stop procedure
+2023-04-25 13:20:22 [DEBUG] o.s.c.s.DefaultLifecycleProcessor - Stopping beans in phase 2147483646
+2023-04-25 13:20:22 [INFO ] o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8081"]
+2023-04-25 13:20:22 [INFO ] o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2023-04-25 13:20:22 [INFO ] o.a.c.c.C.[Tomcat].[localhost].[/] - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-04-25 13:20:22 [WARN ] o.a.c.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [HikariPool-4 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17.0.6/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base@17.0.6/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
+ java.base@17.0.6/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
+ java.base@17.0.6/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base@17.0.6/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
+ java.base@17.0.6/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+ java.base@17.0.6/java.lang.Thread.run(Thread.java:833)
+2023-04-25 13:20:22 [INFO ] o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8081"]
+2023-04-25 13:20:22 [INFO ] o.a.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8081"]
+2023-04-25 13:20:22 [DEBUG] o.s.c.s.DefaultLifecycleProcessor - Bean 'webServerStartStop' completed its stop procedure
+2023-04-25 13:20:22 [DEBUG] o.s.c.s.DefaultLifecycleProcessor - Stopping beans in phase -2147483647
+2023-04-25 13:20:22 [DEBUG] o.s.c.s.DefaultLifecycleProcessor - Bean 'springBootLoggingLifecycle' completed its stop procedure
+2023-04-25 13:20:22 [DEBUG] o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2023-04-25 13:20:22 [DEBUG] o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans
+2023-04-25 13:20:22 [DEBUG] o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2023-04-25 13:20:22 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown initiated...
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Before shutdown stats (total=10, active=0, idle=10, waiting=0)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@1f00efcd: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@10580d0a: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@51650731: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@607e5458: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@314af87e: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@62231145: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@3504258d: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@559c10db: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@4fb1f541: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.PoolBase - HikariPool-4 - Closing connection net.sf.log4jdbc.sql.jdbcapi.ConnectionSpy@2928bd8f: (connection evicted)
+2023-04-25 13:20:22 [DEBUG] com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2023-04-25 13:20:22 [INFO ] com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown completed.
+2023-04-25 13:20:22 [DEBUG] o.s.b.d.r.c.RestartClassLoader - Created RestartClassLoader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@206ba1bd
+2023-04-25 13:20:22 [DEBUG] o.s.boot.devtools.restart.Restarter - Starting application com.KoreaIT.cgh.demo.Demo1Application with URLs [file:/C:/workspace_cgh/sts-4.18.0.RELEASE-workspace/demo-1/target/classes/]
