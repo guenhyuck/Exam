@@ -9,38 +9,38 @@ import com.KoreaIT.cgh.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-
-	public void writeArticle(int memberId, String title, String body, int boardId);
-
+	public void writeArticle(int memberId, int boardId, String title, String body);
 	@Select("""
 			SELECT *
 			FROM article
 			ORDER BY id DESC
 				""")
 	public List<Article> getArticles();
-
 	@Select("""
 			<script>
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
 			INNER JOIN `member` AS M
-			ON A.memberId = M.id 
+			ON A.memberId = M.id
 			WHERE 1
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
 			</if>
 			ORDER BY A.id DESC
+			<if test="limitFrom > 0">
+				LIMIT #{limitFrom}, #{limitTake}
+			</if>
 			</script>
 				""")
-	public List<Article> getForPrintArticles(int boardId);
+	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake);
 
 	@Select("""
 			SELECT *
+ 
 			FROM article
 			WHERE id = #{id}
 			""")
 	public Article getArticle(int id);
-
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
@@ -49,15 +49,9 @@ public interface ArticleRepository {
 			WHERE A.id = #{id}
 			""")
 	public Article getForPrintArticle(int id);
-
 	public void deleteArticle(int id);
-
 	public void modifyArticle(int id, String title, String body);
-
 	public int getLastInsertId();
-
-	public void writeArticle(int loginedMemberId);
-	
 	@Select("""
 			<script>
 			SELECT COUNT(*) AS cnt
@@ -68,36 +62,5 @@ public interface ArticleRepository {
 			</if>
 			</script>
 				""")
-
-	public int getArticleCount(int boardId);
-	
-	@Select("""
-			<script>
-			SELECT COUNT(*) AS totalCount
-			FROM article AS A
-			ORDER BY boardId
-			DESC
-			<if test="boardId != 0">
-				AND A.boardId = #{boardId}
-			</if>
-			</script>
-				""")
-
-	public int getTotalCount(int totalCount);
-	
-	@Select("""
-			<script>
-			SELECT COUNT(*) AS pageSize
-			FROM article
-			WHERE boardId = #{boardId}
-			ORDER BY cnt DESC 
-            LIMIT 0,10
-			<if test="boardId != 0">
-				AND A.boardId = #{boardId}
-			</if>
-			</script>
-				""")
-
-	public int getPageSize(int pageSize);
-
+	public int getArticlesCount(int boardId);
 }

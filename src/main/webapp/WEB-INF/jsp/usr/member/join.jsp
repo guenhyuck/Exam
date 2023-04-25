@@ -12,31 +12,31 @@
     
     <form method="post" action="doJoin"
 		onsubmit="LoginForm__submit(this); return false;">
-		<div class="login">
+		<div class="join">
 			로그인 아이디 : <input autocomplete="off" type="text" placeholder="아이디를 입력해주세요"
 				name="loginId" />
 		</div>
-		<div class="login">
+		<div class="join">
 			로그인 비밀번호 : <input autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요"
 				name="loginPw" />
 		</div>
-				<div class="login">
+				<div class="join">
 			로그인 비밀번호 확인 : <input autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요"
 				name="loginPw" />
 		</div>
-				<div class="login">
+				<div class="join">
 			이름 : <input autocomplete="off" type="text" placeholder="이름을 입력해주세요"
 				name="name" />
 		</div>
-				<div class="login">
+				<div class="join">
 			닉네임 : <input autocomplete="off" type="text" placeholder="닉네임을 입력해주세요"
 				name="nickname" />
 		</div>
-				<div class="login">
+				<div class="join">
 			전화번호 : <input autocomplete="off" type="text" placeholder="전화번호를 입력해주세요"
 				name="cellphoneNum" />
 		</div>
-				<div class="login">
+				<div class="join">
 			이메일 주소 : <input autocomplete="off" type="text" placeholder="이메일 주소를 입력해주세요"
 				name="email" />
 		</div>
