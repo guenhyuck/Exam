@@ -14,8 +14,8 @@ public class ArticleService {
 		this.articleRepository = articleRepository;
 	}
 	// 서비스 메서드
-	public ResultData<Integer> writeArticle(int memberId, String title, String body) {
-		articleRepository.writeArticle(memberId, title, body);
+	public ResultData<Integer> writeArticle(int memberId, String title, String body, int boardId) {
+		articleRepository.writeArticle(memberId, title, body,boardId);
 		int id = articleRepository.getLastInsertId();
 		return ResultData.from("S-1", Ut.f("%d번 글이 생성되었습니다", id), "id", id);
 	}
@@ -82,6 +82,12 @@ public class ArticleService {
 	}
 	public int getArticlesCount(int boardId) {
 		return articleRepository.getArticleCount((int) boardId);
+	}
+	public int getPageSize(int pageSize) {
+		return articleRepository.getPageSize(pageSize);
+	}
+	public int getTotalCount(int totalCount) {
+		return articleRepository.getTotalCount(totalCount);
 	}
 
 }

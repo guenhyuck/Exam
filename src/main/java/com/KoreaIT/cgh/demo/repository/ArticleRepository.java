@@ -10,7 +10,7 @@ import com.KoreaIT.cgh.demo.vo.Article;
 @Mapper
 public interface ArticleRepository {
 
-	public void writeArticle(int memberId, String title, String body);
+	public void writeArticle(int memberId, String title, String body, int boardId);
 
 	@Select("""
 			SELECT *
@@ -70,5 +70,34 @@ public interface ArticleRepository {
 				""")
 
 	public int getArticleCount(int boardId);
+	
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS totalCount
+			FROM article AS A
+			ORDER BY boardId
+			DESC
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
+			</script>
+				""")
+
+	public int getTotalCount(int totalCount);
+	
+	@Select("""
+			<script>
+			SELECT COUNT(*) AS pageSize
+			FROM article
+			WHERE boardId = #{boardId}
+			ORDER BY cnt DESC 
+            LIMIT 0,10
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
+			</script>
+				""")
+
+	public int getPageSize(int pageSize);
 
 }
