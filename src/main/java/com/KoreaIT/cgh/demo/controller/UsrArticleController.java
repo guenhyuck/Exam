@@ -57,7 +57,12 @@ public class UsrArticleController {
 
 	@RequestMapping("/usr/article/modify")
 	public String showModify(Model model, int id) {
+		
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		
+		articleService.increaseHitCount(id);
+		
+		
 		if (article == null) {
 			return rq.jsHitoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
 		}

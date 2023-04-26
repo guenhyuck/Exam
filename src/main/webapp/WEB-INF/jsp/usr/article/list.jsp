@@ -20,6 +20,7 @@
 						<th>날짜</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,6 +34,7 @@
 								<a class="hover:underline" href="../article/detail?id=${article.id}">${article.title}</a>
 							</td>
 							<td>${article.extra__writer}</td>
+							<td>${article.hitCount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -64,7 +66,6 @@
 				</c:if>
 			</div>
 		</div>
-
 	</div>
 </section>
 <%@ include file="../common/foot.jspf"%>

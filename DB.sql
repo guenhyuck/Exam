@@ -133,8 +133,13 @@ updateDate = NOW(),
 `code` = 'QnA',
 `name` = '질의응답';
 
-
+##article 테이블에 boardId 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER `memberId`;
+
+
+##article 테이블에 hitCount 추가
+ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL;
+
 
 UPDATE article
 SET boardId =1
@@ -175,17 +180,17 @@ LIMIT 0, 10
 
 
 
-select now()
+SELECT NOW()
 
-SELECT floor(rand() * 2) + 1
+SELECT FLOOR(RAND() * 2) + 1
 ###테이블 확인
 
 SELECT * FROM article;
-select * from `member`;
+SELECT * FROM `member`;
 SELECT * FROM board;
 
 DESC `article`;
-desc `member`;
+DESC `member`;
 DESC `board`;
 
 SELECT COUNT(*) > 0
@@ -211,3 +216,5 @@ WHERE A.id = B.id;
 
 
 SELECT LAST_INSERT_ID();
+
+SELECT CONCAT('%' 'abc' '%');
