@@ -6,7 +6,7 @@
 <section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 				<div class="table-box-type-1">
-						<form action="../article/doWrite" method="POST">
+						<form action="../member/doJoin" method="POST">
 								<table>
 										<colgroup>
 												<col width="200" />
@@ -30,7 +30,7 @@
 		</div>
 				<div class="join">
 			로그인 비밀번호 확인 : <input autocomplete="off" type="text" placeholder="비밀번호를 입력해주세요"
-				name="loginPw" />
+				name="loginPwConFirm" />
 		</div>
 				<div class="join">
 			이름 : <input autocomplete="off" type="text" placeholder="이름을 입력해주세요"

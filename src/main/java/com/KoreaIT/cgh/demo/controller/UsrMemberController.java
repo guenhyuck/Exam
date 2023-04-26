@@ -21,11 +21,12 @@ public class UsrMemberController {
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
-
-	@RequestMapping("/usr/member/login")
-	public String showLogin(HttpSession httpSession) {
-		return "usr/member/login";
+	
+	@RequestMapping("/usr/member/join")
+	public String showJoin(HttpSession httpSession) {
+		return "usr/member/join";
 	}
+
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
@@ -60,13 +61,12 @@ public class UsrMemberController {
 
 		return Ut.jsReplace("S-1", Ut.f("%d님이 가입하셨습니다", member.getId()), "/");
 	}
-	
-	@RequestMapping("/usr/member/join")
-	public String showJoin(HttpSession httpSession) {
-		return "usr/member/join";
+
+
+	@RequestMapping("/usr/member/login")
+	public String showLogin(HttpSession httpSession) {
+		return "usr/member/login";
 	}
-
-
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
