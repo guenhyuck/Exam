@@ -14,9 +14,10 @@ public class Article {
 	private int memberId;
 	private String title;
 	private String body;
+	private int hitCount;
 
 	private String extra__writer;
-	private int hitCount;
+	
 
 	private boolean actorCanModify;
 	private boolean actorCanDelete;

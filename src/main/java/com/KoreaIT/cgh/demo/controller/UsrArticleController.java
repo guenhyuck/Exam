@@ -25,44 +25,32 @@ public class UsrArticleController {
 	private BoardService boardService;
 	@Autowired
 	private Rq rq;
-
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
-
 		Board board = boardService.getBoardById(boardId);
-
 		if (board == null) {
 			return rq.jsHitoryBackOnView("없는 게시판이야");
 		}
-
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
-
 		int itemsInAPage = 10;
-		
 		int pagesCount = (int) Math.ceil(articlesCount / (double) itemsInAPage);
-
-		List<Article> articles = articleService.getForPrintArticles(boardId,searchKeywordTypeCode,searchKeyword, itemsInAPage, page);
-
+		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
+				searchKeyword);
+		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
+		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("board", board);
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
 		model.addAttribute("pagesCount", pagesCount);
 		model.addAttribute("articlesCount", articlesCount);
 		model.addAttribute("articles", articles);
-
 		return "usr/article/list";
 	}
-
 	@RequestMapping("/usr/article/modify")
 	public String showModify(Model model, int id) {
-		
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-		
-		articleService.increaseHitCount(id);
-		
-		
 		if (article == null) {
 			return rq.jsHitoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
 		}
@@ -73,7 +61,6 @@ public class UsrArticleController {
 		model.addAttribute("article", article);
 		return "usr/article/modify";
 	}
-
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
@@ -88,7 +75,6 @@ public class UsrArticleController {
 		articleService.modifyArticle(id, title, body);
 		return rq.jsReplace(Ut.f("%d번 글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", id));
 	}
-
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
@@ -102,12 +88,10 @@ public class UsrArticleController {
 		articleService.deleteArticle(id);
 		return Ut.jsReplace(Ut.f("%d번 글을 삭제 했습니다", id), "../article/list?boardId=1");
 	}
-
 	@RequestMapping("/usr/article/write")
 	public String showWrite(String title, String body) {
 		return "usr/article/write";
 	}
-
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(int boardId, String title, String body, String replaceUri) {
@@ -124,11 +108,17 @@ public class UsrArticleController {
 		}
 		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
 	}
-
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
+
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+
+		articleService.increaseHitCount(id);
+
 		model.addAttribute("article", article);
+
 		return "usr/article/detail";
+    
+  
 	}
 }

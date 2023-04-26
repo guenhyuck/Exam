@@ -13,6 +13,7 @@
 					<col width="140" />
 					<col width="140" />
 					<col width="140" />
+					<col width="140" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -35,8 +36,10 @@
 							</td>
 							<td>${article.extra__writer}</td>
 							<td>${article.hitCount}</td>
+
 						</tr>
 					</c:forEach>
+  
 				</tbody>
 			</table>
 		</div>
@@ -45,24 +48,20 @@
 				<c:set var="paginationLen" value="4" />
 				<c:set var="startPage" value="${page - paginationLen >= 1 ? page - paginationLen : 1}" />
 				<c:set var="endPage" value="${page + paginationLen <= pagesCount ? page + paginationLen : pagesCount}" />
-
 				<c:set var="baseUri" value="?boardId=${boardId }" />
 				<c:set var="baseUri" value="${baseUri }&searchKeywordTypeCode=${searchKeywordTypeCode}" />
 				<c:set var="baseUri" value="${baseUri }&searchKeyword=${searchKeyword}" />
-
 				<c:if test="${startPage > 1 }">
 					<a class="btn" href="${baseUri }&page=1">1</a>
 					<button class="btn btn-disabled">...</button>
 				</c:if>
-
 				<c:forEach begin="${startPage }" end="${endPage }" var="i">
 					<a class="btn ${page == i ? 'btn-active' : '' }" href="${baseUri }&page=${i}">${i }</a>
 				</c:forEach>
 
 				<c:if test="${endPage < pagesCount }">
 					<button class="btn btn-disabled">...</button>
-					<a class="btn"
-						href="${baseUri }&page=${pagesCount}">${pagesCount }</a>
+					<a class="btn" href="${baseUri }&page=${pagesCount}">${pagesCount }</a>
 				</c:if>
 			</div>
 		</div>

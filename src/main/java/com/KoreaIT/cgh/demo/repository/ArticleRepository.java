@@ -10,16 +10,13 @@ import com.KoreaIT.cgh.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-
 	public void writeArticle(int memberId, int boardId, String title, String body);
-
 	@Select("""
 			SELECT *
 			FROM article
 			ORDER BY id DESC
 				""")
 	public List<Article> getArticles();
-
 	@Select("""
 			<script>
 			SELECT A.*, M.nickname AS extra__writer
@@ -50,15 +47,14 @@ public interface ArticleRepository {
 			</if>
 			</script>
 				""")
-	public List<Article> getForPrintArticles(int boardId, String searchKerwordTypeCode, String searchKerword, int limitFrom, int limitTake);
-
+	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
+			int limitFrom, int limitTake);
 	@Select("""
 			SELECT *
 			FROM article
 			WHERE id = #{id}
 			""")
 	public Article getArticle(int id);
-
 	@Select("""
 			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
@@ -67,13 +63,9 @@ public interface ArticleRepository {
 			WHERE A.id = #{id}
 			""")
 	public Article getForPrintArticle(int id);
-
 	public void deleteArticle(int id);
-
 	public void modifyArticle(int id, String title, String body);
-
 	public int getLastInsertId();
-
 	@Select("""
 			<script>
 			SELECT COUNT(*) AS cnt
@@ -98,11 +90,9 @@ public interface ArticleRepository {
 			</if>
 			</script>
 				""")
-
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
-	
-	
-	
+
+
 	@Update("""
 			<script>
 				UPDATE article
