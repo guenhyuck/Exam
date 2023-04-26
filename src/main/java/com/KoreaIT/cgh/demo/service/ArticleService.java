@@ -86,7 +86,7 @@ public class ArticleService {
 		return ResultData.from("S-1", "삭제 가능");
 	}
 
-	public List<Article> getForPrintArticles(int boardId, int itemsInAPage, int page) {
+	public List<Article> getForPrintArticles(int boardId,String searchKerwordTypeCode ,String searchKerword, int itemsInAPage, int page) {
 		/*
 		 * SELECT * FROM article WHERE boardId = 1 ORDER BY id DESC LIMIT 0, 10
 		 */
@@ -95,9 +95,8 @@ public class ArticleService {
 
 		return articleRepository.getForPrintArticles(boardId, limitFrom, limitTake);
 	}
-
-	public int getArticlesCount(int boardId) {
-		return articleRepository.getArticlesCount(boardId);
+	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 }
