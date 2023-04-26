@@ -44,8 +44,6 @@
 			</div>
 
 <ul id="myList">
-  <li><h2>${article.title}</h2><p>${article.body}</p></li>
-  <li><h2>${article.id}</h2><p>${article.extra__writer}</p></li>
 </ul>
 
 

@@ -29,13 +29,27 @@ public interface ArticleRepository {
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
 			</if>
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordTypeCode == 'title'" >
+						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
+					<when test="searchKeywordTypeCode == 'body'" >
+						AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
+					</when>
+					<otherwise>
+						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
+						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
+					</otherwise>
+				</choose>
+			</if>
 			ORDER BY A.id DESC
 			<if test="limitFrom >= 0">
 				LIMIT #{limitFrom}, #{limitTake}
 			</if>
 			</script>
 				""")
-	public List<Article> getForPrintArticles(int boardId, int limitFrom, int limitTake);
+	public List<Article> getForPrintArticles(int boardId, String searchKerwordTypeCode, String searchKerword, int limitFrom, int limitTake);
 
 	@Select("""
 			SELECT *
@@ -64,43 +78,24 @@ public interface ArticleRepository {
 			SELECT COUNT(*) AS cnt
 			FROM article AS A
 			WHERE 1
-
 			<if test="boardId != 0">
-
 				AND A.boardId = #{boardId}
-
 			</if>
-
 			<if test="searchKeyword != ''">
-
 				<choose>
-
 					<when test="searchKeywordTypeCode == 'title'" >
-
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
-
 					</when>
-
 					<when test="searchKeywordTypeCode == 'body'" >
-
 						AND A.body LIKE CONCAT('%',#{searchKeyword},'%')
-
 					</when>
-
 					<otherwise>
-
 						AND A.title LIKE CONCAT('%',#{searchKeyword},'%')
-
 						OR A.body LIKE CONCAT('%',#{searchKeyword},'%')
-
 					</otherwise>
-
 				</choose>
-
 			</if>
-
 			</script>
-
 				""")
 
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);

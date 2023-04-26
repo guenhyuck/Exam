@@ -145,6 +145,17 @@ SET boardId =2
 WHERE id =3;
 
 ###게시물 갯수 늘리기
+UPDATE article
+SET `body` = '내용4'
+WHERE id = 1;
+
+UPDATE article
+SET `body` = '내용5'
+WHERE id = 2;
+
+UPDATE article
+SET `body` = '내용6'
+WHERE id = 3;
 
 INSERT INTO article 
 (
@@ -164,17 +175,17 @@ LIMIT 0, 10
 
 
 
-SELECT NOW()
+select now()
 
-SELECT FLOOR(RAND() * 2) + 1
+SELECT floor(rand() * 2) + 1
 ###테이블 확인
 
 SELECT * FROM article;
-SELECT * FROM `member`;
+select * from `member`;
 SELECT * FROM board;
 
 DESC `article`;
-DESC `member`;
+desc `member`;
 DESC `board`;
 
 SELECT COUNT(*) > 0
