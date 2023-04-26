@@ -101,6 +101,6 @@ public interface ArticleRepository {
 			</script>
 			""")
 
-	public void increaseHitCount(int id);
+	public int increaseHitCount(int id);
 
 }
