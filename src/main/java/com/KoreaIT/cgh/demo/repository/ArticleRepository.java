@@ -18,7 +18,6 @@ public interface ArticleRepository {
 			ORDER BY id DESC
 				""")
 	public List<Article> getArticles();
-
 	@Select("""
 			<script>
 			SELECT A.*, M.nickname AS extra__writer

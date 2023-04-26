@@ -54,7 +54,6 @@ public class UsrArticleController {
 
 		return "usr/article/list";
 	}
-
 	@RequestMapping("/usr/article/modify")
 	public String showModify(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
