@@ -32,6 +32,7 @@
 					<col width="140" />
 					<col width="140" />
 					<col width="140" />
+					<col width="140" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -40,6 +41,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>조회수</th>
+						<th>추천</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -54,6 +56,23 @@
 							</td>
 							<td>${article.extra__writer}</td>
 							<td>${article.hitCount}</td>
+
+							<td>
+							<c:choose>
+  <c:when test="${mno ne null}">
+    <a href='javascript: like_func();'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/200px-Bot%C3%B3n_Me_gusta.svg.png' id='like_img'></a>
+  </c:when>
+  <c:otherwise>
+    <a href='javascript: login_need();'><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Bot%C3%B3n_Me_gusta.svg/200px-Bot%C3%B3n_Me_gusta.svg.png'></a>
+  </c:otherwise>
+</c:choose>
+							
+						<label class="cursor-pointer label">
+							<span class="label-text">추천하기</span>
+							 <input type="checkbox" class="checkbox checkbox-good" />
+							 <div id="recommendation" style="display:none;">추천하셨습니다</div>
+								  </label>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

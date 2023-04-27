@@ -110,3 +110,9 @@ header>div>ul>li:hover>ul {
 	display: block;
 }
 
+html img{
+	max-width: 10%;
+}
+html>head>body>hearder>div>img{
+	max-width: 30%;
+}

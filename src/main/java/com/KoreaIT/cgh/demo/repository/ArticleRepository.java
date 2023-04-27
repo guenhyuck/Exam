@@ -19,13 +19,20 @@ public interface ArticleRepository {
 	public List<Article> getArticles();
 	@Select("""
 			<script>
-			SELECT A.*, M.nickname AS extra__writer
+			SELECT A.*,
+			IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
+			IFNULL(SUM(IF(RP.point &gt; 0,RP.point,0)),0) AS extra__goodReactionPoint,
+			IFNULL(SUM(IF(RP.point &lt; 0,RP.point,0)),0) AS extra__badReactionPoint,
+			M.nickname AS extra__writer
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
+			LEFT JOIN reactionPoint AS RP 
+			ON A.id = RP.relId AND RP.relTypeCode = 'article'
 			WHERE 1
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
+  
 			</if>
 			<if test="searchKeyword != ''">
 				<choose>
@@ -41,6 +48,7 @@ public interface ArticleRepository {
 					</otherwise>
 				</choose>
 			</if>
+			GROUP BY A.id
 			ORDER BY A.id DESC
 			<if test="limitFrom >= 0">
 				LIMIT #{limitFrom}, #{limitTake}
