@@ -135,8 +135,15 @@ public class UsrArticleController {
 		if (increaseHitCountRd.isFail()) {
 			return increaseHitCountRd;
 		}
+		
+	//	return ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));기존방식
 
-		return ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
+		ResultData rd = ResultData.newData(increaseHitCountRd, "hitCount", articleService.getArticleHitCount(id));
+		
+		rd.setData2("id",id);
+		
+		return rd;
+		//Rq의 new데이터에 추가하고 싶지 않아서 바로 만드는 방법 (몇번글의 조회수가 증가를 했다)
 	}
 
 }
