@@ -29,7 +29,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum,
+	public String doJoin(String loginId, String loginPw,String loginPwConFrim, String name, String nickname, String cellphoneNum,
 			String email) {
 
 		if (Ut.empty(loginId)) {
@@ -38,6 +38,12 @@ public class UsrMemberController {
 		if (Ut.empty(loginPw)) {
 			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
 		}
+		if (Ut.empty(loginPwConFrim)) {
+	        return Ut.jsHitoryBack("F-8", "비밀번호 확인을 입력해주세요");
+	    }
+	    if (!loginPw.equals(loginPwConFrim)) {
+	        return Ut.jsHitoryBack("F-9", "비밀번호와 비밀번호 확인이 일치하지 않습니다");
+	    }
 		if (Ut.empty(name)) {
 			return Ut.jsHitoryBack("F-3", "이름을 입력해주세요");
 		}
@@ -51,7 +57,7 @@ public class UsrMemberController {
 			return Ut.jsHitoryBack("F-6", "이메일을 입력해주세요");
 		}
 
-		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw,loginPwConFrim, name, nickname, cellphoneNum, email);
 
 		if (joinRd.isFail()) {
 			return Ut.jsHitoryBack("F-7","다시 확인해 주세요");

@@ -90,6 +90,9 @@ email = 'absdfsdf@gmail.com';
 
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
 
+# 멤버 테이블 구조 변경 loginPwConFirm 추가
+ALTER TABLE `member` ADD COLUMN loginPwConFirm CHAR(60) NOT NULL AFTER `loginPw`;
+
 
 UPDATE article
 SET memberId = 2

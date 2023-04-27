@@ -15,12 +15,13 @@ public interface MemberRepository {
 			updateDate = NOW(),
 			loginId = #{loginId},
 			loginPw = #{loginPw},
+			loginPwConFrim = #{loginPwConFrim},
 			`name` = #{name},
 			nickname = #{nickname},
 			cellphoneNum = #{cellphoneNum},
 			email = #{email}
 			""")
-	void join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email);
+	void join(String loginId, String loginPw,String loginPwConFrim, String name, String nickname, String cellphoneNum, String email);
 
 	@Select("""
 			SELECT *
