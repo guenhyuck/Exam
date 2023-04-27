@@ -16,7 +16,6 @@
 			return;
 		}
 		localStorage.setItem(localStorageKey, true);
-
 		$.get('../article/doIncreaseHitCountRd', {
 			id : params.id,
 			ajaxMode : 'Y'
@@ -29,6 +28,51 @@
 		// 		ArticleDetail__increaseHitCount();
 		// 연습코드
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
+	})
+</script>
+
+<script>
+function ArticleDetail__increaseReactionCount() {
+	const localStorageKey = 'article__' + params.id + '__alreadyView';
+	if (localStorage.getItem(localStorageKey)) {
+		return;
+	}
+
+		localStorage.setItem(localStorageKey, true);
+		$.get('../reaction/doIncreaseHitCountRd', {
+			id : params.id,
+			ajaxMode : 'Y'
+		}, function(data) {
+			$('.article-detail__increase-count').empty().html(data.data1);
+		}, 'json');
+	}
+	$(function() {
+		// 실전코드
+		// 		ArticleDetail__increaseHitCount();
+		// 연습코드
+		setTimeout(ArticleDetail__increaseReactionCount, 2000);
+	})
+</script>
+
+<script>
+function ArticleDetail__decreaseReactionCount() {
+	const localStorageKey = 'article__' + params.id + '__alreadyView';
+	if (localStorage.getItem(localStorageKey)) {
+		return;
+	}
+		localStorage.setItem(localStorageKey, true);
+		$.get('../reaction/doIncreaseHitCountRd', {
+			id : params.id,
+			ajaxMode : 'Y'
+		}, function(data) {
+			$('.article-detail__decrease-count').empty().html(data.data1);
+		}, 'json');
+	}
+	$(function() {
+		// 실전코드
+		// 		ArticleDetail__increaseHitCount();
+		// 연습코드
+		setTimeout(ArticleDetail__decreaseReactionCount, 2000);
 	})
 </script>
 
@@ -73,15 +117,15 @@
 												<th>내용</th>
 												<td>${article.body }</td>
 										</tr>
-																				<tr>
+										<tr>
 												<th>좋아요</th>
 												<td>${article.extra__goodReactionPoint}</td>
 										</tr>
-																				<tr>
+										<tr>
 												<th>싫어요</th>
 												<td>${article.extra__badReactionPoint}</td>
 										</tr>
-																				<tr>
+										<tr>
 												<th>추천 총합</th>
 												<td>${article.extra__sumReactionPoint}</td>
 										</tr>
@@ -97,6 +141,11 @@
 								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
 										href="../article/doDelete?id=${article.id }">삭제</a>
 						</c:if>
+
+						<a class="btn-text-link btn btn-active btn-ghost" href="../reaction/doIncreaseReactionCountRd?id=${reactionPoint.id}">좋아요</a>
+
+						<a class="btn-text-link btn btn-active btn-ghost" href="../reaction/doDecreaseReactionCountRd?id=${reactionPoint.id}">싫어요</a>
+
 				</div>
 		</div>
 </section>
