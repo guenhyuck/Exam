@@ -3,7 +3,6 @@ package com.KoreaIT.cgh.demo.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface ReactionPointRepository {
@@ -43,4 +42,35 @@ public interface ReactionPointRepository {
 			</script>
 			""")
 	public void addBadReactionPoint(int actorId, String relTypeCode, int id);
+	
+	
+	////////////////////////
+	
+	
+	
+	@Insert("""
+			<script>
+				INSERT INTO reactionPoint
+				SET regDate = NOW(),
+				updateDate = NOW(),
+				relTypeCode = #{relTypeCode},
+				relId = #{id},
+				memberId = #{actorId},
+				`point` = -1
+			</script>
+			""")
+	public int delGoodReactionPoint(int actorId, String relTypeCode, int id);
+
+	@Insert("""
+			<script>
+				INSERT INTO reactionPoint
+				SET regDate = NOW(),
+				updateDate = NOW(),
+				relTypeCode = #{relTypeCode},
+				relId = #{id},
+				memberId = #{actorId},
+				`point` = +1
+			</script>
+			""")
+	public void delBadReactionPoint(int actorId, String relTypeCode, int id);
 }

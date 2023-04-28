@@ -102,5 +102,8 @@ public class ArticleService {
 		}
 		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
 	}
+	
+	
+
 
 }

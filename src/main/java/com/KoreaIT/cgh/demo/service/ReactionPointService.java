@@ -49,5 +49,7 @@ public class ReactionPointService {
 
 		return ResultData.from("S-1", "싫어요 처리 됨");
 	}
+	
+	
 
 }

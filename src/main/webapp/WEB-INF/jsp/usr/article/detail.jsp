@@ -8,7 +8,6 @@
 	const params = {}
 	params.id = parseInt('${param.id}');
 </script>
-
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
@@ -30,7 +29,6 @@
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
 	})
 </script>
-
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -38,14 +36,12 @@
 				<colgroup>
 					<col width="200" />
 				</colgroup>
-
 				<tbody>
 					<tr>
 						<th>번호</th>
 						<td>
 							<div class="badge">${article.id}</div>
 						</td>
-
 					</tr>
 					<tr>
 						<th>작성날짜</th>
@@ -65,7 +61,6 @@
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
 					</tr>
-
 					<tr>
 						<th>추천</th>
 						<td>
@@ -75,15 +70,18 @@
 								<div>
 									<span>
 										<span>&nbsp;</span>
-										<a href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
-											class="btn btn-xs">좋아요 ♥</a>
+										<a
+											href="/usr/reactionPoint/doGoodReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											class="btn btn-xs">좋아요 👍</a>
 									</span>
 									<span>
 										<span>&nbsp;</span>
-										<a href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.currentUri}"
-											class="btn btn-xs">싫어요 №</a>
+										<a
+											href="/usr/reactionPoint/doBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											class="btn btn-xs">싫어요 👎</a>
 									</span>
 								</div>
+
 							</c:if>
 						</td>
 					</tr>
@@ -104,12 +102,10 @@
 						<td>${article.body }</td>
 					</tr>
 				</tbody>
-
 			</table>
 		</div>
 		<div class="btns">
 			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-
 			<c:if test="${article.actorCanModify }">
 				<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
@@ -120,7 +116,4 @@
 		</div>
 	</div>
 </section>
-
-
-
 <%@ include file="../common/foot.jspf"%>

@@ -10,13 +10,16 @@ import com.KoreaIT.cgh.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
+
 	public void writeArticle(int memberId, int boardId, String title, String body);
+
 	@Select("""
 			SELECT *
 			FROM article
 			ORDER BY id DESC
 				""")
 	public List<Article> getArticles();
+
 	@Select("""
 			<script>
 			SELECT A.*,
@@ -27,7 +30,6 @@ public interface ArticleRepository {
 			WHERE 1
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
-
 			</if>
 			<if test="searchKeyword != ''">
 				<choose>
@@ -46,16 +48,12 @@ public interface ArticleRepository {
 			ORDER BY A.id DESC
 			<if test="limitFrom >= 0">
 				LIMIT #{limitFrom}, #{limitTake}
-
-    
-        
-     
-  
 			</if>
 			</script>
 				""")
 	public List<Article> getForPrintArticles(int boardId, String searchKeywordTypeCode, String searchKeyword,
 			int limitFrom, int limitTake);
+
 	@Select("""
 			SELECT *
 			FROM article
@@ -74,10 +72,12 @@ public interface ArticleRepository {
 			""")
 	public Article getForPrintArticle(int id);
 
-  
 	public void deleteArticle(int id);
+
 	public void modifyArticle(int id, String title, String body);
+
 	public int getLastInsertId();
+
 	@Select("""
 			<script>
 			SELECT COUNT(*) AS cnt
@@ -103,6 +103,7 @@ public interface ArticleRepository {
 			</script>
 				""")
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword);
+
 	@Update("""
 			<script>
 				UPDATE article
@@ -110,7 +111,9 @@ public interface ArticleRepository {
 				WHERE id = #{id}
 			</script>
 			""")
+
 	public int increaseHitCount(int id);
+
 	@Select("""
 			<script>
 				SELECT hitCount
@@ -137,5 +140,8 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseBadReationPoint(int relId);
+	
+
+
 
 }
