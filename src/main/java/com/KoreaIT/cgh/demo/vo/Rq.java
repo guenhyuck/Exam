@@ -92,7 +92,24 @@ public class Rq {
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
-
+	public String getCurrentUri() {
+		String currentUri = req.getRequestURI();
+		String queryString = req.getQueryString();
+		
+		System.out.println(currentUri+"확인용");
+		System.out.println(queryString+"확인용");
+		
+		if(queryString != null && queryString.length() > 0) {
+			currentUri += "?" + queryString;
+		}
+		
+		System.out.println(currentUri+"확인용");
+		return queryString;
+	}
+     
+	
+    //Rq 객체 생성 유도
+	// 삭제 x,BeforeActionInterceptor에서 강제 호출
 	public void initOnBeforeActionInterceptor() {
 
 	}

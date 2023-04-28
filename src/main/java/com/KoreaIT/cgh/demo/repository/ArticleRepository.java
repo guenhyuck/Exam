@@ -20,18 +20,14 @@ public interface ArticleRepository {
 	@Select("""
 			<script>
 			SELECT A.*,
-			IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-			IFNULL(SUM(IF(RP.point &gt; 0,RP.point,0)),0) AS extra__goodReactionPoint,
-			IFNULL(SUM(IF(RP.point &lt; 0,RP.point,0)),0) AS extra__badReactionPoint,
 			M.nickname AS extra__writer
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
-			LEFT JOIN reactionPoint AS RP
-			ON A.id = RP.relId AND RP.relTypeCode = 'article'
 			WHERE 1
 			<if test="boardId != 0">
 				AND A.boardId = #{boardId}
+
 			</if>
 			<if test="searchKeyword != ''">
 				<choose>
@@ -47,10 +43,14 @@ public interface ArticleRepository {
 					</otherwise>
 				</choose>
 			</if>
-			GROUP BY A.id
 			ORDER BY A.id DESC
 			<if test="limitFrom >= 0">
 				LIMIT #{limitFrom}, #{limitTake}
+
+    
+        
+     
+  
 			</if>
 			</script>
 				""")
@@ -62,22 +62,19 @@ public interface ArticleRepository {
 			WHERE id = #{id}
 			""")
 	public Article getArticle(int id);
+
 	@Select("""
 			<script>
-			SELECT A.*, M.nickname AS extra__writer,
-			IFNULL(SUM(RP.point),0) AS extra__sumReactionPoint,
-			IFNULL(SUM(IF(RP.point &gt; 0,RP.point,0)),0) AS extra__goodReactionPoint,
-			IFNULL(SUM(IF(RP.point &lt; 0,RP.point,0)),0) AS extra__badReactionPoint
+			SELECT A.*, M.nickname AS extra__writer
 			FROM article AS A
 			INNER JOIN `member` AS M
 			ON A.memberId = M.id
-			LEFT JOIN reactionPoint AS RP
-			ON A.id = RP.relId AND RP.relTypeCode = 'article'
 			WHERE A.id = #{id}
-			GROUP BY A.id
 			</script>
 			""")
 	public Article getForPrintArticle(int id);
+
+  
 	public void deleteArticle(int id);
 	public void modifyArticle(int id, String title, String body);
 	public int getLastInsertId();
@@ -122,5 +119,23 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+
+	@Update("""
+			<script>
+				UPDATE article
+				SET goodReactionPoint = goodReactionPoint + 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int increaseGoodReationPoint(int relId);
+
+	@Update("""
+			<script>
+				UPDATE article
+				SET badReactionPoint = badReactionPoint + 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int increaseBadReationPoint(int relId);
 
 }
