@@ -45,8 +45,6 @@
 						<th>조회수</th>
 						<th>좋아요</th>
 						<th>싫어요</th>
-						<th>추천 합</th>
-		
 					</tr>
 				</thead>
 				<tbody>
@@ -61,9 +59,8 @@
 							</td>
 							<td>${article.extra__writer}</td>
 							<td>${article.hitCount}</td>
-							<td>${article.extra__goodReactionPoint}</td>
-							<td>${article.extra__badReactionPoint}</td>
-							<td>${article.extra__sumReactionPoint}</td>
+							<td>${article.goodReactionPoint}</td>
+							<td>${article.badReactionPoint}</td>
 						
 						</tr>
 					</c:forEach>
