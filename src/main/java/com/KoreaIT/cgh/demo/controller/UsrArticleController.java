@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.cgh.demo.service.ArticleService;
 import com.KoreaIT.cgh.demo.service.BoardService;
+import com.KoreaIT.cgh.demo.service.ReactionPointService;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Article;
 import com.KoreaIT.cgh.demo.vo.Board;
@@ -25,8 +26,14 @@ public class UsrArticleController {
 	private BoardService boardService;
 	@Autowired
 	private Rq rq;
+	@Autowired
+	private ReactionPointService reactionPointService;
+
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
+
+
+
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		Board board = boardService.getBoardById(boardId);
@@ -113,14 +120,14 @@ public class UsrArticleController {
 
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 
-		boolean actorCanMakeReaction = articleService.actorCanMakeReaction(rq.getLoginedMemberId(), id);
+		boolean actorCanMakeReaction = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(), "article",
+				id);
 
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReaction);
 
 		return "usr/article/detail";
 	}
-
 	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
 	public ResultData doIncreaseHitCountRd(int id) {
