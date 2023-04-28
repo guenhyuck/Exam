@@ -15,14 +15,7 @@ public class ResultData<DT> {
 	private Object data2;
 	@Getter
 	private String data2Name;
-	@Getter
-	private Object data3;
-	@Getter
-	private String data3Name;
-	@Getter
-	private Object data4;
-	@Getter
-	private String data4Name;
+
 
 	public static <DT> ResultData<DT> from(String resultCode, String msg) {
 		return from(resultCode, msg, null, null);
@@ -56,16 +49,5 @@ public class ResultData<DT> {
 		
 		
 	}
-   //추천
-	public void setData3(String data3Name, Object data3) {
-		this.data3Name = data3Name;
-		this.data3 = data3;
-	
-		
-	}
-   //비추
-	public void setData4(String data4Name, Object data4) {
-		this.data4Name = data4Name;
-		this.data4 = data4;
-	}
+   
 }

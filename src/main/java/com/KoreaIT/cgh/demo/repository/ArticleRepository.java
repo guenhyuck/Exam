@@ -126,6 +126,21 @@ public interface ArticleRepository {
 			""")
 	public int getArticleHitCount(int id);
 	
+	
+	//몇번 회원이 몇번 글에 좋아요(싫어요,아무것도 안누름) 했나 알아보기
+	@Select("""
+			<script>
+				SELECT IFNULL(SUM(RP.point),0)
+				FROM reactionPoint AS RP
+				WHERE RP.relTypeCode = 'article'
+				AND RP.relID = #{id}
+				AND RP.memberID = #{actorId}
+			</script>
+			""")
+	
+	
+	public int getSumReactionPointByMemberId(int actorId, int id);
+	
 
 
 }

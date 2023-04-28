@@ -114,4 +114,8 @@ public class ArticleService {
 		return articleRepository.getArticleHitCount(id);
 	}
 
+	public boolean actorCanMakeReaction(int actorId, int id) {
+		return articleRepository.getSumReactionPointByMemberId(actorId, id) == 0;
+	}//->가져온값이 0이면 해도 돼 0이 아니면 하면 안돼
+
 }

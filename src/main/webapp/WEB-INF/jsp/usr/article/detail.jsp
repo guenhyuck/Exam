@@ -8,7 +8,6 @@
 	const params = {}
 	params.id = parseInt('${param.id}');
 </script>
-
 <script>
 	function ArticleDetail__increaseHitCount() {
 		const localStorageKey = 'article__' + params.id + '__alreadyView';
@@ -30,126 +29,85 @@
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
 	})
 </script>
-
-<script>
-function ArticleDetail__increaseReactionCount() {
-	const localStorageKey = 'article__' + params.id + '__alreadyView';
-	if (localStorage.getItem(localStorageKey)) {
-		return;
-	}
-
-		localStorage.setItem(localStorageKey, true);
-		$.get('../reaction/doIncreaseHitCountRd', {
-			id : params.id,
-			ajaxMode : 'Y'
-		}, function(data) {
-			$('.article-detail__increase-count').empty().html(data.data1);
-		}, 'json');
-	}
-	$(function() {
-		// 실전코드
-		// 		ArticleDetail__increaseHitCount();
-		// 연습코드
-		setTimeout(ArticleDetail__increaseReactionCount, 2000);
-	})
-</script>
-
-<script>
-function ArticleDetail__decreaseReactionCount() {
-	const localStorageKey = 'article__' + params.id + '__alreadyView';
-	if (localStorage.getItem(localStorageKey)) {
-		return;
-	}
-		localStorage.setItem(localStorageKey, true);
-		$.get('../reaction/doIncreaseHitCountRd', {
-			id : params.id,
-			ajaxMode : 'Y'
-		}, function(data) {
-			$('.article-detail__decrease-count').empty().html(data.data1);
-		}, 'json');
-	}
-	$(function() {
-		// 실전코드
-		// 		ArticleDetail__increaseHitCount();
-		// 연습코드
-		setTimeout(ArticleDetail__decreaseReactionCount, 2000);
-	})
-</script>
-
 <section class="mt-8 text-xl">
-		<div class="container mx-auto px-3">
-				<div class="table-box-type-1">
-						<table border="1">
-								<colgroup>
-										<col width="200" />
-								</colgroup>
-								<tbody>
-										<tr>
-												<th>번호</th>
-												<td>
-														<div class="badge">${article.id}</div>
-												</td>
-										</tr>
-										<tr>
-												<th>작성날짜</th>
-												<td>${article.regDate }</td>
-										</tr>
-										<tr>
-												<th>수정날짜</th>
-												<td>${article.updateDate }</td>
-										</tr>
-										<tr>
-												<th>작성자</th>
-												<td>${article.extra__writer }</td>
-										</tr>
-										<tr>
-												<th>조회수</th>
-												<td>
-														<span class="article-detail__hit-count">${article.hitCount }</span>
-												</td>
-										</tr>
-										<tr>
-												<th>제목</th>
+	<div class="container mx-auto px-3">
+		<div class="table-box-type-1">
+			<table border="1">
+				<colgroup>
+					<col width="200" />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>번호</th>
+						<td>
+							<div class="badge">${article.id}</div>
+						</td>
+					</tr>
+					<tr>
+						<th>작성날짜</th>
+						<td>${article.regDate }</td>
+					</tr>
+					<tr>
+						<th>수정날짜</th>
+						<td>${article.updateDate }</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td>${article.extra__writer }</td>
+					</tr>
+					<tr>
+						<th>조회수</th>
+						<td>
+							<span class="article-detail__hit-count">${article.hitCount }</span>
+						</td>
+					</tr>
 
-												<td>${article.title }</td>
-										</tr>
-										<tr>
-												<th>내용</th>
-												<td>${article.body }</td>
-										</tr>
-										<tr>
-												<th>좋아요</th>
-												<td>${article.extra__goodReactionPoint}</td>
-										</tr>
-										<tr>
-												<th>싫어요</th>
-												<td>${article.extra__badReactionPoint}</td>
-										</tr>
-										<tr>
-												<th>추천 총합</th>
-												<td>${article.extra__sumReactionPoint}</td>
-										</tr>
-								</tbody>
-						</table>
-				</div>
-				<div class="btns">
-						<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-						<c:if test="${article.actorCanModify }">
-								<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
-						</c:if>
-						<c:if test="${article.actorCanDelete }">
-								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-										href="../article/doDelete?id=${article.id }">삭제</a>
-						</c:if>
+					<tr>
+						<th>추천</th>
+						<td>
+							<span>좋아요 : ${article.extra__goodReactionPoint }</span>
+							<c:if test="${actorCanMakeReaction }">
+								<span>
+									<span>&nbsp;</span>
+									<button>👍</button>
+								</span>
+								<span>
+									<span>&nbsp;</span>
+									<button>👎</button>
+								</span>
+							</c:if>
+						</td>
+					</tr>
+					<!-- 					<tr> -->
+					<!-- 						<th>싫어요</th> -->
+					<%-- 						<td>${article.extra__badReactionPoint }</td> --%>
+					<!-- 					</tr> -->
+					<!-- 					<tr> -->
+					<!-- 						<th>추천 총합</th> -->
+					<%-- 						<td>${article.extra__sumReactionPoint }</td> --%>
+					<!-- 					</tr> -->
+					<tr>
+						<th>제목</th>
+						<td>${article.title }</td>
 
-						<a class="btn-text-link btn btn-active btn-ghost" href="../reaction/doIncreaseReactionCountRd?id=${reactionPoint.id}">좋아요</a>
-
-						<a class="btn-text-link btn btn-active btn-ghost" href="../reaction/doDecreaseReactionCountRd?id=${reactionPoint.id}">싫어요</a>
-
-				</div>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>${article.body }</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+		<div class="btns">
+			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+			<c:if test="${article.actorCanModify }">
+				<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
+			</c:if>
+			<c:if test="${article.actorCanDelete }">
+				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
+					href="../article/doDelete?id=${article.id }">삭제</a>
+			</c:if>
+		</div>
+	</div>
 </section>
-
-
-
 <%@ include file="../common/foot.jspf"%>
