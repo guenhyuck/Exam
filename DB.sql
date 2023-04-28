@@ -258,6 +258,40 @@ relTypeCode = 'article',
 relId = 1,
 `point` = 1;
 
+
+# article 테이블에 리액션포인트 칼럼 추가
+ALTER TABLE article ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL;
+ALTER TABLE article ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL;
+
+
+SELECT RP.point
+FROM reactionPoint AS RP
+GROUP BY RP.relTypeCode, RP.relId;
+
+SELECT IF(RP.point > 0, '큼', '작음')
+FROM reactionPoint AS RP
+GROUP BY RP.relTypeCode, RP.relId;
+
+
+
+
+##각 게시물 별 좋아요 , 싫어요 갯수 를 article 테이블에 넣겠다
+##기존 게시물의 good,bad ReationPoint 필드의 값을 채운다
+
+UPDATE article AS A
+INNER JOIN (
+  SELECT RP.relTypeCode,RP.relId,
+  SUM(IF(RP.point > 0, RP.point,0)) AS goodReationPoint,
+  SUM(IF(RP.point < 0, RP.point * -1,0)) AS badReationPoint
+  FROM reactionPoint AS RP
+  GROUP BY RP.relTypeCode, RP.relId;
+
+) AS RP_SUM
+ON A.id = RP_SUM.relId
+SET A.goodReationPoint = RP_SUM.goodReationPoint,
+A.badReationPoint = RP_SUM.badReationPoint;
+
+
 ####################################
 
 
@@ -268,6 +302,15 @@ SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 
+
+
+##각 게시물 별 좋아요 , 싫어요 갯수
+
+SELECT RP.relTypeCode,RP.relId,
+SUM(IF(RP.point > 0, RP.point,0)) AS goodReationPoint,
+SUM(IF(RP.point < 0, RP.point * -1,0)) AS badReationPoint
+FROM reactionPoint AS RP
+GROUP BY RP.relTypeCode, RP.relId;
 
 ### 테이블 분석
 DESC `article`;
@@ -354,3 +397,16 @@ ON A.id = RP.relId AND RP.relTypeCode = 'article'
 WHERE RP.point IS NOT NULL
 GROUP BY A.id, M.nickName, RP.point
 ORDER BY A.id DESC;
+
+
+UPDATE reactionPoint
+SET `point` = `point` + 1
+WHERE id = 2;
+
+UPDATE reactionPoint
+SET `point` = `point` - 1
+WHERE id = 1;
+				
+SELECT `point`
+FROM reactionPoint
+WHERE id =1;

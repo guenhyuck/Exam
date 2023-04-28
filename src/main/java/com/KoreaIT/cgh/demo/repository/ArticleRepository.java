@@ -133,14 +133,15 @@ public interface ArticleRepository {
 				SELECT IFNULL(SUM(RP.point),0)
 				FROM reactionPoint AS RP
 				WHERE RP.relTypeCode = 'article'
-				AND RP.relID = #{id}
-				AND RP.memberID = #{actorId}
+				AND RP.relId = #{id}
+				AND RP.memberId = #{actorId}
 			</script>
+
 			""")
-	
-	
+
 	public int getSumReactionPointByMemberId(int actorId, int id);
-	
+
+
 
 
 }
