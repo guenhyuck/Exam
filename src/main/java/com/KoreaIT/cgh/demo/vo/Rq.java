@@ -27,7 +27,9 @@ public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
+	
 	public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
+		
 		this.req = req;
 		this.resp = resp;
 		this.session = req.getSession();
@@ -44,10 +46,12 @@ public class Rq {
 		this.loginedMember = loginedMember;
 		this.req.setAttribute("rq", this);
 	}
+	
 	public void printHitoryBackJs(String msg) throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsHitoryBack("F-B", msg));
 	}
+	
 	public void print(String str) {
 		try {
 			resp.getWriter().append(str);
@@ -55,26 +59,33 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
+	
 	public void println(String str) {
 		print(str + "\n");
 	}
+	
 	public void login(Member member) {
 		session.setAttribute("loginedMemberId", member.getId());
 	}
+	
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
 	}
+	
 	public String jsHitoryBackOnView(String msg) {
 		req.setAttribute("msg", msg);
 		req.setAttribute("historyBack", true);
 		return "usr/common/js";
 	}
+	
 	public String jsHitoryBack(String resultCode, String msg) {
 		return Ut.jsHitoryBack(resultCode, msg);
 	}
+	
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
+	
 	public String getCurrentUri() {
 		String currentUri = req.getRequestURI();
 		String queryString = req.getQueryString();
@@ -100,5 +111,9 @@ public class Rq {
   
 	// 삭제 x, BeforeActionInterceptor 에서 강제 호출
 	public void initOnBeforeActionInterceptor() {
+	}
+	
+	public boolean isNotLogined() {
+		return !isLogined;
 	}
 }
