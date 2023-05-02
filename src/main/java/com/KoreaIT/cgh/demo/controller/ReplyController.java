@@ -38,15 +38,13 @@ public class ReplyController {
 	
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
-	public String doRepWrite(int boardId, String title, String body, String replaceUri) {
-		if (Ut.empty(title)) {
-			return rq.jsHitoryBack("F-1", "제목을 입력해주세요");
-		}
+	public String doRepWrite(int boardId, String body, String replaceUri) {
+
 		if (Ut.empty(body)) {
 			return rq.jsHitoryBack("F-2", "내용을 입력해주세요");
 		}
-		ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);
-		int id = (int) writeArticleRd.getData1();
+		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), body);
+		int id = (int) writeReplyRd.getData1();
 		if (Ut.empty(replaceUri)) {
 			replaceUri = Ut.f("../article/detail?id=%d", id);
 		}

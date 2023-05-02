@@ -29,6 +29,24 @@
 		setTimeout(ArticleDetail__increaseHitCount, 2000);
 	})
 </script>
+
+<script type="text/javascript">
+	let ReplyWrite__submitFormDone = false;
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		form.body.value = form.body.value.trim();
+		if (form.body.value.length < 3) {
+			alert('3글자 이상 입력하세요');
+			form.body.focus();
+			return;
+		}
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+	}
+</script>
+
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -153,7 +171,7 @@
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
 			<c:if test="${rq.logined }">
-				<form action="../reply/doWrite" method="POST">
+				<form action="../reply/doWrite" method="POST" onsubmit="ReplyWrite__subbitForm(this); return false;">
 					<input type="hidden" name="relTypeCode" value="article" />
 					<input type="hidden" name="relId" value="${article.id }" />
 					<table>
