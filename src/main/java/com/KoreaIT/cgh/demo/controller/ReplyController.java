@@ -1,54 +1,56 @@
 package com.KoreaIT.cgh.demo.controller;
 
-import java.util.List;
 
-import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.KoreaIT.cgh.demo.service.ArticleService;
-import com.KoreaIT.cgh.demo.service.BoardService;
+
+
+import com.KoreaIT.cgh.demo.service.ReactionPointService;
 import com.KoreaIT.cgh.demo.service.ReplyService;
 import com.KoreaIT.cgh.demo.util.Ut;
-import com.KoreaIT.cgh.demo.vo.Reply;
 import com.KoreaIT.cgh.demo.vo.ResultData;
 import com.KoreaIT.cgh.demo.vo.Rq;
 
 @Controller
 @RequestMapping()
 public class ReplyController {
-	@Inject
-	private BoardService boardService;
-	@Inject
-	private ArticleService articleService;
-	@Inject
-	private Rq rq;
-
-	@Inject
+	@Autowired
 	private ReplyService replyService;
 
-	// 댓글 작성
-	@RequestMapping("/usr/reply/write")
-	public String showRepWrite(String title, String body) {
-		return "usr/reply/write";
-	}
-	
+	@Autowired
+	private Rq rq;
+	@Autowired
+	private ReactionPointService reactionPointService;
+
 	@RequestMapping("/usr/reply/doWrite")
 	@ResponseBody
-	public String doRepWrite(int boardId, String body, String replaceUri) {
+	public String doWrite(String relTypeCode, int relId, String body, String replaceUri) {
 
+		if (Ut.empty(relTypeCode)) {
+			return rq.jsHitoryBack("F-1", "relTypeCode 을(를) 입력해주세요");
+		}
+		if (Ut.empty(relId)) {
+			return rq.jsHitoryBack("F-2", "relId 을(를) 입력해주세요");
+		}
 		if (Ut.empty(body)) {
-			return rq.jsHitoryBack("F-2", "내용을 입력해주세요");
+			return rq.jsHitoryBack("F-3", "body 을(를) 입력해주세요");
 		}
-		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), body);
+
+		ResultData<Integer> writeReplyRd = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
+
 		int id = (int) writeReplyRd.getData1();
+
 		if (Ut.empty(replaceUri)) {
-			replaceUri = Ut.f("../article/detail?id=%d", id);
+			replaceUri = Ut.f("../article/detail?id=%d", relId);
 		}
-		return rq.jsReplace(Ut.f("%d번 댓글이 생성되었습니다", id), replaceUri);
+
+		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
 
 }
+

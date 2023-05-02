@@ -3,13 +3,14 @@ package com.KoreaIT.cgh.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.KoreaIT.cgh.demo.repository.ReplyRepository;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Reply;
 import com.KoreaIT.cgh.demo.vo.ResultData;
 
+@Service
 public class ReplyService {
 	@Autowired
 	private ReplyRepository replyRepository;
@@ -17,25 +18,29 @@ public class ReplyService {
 		this.replyRepository = replyRepository;
 	}
 
-	public ResultData<Integer> writeReply(int loginedMemberId,  String body) {
-		replyRepository.writeReply(loginedMemberId,   body);
+	public ResultData<Integer> writeReply(int actorId, String relTypeCode, int relId, String body) {
+		replyRepository.writeReply(actorId, relTypeCode, relId, body);
+
 		int id = replyRepository.getLastInsertId();
+
 		return ResultData.from("S-1", Ut.f("%d번 댓글이 생성되었습니다", id), "id", id);
 	}
-	public void deleteReply(int id) {
-		replyRepository.deleteReply(id);
-	}
-	public ResultData modifyReply(int id, String title, String body) {
-		replyRepository.modifyReply(id, title, body);
-		Reply reply = getReply(id);
-		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정 했습니다", id), "reply", reply);
-	}
-	public List<Reply> replys() {
-		return replyRepository.getReplys();
-	}
-	public Reply getReply(int id) {
-		return replyRepository.getReply(id);
-	}
+	
+//	
+//	public void deleteReply(int id) {
+//		replyRepository.deleteReply(id);
+//	}
+//	public ResultData modifyReply(int id, String title, String body) {
+//		replyRepository.modifyReply(id, title, body);
+//		Reply reply = getReply(id);
+//		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정 했습니다", id), "reply", reply);
+//	}
+//	public List<Reply> replys() {
+//		return replyRepository.getReplys();
+//	}
+//	public Reply getReply(int id) {
+//		return replyRepository.getReply(id);
+//	}
 	
 	
 	

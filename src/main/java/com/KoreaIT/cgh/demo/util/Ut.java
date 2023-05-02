@@ -9,13 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 public class Ut {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
+	
 	public static boolean empty(Object obj) {
 		if (obj == null) {
 			return true;
 		}
+		if (obj instanceof Integer) {
+			return ((int) obj == 0);
+		}
 		if (obj instanceof String == false) {
 			return true;
 		}
+		
 		String str = (String) obj;
 		return str.trim().length() == 0;
 	}
