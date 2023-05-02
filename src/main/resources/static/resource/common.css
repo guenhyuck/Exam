@@ -79,3 +79,7 @@ html div>form>p>button:hover {
     text-decoration: underline;
 	color: red;
 }
+
+.reply>p{
+	margin-top: 15px;
+}

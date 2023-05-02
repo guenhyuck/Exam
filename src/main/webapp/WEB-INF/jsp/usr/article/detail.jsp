@@ -102,16 +102,6 @@
 								<div>
 									<span>
 
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -116,7 +117,7 @@
-  
 										<span>&nbsp;</span>
 										<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
 									</span>
@@ -190,7 +180,7 @@
 
 <div>
 
-    <form method="post" action="/reply/doWrite">
+    <form class = "reply mt-5" method="post" action="/reply/doWrite">
     
         <p>
             <label>댓글 작성자</label> <input type="text" name="writer">
