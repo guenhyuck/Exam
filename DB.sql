@@ -130,7 +130,7 @@ UPDATE article
 SET boardId = 2
 WHERE id = 3;
 
-ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL;
+ALTER TABLE article ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # reactionPoint 테이블 생성
 CREATE TABLE reactionPoint (
@@ -191,8 +191,8 @@ relId = 1,
 `point` = 1;
 
 # 게시물 테이블에 추천 관련 컬럼 추가
-ALTER TABLE article ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL;
-ALTER TABLE article ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL;
+ALTER TABLE article ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE article ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 기존 게시물의 good,bad ReactionPoint 필드의 값을 채운다
 UPDATE article AS A
@@ -250,7 +250,11 @@ memberId = 3,
 relTypeCode = 'article',
 relId = 2,
 `body` = '댓글4';
-	
+
+
+# 댓글 관련 테이블에 추천 관련 컬럼 추가
+ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 	
 ###################################################################확인부
 SELECT * FROM article;

@@ -35,20 +35,19 @@ public class ReplyService {
 //		Reply reply = getReply(id);
 //		return ResultData.from("S-1", Ut.f("%d번 댓글을 수정 했습니다", id), "reply", reply);
 //	}
-//	public List<Reply> replys() {
-//		return replyRepository.getReplys();
-//	}
-//	public Reply getReply(int id) {
-//		return replyRepository.getReply(id);
-//	}
+	public List<Reply> replys() {
+		return replyRepository.getReplys();
+	}
+	public Reply getReply(int id) {
+		return replyRepository.getReply(id);
+	}
 	
 	
 	
-//	public Reply getForPrintReply(int actorId, int id) {
-//		Reply reply = replyRepository.getForPrintReply(id);
-//		controlForPrintData(actorId, reply);
-//		return reply;
-//	}
+	public List<Reply> getForPrintReplies(int actorId,String relTypeCode, int relId) {
+		return replyRepository.getForPrintReplies(actorId,relTypeCode,relId);
+	
+	}
 
 	// 댓글 권한
 	

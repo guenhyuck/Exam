@@ -20,6 +20,8 @@ public class Reply {
 	private int goodReactionPoint;
 	private int badReactionPoint;
 	
+	private String extra__writer;
+	
 	
 	private boolean actorCanModify;
 	private boolean actorCanDelete;

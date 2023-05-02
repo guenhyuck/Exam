@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.KoreaIT.cgh.demo.service.ArticleService;
 import com.KoreaIT.cgh.demo.service.BoardService;
 import com.KoreaIT.cgh.demo.service.ReactionPointService;
+import com.KoreaIT.cgh.demo.service.ReplyService;
 import com.KoreaIT.cgh.demo.util.Ut;
 import com.KoreaIT.cgh.demo.vo.Article;
 import com.KoreaIT.cgh.demo.vo.Board;
+import com.KoreaIT.cgh.demo.vo.Reply;
 import com.KoreaIT.cgh.demo.vo.ResultData;
 import com.KoreaIT.cgh.demo.vo.Rq;
 
@@ -24,6 +26,8 @@ public class UsrArticleController {
 	private ArticleService articleService;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private ReplyService replyService;
 	@Autowired
 	private Rq rq;
 	@Autowired
@@ -112,6 +116,8 @@ public class UsrArticleController {
 		}
 		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
 	}
+	
+	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 
@@ -119,10 +125,16 @@ public class UsrArticleController {
 
 		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(),
 				"article", id);
+		
+		
+	    List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(),"article",id);
+	    
+	    int repliesCount = replies.size();
 
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
+		model.addAttribute("repliesCount", repliesCount);
 
 		if (actorCanMakeReactionRd.getResultCode().equals("F-2")) {
 			int sumReactionPointByMemberId = (int) actorCanMakeReactionRd.getData1();

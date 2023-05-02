@@ -33,21 +33,21 @@ public interface ReplyRepository {
 			""")
 	int getLastInsertId();
 	
-//	@Select("""
-//			SELECT *
-//			FROM reply
-//			ORDER BY id DESC
-//				""")
-//	public List<Reply> getReplys();
-//
-//
-//	@Select("""
-//			SELECT *
-//			FROM reply
-//			WHERE id = #{id}
-//			""")
-//	public Reply getReply(int id);
-//
+	@Select("""
+			SELECT *
+			FROM reply
+			ORDER BY id DESC
+				""")
+	public List<Reply> getReplys();
+
+
+	@Select("""
+			SELECT *
+			FROM reply
+			WHERE id = #{id}
+			""")
+	public Reply getReply(int id);
+
 //	@Select("""
 //			<script>
 //			SELECT R.*, M.nickname AS extra__writer
@@ -57,13 +57,24 @@ public interface ReplyRepository {
 //			WHERE R.id = #{id}
 //			</script>
 //			""")
-//	public Reply getForPrintReply(int id);
-//
+//	public Reply getForPrintReplise(int id);
+	
+	@Select("""
+			SELECT R.*, M.nickname AS extra__writer
+			FROM reply AS R
+			LEFT JOIN `member` AS M
+			ON R.memberId = M.id
+			WHERE R.relTypeCode = #{relTypeCode}
+			AND R.relId = #{relId}
+			ORDER BY R.id DESC
+		""")
+     List<Reply> getForPrintReplies(int actorId, String relTypeCode, int relId);
+
 //	public void deleteReply(int id);
 //
 //	public void modifyReply(int id, String title, String body);
 //
-//	public int getLastInsertId();
+
 //
 //
 //	@Update("""

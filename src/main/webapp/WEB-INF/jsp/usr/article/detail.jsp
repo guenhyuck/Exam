@@ -167,6 +167,8 @@
 </div>
 </section>
 
+<!-- 댓글 작성 -->
+
 <section class="mt-8 text-xl">
 	<div class="container mx-auto px-3">
 		<div class="table-box-type-1">
@@ -180,7 +182,6 @@
 						</colgroup>
 
 						<tbody>
-							<tr>
 								<th>댓글</th>
 								<td>
 									<textarea class="input input-bordered w-full max-w-xs" type="text" name="body" placeholder="내용을 입력해주세요" /></textarea>
@@ -203,6 +204,11 @@
 				<a class="btn-text-link btn btn-active btn-ghost" href="/usr/member/login">로그인</a> 후 이용해줘
 			</c:if>
 		</div>
+<section class="mt-5">
+	<div class="container mx-auto px-3">
+		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
+	</div>
+</section>
 
 	</div>
 </section>
