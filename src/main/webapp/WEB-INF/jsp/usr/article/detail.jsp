@@ -153,7 +153,7 @@
 				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
 					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
-			<!--  댓글 기능 -->
+			<!--  댓글 기능 구현중 -->
 			
 			<hr />
 
