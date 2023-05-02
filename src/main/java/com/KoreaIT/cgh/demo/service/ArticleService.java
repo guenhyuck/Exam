@@ -40,7 +40,6 @@ public class ArticleService {
 		return article;
 	}
 	private void controlForPrintData(int actorId, Article article) {
-		
 		if (article == null) {
 			return;
 		}
@@ -50,14 +49,12 @@ public class ArticleService {
 		article.setActorCanModify(actorCanModifyRd.isSuccess());
 	}
 	public ResultData actorCanModify(int loginedMemberId, Article article) {
-		
 		if (article.getMemberId() != loginedMemberId) {
 			return ResultData.from("F-2", Ut.f("해당 글에 대한 권한이 없습니다"));
 		}
 		return ResultData.from("S-1", "수정 가능");
 	}
 	private ResultData actorCanDelete(int actorId, Article article) {
-		
 		if (article == null) {
 			return ResultData.from("F-1", "게시물이 존재하지 않습니다");
 		}
@@ -68,7 +65,6 @@ public class ArticleService {
 	}
 	public List<Article> getForPrintArticles(int boardId, int itemsInAPage, int page, String searchKeywordTypeCode,
 			String searchKeyword) {
-		
 		int limitFrom = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
 		return articleRepository.getForPrintArticles(boardId, searchKeywordTypeCode, searchKeyword, limitFrom,
@@ -78,7 +74,6 @@ public class ArticleService {
 		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 	public ResultData increaseHitCount(int id) {
-		
 		int affectedRow = articleRepository.increaseHitCount(id);
 		if (affectedRow == 0) {
 			return ResultData.from("F-1", "해당 게시물은 없음", "affectedRow", affectedRow);
@@ -88,28 +83,38 @@ public class ArticleService {
 	public int getArticleHitCount(int id) {
 		return articleRepository.getArticleHitCount(id);
 	}
-
-	public ResultData increaseGoodReactionPoint(int relId) {
-		
+	public ResultData increaseGoodReationPoint(int relId) {
 		int affectedRow = articleRepository.increaseGoodReationPoint(relId);
-
 		if (affectedRow == 0) {
 			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
 		}
 		return ResultData.from("S-1", "좋아요 증가", "affectedRow", affectedRow);
 	}
-
-	public ResultData increaseBadReactionPoint(int relId) {
-
+	public ResultData increaseBadReationPoint(int relId) {
 		int affectedRow = articleRepository.increaseBadReationPoint(relId);
-
 		if (affectedRow == 0) {
 			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
 		}
 		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
 	}
-	
-	
 
+	public ResultData decreaseGoodReationPoint(int relId) {
+		int affectedRow = articleRepository.decreaseGoodReationPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseBadReationPoint(int relId) {
+		int affectedRow = articleRepository.decreaseBadReationPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "싫어요 감소", "affectedRow", affectedRow);
+
+	}
 
 }

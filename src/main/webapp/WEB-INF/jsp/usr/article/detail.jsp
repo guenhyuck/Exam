@@ -97,16 +97,28 @@
 								</div>
 							</c:if>
 
+
 							<c:if test="${actorCanCancelBadReaction }">
 								<div>
 									<span>
+
+    
+        
+          
+    
+
+        
+        Expand All
+    
+    @@ -116,7 +117,7 @@
+  
 										<span>&nbsp;</span>
 										<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
 									</span>
 									<span>
 										<span>&nbsp;</span>
 										<a
-											href="/usr/reactionPoint/doBadCancelReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=article&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
 											class="btn btn-xs">싫어요 👎</a>
 									</span>
 								</div>
@@ -141,6 +153,60 @@
 				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
 					href="../article/doDelete?id=${article.id }">삭제</a>
 			</c:if>
+			<!--  댓글 기능 -->
+			
+			<hr />
+
+<hr />
+
+<ul>
+ <li>
+        <div>
+            <p>첫번째 댓글 작성자</p>
+            <p>첫번째 댓글</p>
+        </div>
+    </li>
+    <li>
+        <div>
+            <p>두번째 댓글 작성자</p>
+            <p>두번째 댓글</p>
+        </div>
+    </li>
+    <li>
+        <div>
+            <p>세번째 댓글 작성자</p>
+            <p>세번째 댓글</p>
+        </div>
+    </li>
+<%--     <c:forEach items="${reply}" var="reply">
+<li>
+	<div>
+		<p>${reply.writer} / ${reply.regDate}</p>
+		<p>${reply.content }</p>
+	</div>
+</li>	
+</c:forEach> --%>
+</ul>
+
+<div>
+
+    <form method="post" action="/reply/doWrite">
+    
+        <p>
+            <label>댓글 작성자</label> <input type="text" name="writer">
+        </p>
+        <p>
+            <textarea rows="5" cols="50" name="content"></textarea>
+        </p>
+        <p>
+            <input type="hidden" name="bno" value="${view.bno}">
+            <button type="submit">댓글 작성</button>
+        </p>
+    </form>
+    
+</div>
+			<!-- 댓글 기능 구현중  -->
+			
 		</div>
 	</div>
 </section>

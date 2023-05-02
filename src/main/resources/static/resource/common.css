@@ -72,3 +72,10 @@ html img{
 html>head>body>hearder>div>img{
 	max-width: 30%;
 }
+
+/* 댓글부 */
+
+html div>form>p>button:hover {
+    text-decoration: underline;
+	color: red;
+}
