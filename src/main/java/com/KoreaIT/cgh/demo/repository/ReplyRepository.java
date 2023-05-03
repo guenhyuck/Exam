@@ -2,6 +2,7 @@ package com.KoreaIT.cgh.demo.repository;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -48,16 +49,16 @@ public interface ReplyRepository {
 			""")
 	public Reply getReply(int id);
 
-//	@Select("""
-//			<script>
-//			SELECT R.*, M.nickname AS extra__writer
-//			FROM reply AS R
-//			INNER JOIN `member` AS M
-//			ON R.memberId = M.id
-//			WHERE R.id = #{id}
-//			</script>
-//			""")
-//	public Reply getForPrintReplise(int id);
+	@Select("""
+			<script>
+			SELECT R.*, M.nickname AS extra__writer
+			FROM reply AS R
+			INNER JOIN `member` AS M
+			ON R.memberId = M.id
+			WHERE R.id = #{id}
+			</script>
+			""")
+	public Reply getForPrintReplise(int memberId,int id);
 	
 	@Select("""
 			SELECT R.*, M.nickname AS extra__writer
@@ -66,14 +67,28 @@ public interface ReplyRepository {
 			ON R.memberId = M.id
 			WHERE R.relTypeCode = #{relTypeCode}
 			AND R.relId = #{relId}
-			ORDER BY R.id DESC
+			ORDER BY R.id ASC
 		""")
      List<Reply> getForPrintReplies(int actorId, String relTypeCode, int relId);
 
-//	public void deleteReply(int id);
-//
-//	public void modifyReply(int id, String title, String body);
-//
+	@Delete("""
+		DELETE FROM
+		reply
+		WHERE id = #{id}
+			""")
+
+			
+	
+	public void deleteReply(int id);
+	
+	@Update("""
+		UPDATE reply
+		SET `body` = #{body}
+		WHERE id = #{id}
+			""")
+
+	public void modifyReply(int id, String body);
+
 
 //
 //
