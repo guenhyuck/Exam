@@ -1,14 +1,10 @@
 package com.KoreaIT.cgh.demo.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
 
 import com.KoreaIT.cgh.demo.service.ReactionPointService;
 import com.KoreaIT.cgh.demo.service.ReplyService;
@@ -53,7 +49,7 @@ public class ReplyController {
 
 		return rq.jsReplace(writeReplyRd.getMsg(), replaceUri);
 	}
-	
+
 	@RequestMapping("/usr/reply/modify")
 	public String showModify(Model model, int id) {
 		Reply reply = replyService.getForPrintReplise(rq.getLoginedMemberId(), id);
@@ -67,9 +63,10 @@ public class ReplyController {
 		model.addAttribute("reply", reply);
 		return "usr/reply/modify";
 	}
+
 	@RequestMapping("/usr/reply/doModify")
 	@ResponseBody
-	public String doModify(int id , String body) {
+	public String doModify(int id, String body) {
 		Reply reply = replyService.getReply(id);
 		if (reply == null) {
 			return rq.jsHitoryBack("F-1", Ut.f("%d번 댓글은 존재하지 않습니다@", id));
@@ -79,8 +76,9 @@ public class ReplyController {
 			return rq.jsHitoryBack(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
 		}
 		replyService.modifyReply(id, body);
-		return rq.jsReplace(Ut.f("%d번 댓글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", id));
+		return rq.jsReplace(Ut.f("%d번 댓글을 수정 했습니다", id), Ut.f("../article/detail?id=%d", reply.getRelId()));
 	}
+
 	@RequestMapping("/usr/reply/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
@@ -92,8 +90,8 @@ public class ReplyController {
 			return Ut.jsHitoryBack("F-2", Ut.f("%d번 댓글에 대한 권한이 없습니다", id));
 		}
 		replyService.deleteReply(id);
-		return Ut.jsReplace(Ut.f("%d번 댓글을 삭제 했습니다", id), "../article/list?boardId=1");
+		return Ut.jsReplace(Ut.f("%d번 댓글을 삭제 했습니다", id), Ut.f("../article/detail?id=%d", reply.getRelId()));
+
 	}
 
 }
-

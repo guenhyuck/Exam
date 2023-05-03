@@ -30,4 +30,5 @@ public class Reply {
 		return regDate.substring(2, 16).replace(" ", "<br>");
 	}
 
+
 }
