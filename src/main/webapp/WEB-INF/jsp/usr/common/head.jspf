@@ -70,6 +70,13 @@
 										</a>
 								</li>
 						</c:if>
+												<c:if test="${rq.isLogined() }">
+								<li class="hover:underline">
+										<a class="h-full px-3 flex items-center" href="/usr/member/mypage">
+												<span>MYPAGE</span>
+										</a>
+								</li>
+						</c:if>
 						<c:if test="${rq.isLogined() }">
 								<li class="hover:underline">
 										<a class="h-full px-3 flex items-center" href="/usr/member/doLogout">

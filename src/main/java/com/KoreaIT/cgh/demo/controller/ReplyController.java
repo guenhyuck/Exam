@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.KoreaIT.cgh.demo.service.ArticleService;
 import com.KoreaIT.cgh.demo.service.ReactionPointService;
 import com.KoreaIT.cgh.demo.service.ReplyService;
 import com.KoreaIT.cgh.demo.util.Ut;
@@ -19,6 +20,8 @@ import com.KoreaIT.cgh.demo.vo.Rq;
 public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
+	@Autowired
+	private ArticleService articleService;
 
 	@Autowired
 	private Rq rq;
@@ -60,7 +63,11 @@ public class ReplyController {
 		if (actorCanModifyRd.isFail()) {
 			return rq.jsHitoryBackOnView(actorCanModifyRd.getMsg());
 		}
+		
+		Article article = articleService.getArticle(reply.getRelId());
+		
 		model.addAttribute("reply", reply);
+		model.addAttribute("article", article);
 		return "usr/reply/modify";
 	}
 

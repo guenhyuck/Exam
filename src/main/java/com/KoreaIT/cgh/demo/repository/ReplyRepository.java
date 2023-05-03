@@ -82,9 +82,14 @@ public interface ReplyRepository {
 	public void deleteReply(int id);
 	
 	@Update("""
+		<script>
 		UPDATE reply
-		SET `body` = #{body}
+		<set>
+		<if test="body != null and body != ''">`body` = #{body},</if>
+		updateDate= NOW()
+		</set>
 		WHERE id = #{id}
+		</script>
 			""")
 
 	public void modifyReply(int id, String body);
@@ -92,44 +97,44 @@ public interface ReplyRepository {
 
 //
 //
-//	@Update("""
-//			<script>
-//				UPDATE reply
-//				SET goodReactionPoint = goodReactionPoint + 1
-//				WHERE id = #{relId}
-//			</script>
-//			""")
-//	public int increaseGoodReationPoint(int relId);
-//
-//	@Update("""
-//			<script>
-//				UPDATE reply
-//				SET badReactionPoint = badReactionPoint + 1
-//				WHERE id = #{relId}
-//			</script>
-//			""")
-//	public int increaseBadReationPoint(int relId);
-//	
-//
-//	@Update("""
-//			<script>
-//				UPDATE reply
-//				SET goodReactionPoint = goodReactionPoint - 1
-//				WHERE id = #{relId}
-//			</script>
-//			""")
-//	public int decreaseGoodReationPoint(int relId);
-//
-//	@Update("""
-//			<script>
-//				UPDATE reply
-//				SET badReactionPoint = badReactionPoint - 1
-//				WHERE id = #{relId}
-//			</script>
-//			""")
-//	public int decreaseBadReationPoint(int relId);
-//
-//	
+	@Update("""
+			<script>
+				UPDATE reply
+				SET goodReactionPoint = goodReactionPoint + 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int increaseGoodReationPoint(int relId);
+
+	@Update("""
+			<script>
+				UPDATE reply
+				SET badReactionPoint = badReactionPoint + 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int increaseBadReationPoint(int relId);
+	
+
+	@Update("""
+			<script>
+				UPDATE reply
+				SET goodReactionPoint = goodReactionPoint - 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int decreaseGoodReationPoint(int relId);
+
+	@Update("""
+			<script>
+				UPDATE reply
+				SET badReactionPoint = badReactionPoint - 1
+				WHERE id = #{relId}
+			</script>
+			""")
+	public int decreaseBadReationPoint(int relId);
+
+	
 
 }
 

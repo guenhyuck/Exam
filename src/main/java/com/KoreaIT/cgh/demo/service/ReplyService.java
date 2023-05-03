@@ -95,38 +95,38 @@ public class ReplyService {
 	
 	//좋아요
 
-//	public ResultData increaseGoodReationPoint(int relId) {
-//		int affectedRow = articleRepository.increaseGoodReationPoint(relId);
-//		if (affectedRow == 0) {
-//			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
-//		}
-//		return ResultData.from("S-1", "좋아요 증가", "affectedRow", affectedRow);
-//	}
-//	public ResultData increaseBadReationPoint(int relId) {
-//		int affectedRow = articleRepository.increaseBadReationPoint(relId);
-//		if (affectedRow == 0) {
-//			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
-//		}
-//		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
-//	}
-//
-//	public ResultData decreaseGoodReationPoint(int relId) {
-//		int affectedRow = articleRepository.decreaseGoodReationPoint(relId);
-//
-//		if (affectedRow == 0) {
-//			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
-//		}
-//		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
-//	}
-//
-//	public ResultData decreaseBadReationPoint(int relId) {
-//		int affectedRow = articleRepository.decreaseBadReationPoint(relId);
-//
-//		if (affectedRow == 0) {
-//			return ResultData.from("F-1", "해당 게시물은 없습니다", "affectedRow", affectedRow);
-//		}
-//		return ResultData.from("S-1", "싫어요 감소", "affectedRow", affectedRow);
-//
-//	}
+	public ResultData increaseGoodReationPoint(int relId) {
+		int affectedRow = replyRepository.increaseGoodReationPoint(relId);
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "댓글은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "좋아요 증가", "affectedRow", affectedRow);
+	}
+	public ResultData increaseBadReationPoint(int relId) {
+		int affectedRow = replyRepository.increaseBadReationPoint(relId);
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "댓글은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "싫어요 증가", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseGoodReationPoint(int relId) {
+		int affectedRow = replyRepository.decreaseGoodReationPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "댓글은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "좋아요 감소", "affectedRow", affectedRow);
+	}
+
+	public ResultData decreaseBadReationPoint(int relId) {
+		int affectedRow = replyRepository.decreaseBadReationPoint(relId);
+
+		if (affectedRow == 0) {
+			return ResultData.from("F-1", "댓글은 없습니다", "affectedRow", affectedRow);
+		}
+		return ResultData.from("S-1", "싫어요 감소", "affectedRow", affectedRow);
+
+	}
 
 }

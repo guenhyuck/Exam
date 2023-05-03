@@ -172,6 +172,7 @@
 							<col width="200" />
 						</colgroup>
 						<tbody>
+						
 							<tr>
 								<th>댓글</th>
 								<td>
@@ -222,6 +223,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			
 				<c:forEach var="reply" items="${replies }">
 					<tr class="hover">
 						<td>
@@ -229,7 +231,54 @@
 						</td>
 						<td>${reply.getForPrintRegDateType1()}</td>
 						<td>${reply.extra__writer}</td>
-						<td>${reply.goodReactionPoint}</td>
+						<td>
+							<span>&nbsp;좋아요 : ${reply.goodReactionPoint }&nbsp;</span>
+							<span>&nbsp;싫어요 : ${reply.badReactionPoint }&nbsp;</span>
+							<c:if test="${actorCanMakeReaction }">
+								<div>
+									<span>
+										<span>&nbsp;</span>
+										<a
+											href="/usr/reactionPoint/doGoodReaction?relTypeCode=reply&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											class="btn btn-xs">좋아요 👍</a>
+									</span>
+									<span>
+										<span>&nbsp;</span>
+										<a
+											href="/usr/reactionPoint/doBadReaction?relTypeCode=reply&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											class="btn btn-xs">싫어요 👎</a>
+									</span>
+								</div>
+							</c:if>
+							<c:if test="${actorCanCancelGoodReaction }">
+								<div>
+									<span>
+										<span>&nbsp;</span>
+										<a
+											href="/usr/reactionPoint/doCancelGoodReaction?relTypeCode=reply&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											class="btn btn-xs">좋아요 👍</a>
+									</span>
+									<span>
+										<span>&nbsp;</span>
+										<a onclick="alert(this.title); return false;" title="좋아요를 먼저 취소해" class="btn btn-xs">싫어요 👎</a>
+									</span>
+								</div>
+							</c:if>
+							<c:if test="${actorCanCancelBadReaction }">
+								<div>
+									<span>
+										<span>&nbsp;</span>
+										<a onclick="alert(this.title); return false;" title="싫어요를 먼저 취소해" class="btn btn-xs">좋아요 👍</a>
+									</span>
+									<span>
+										<span>&nbsp;</span>
+										<a
+											href="/usr/reactionPoint/doCancelBadReaction?relTypeCode=reply&relId=${param.id }&replaceUri=${rq.encodedCurrentUri}"
+											class="btn btn-xs">싫어요 👎</a>
+									</span>
+								</div>
+							</c:if>
+						</td>
 						<td align="left">${reply.body}</td>
 						<td>
 							<c:if test="${reply.actorCanModify }">

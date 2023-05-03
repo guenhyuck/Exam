@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.cgh.demo.service.MemberService;
 import com.KoreaIT.cgh.demo.util.Ut;
+import com.KoreaIT.cgh.demo.vo.Article;
 import com.KoreaIT.cgh.demo.vo.Member;
 import com.KoreaIT.cgh.demo.vo.ResultData;
 import com.KoreaIT.cgh.demo.vo.Rq;
@@ -21,6 +22,68 @@ public class UsrMemberController {
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
+	
+	@RequestMapping("/usr/member/mypage")
+	public String showMypage(HttpSession httpSession) {
+		return "usr/member/mypage";
+	}
+	
+	@RequestMapping("/usr/member/modify")
+	public String showModify(HttpSession httpSession) {
+		return "usr/member/modify";
+	}
+	@RequestMapping("/usr/member/doModify")
+	@ResponseBody
+	public String doModify(String loginId, String loginPw,String loginPwConFrim, String name, String nickname, String cellphoneNum,
+			String email) {
+		if (Ut.empty(loginId)) {
+			return Ut.jsHitoryBack("F-1", "아이디를 입력해주세요");
+		}
+		if (Ut.empty(loginPw)) {
+			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
+		}
+		if (Ut.empty(loginPwConFrim)) {
+	        return Ut.jsHitoryBack("F-8", "비밀번호 확인을 입력해주세요");
+	    }
+	    if (!loginPw.equals(loginPwConFrim)) {
+	        return Ut.jsHitoryBack("F-9", "비밀번호와 비밀번호 확인이 일치하지 않습니다");
+	    }
+		if (Ut.empty(name)) {
+			return Ut.jsHitoryBack("F-3", "이름을 입력해주세요");
+		}
+		if (Ut.empty(nickname)) {
+			return Ut.jsHitoryBack("F-4", "닉네임을 입력해주세요");
+		}
+		if (Ut.empty(cellphoneNum)) {
+			return Ut.jsHitoryBack("F-5", "전화번호를 입력해주세요");
+		}
+		if (Ut.empty(email)) {
+			return Ut.jsHitoryBack("F-6", "이메일을 입력해주세요");
+		}
+
+		ResultData<Integer> joinRd = memberService.join(loginId, loginPw,loginPwConFrim, name, nickname, cellphoneNum, email);
+
+		if (joinRd.isFail()) {
+			return Ut.jsHitoryBack("F-7","다시 확인해 주세요");
+		}
+
+		Member member = memberService.getMemberById(joinRd.getData1());
+
+		return Ut.jsReplace("S-1", Ut.f("%d님 정보가 수정 되었습니다", member.getId()), "/");
+	
+	}
+	
+	@RequestMapping("/usr/member/delete")
+	public String showDelete(HttpSession httpSession) {
+		return "usr/member/delete";
+	}
+	@RequestMapping("/usr/member/doDelete")
+	@ResponseBody
+	public String doDelete(int id,String loginId) {
+		return loginId;
+
+	}
+	
 	
 	@RequestMapping("/usr/member/join")
 	public String showJoin(HttpSession httpSession) {
