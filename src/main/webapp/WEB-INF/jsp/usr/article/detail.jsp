@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="ARTICLE DETAIL" />
 <%@ include file="../common/head.jspf"%>
 <hr />
+
 <!-- <iframe src="http://localhost:8081/usr/article/doIncreaseHitCountRd?id=2" frameborder="0"></iframe> -->
 <script>
 	const params = {}
@@ -40,14 +41,12 @@
 				<colgroup>
 					<col width="200" />
 				</colgroup>
-
 				<tbody>
 					<tr>
 						<th>번호</th>
 						<td>
 							<div class="badge">${article.id}</div>
 						</td>
-
 					</tr>
 					<tr>
 						<th>작성날짜</th>
@@ -67,7 +66,6 @@
 							<span class="article-detail__hit-count">${article.hitCount }</span>
 						</td>
 					</tr>
-
 					<tr>
 						<th>추천</th>
 						<td>
@@ -103,8 +101,6 @@
 									</span>
 								</div>
 							</c:if>
-
-
 							<c:if test="${actorCanCancelBadReaction }">
 								<div>
 									<span>
@@ -121,7 +117,6 @@
 							</c:if>
 						</td>
 					</tr>
-
 					<tr>
 						<th>제목</th>
 						<td>${article.title }</td>
@@ -131,12 +126,10 @@
 						<td>${article.body }</td>
 					</tr>
 				</tbody>
-
 			</table>
 		</div>
 		<div class="btns">
 			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-
 			<c:if test="${article.actorCanModify }">
 				<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
 			</c:if>
@@ -178,7 +171,6 @@
 						<colgroup>
 							<col width="200" />
 						</colgroup>
-
 						<tbody>
 							<tr>
 								<th>댓글</th>
@@ -195,7 +187,6 @@
 								</td>
 							</tr>
 						</tbody>
-
 					</table>
 				</form>
 			</c:if>
@@ -209,6 +200,39 @@
 <section class="mt-5">
 	<div class="container mx-auto px-3">
 		<h1 class="text-3xl">댓글 리스트(${repliesCount })</h1>
+		<table class="table table-zebra w-full">
+			<colgroup>
+				<col width="70" />
+				<col width="100" />
+				<col width="100" />
+				<col width="50" />
+				<col width="140" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>날짜</th>
+					<th>작성자</th>
+					<th>추천</th>
+					<th>내용</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<c:forEach var="reply" items="${replies }">
+					<tr class="hover">
+						<td>
+							<div class="badge">${reply.id}</div>
+						</td>
+						<td>${reply.getForPrintRegDateType1()}</td>
+						<td>${reply.extra__writer}</td>
+						<td>${reply.goodReactionPoint}</td>
+						<td align="left">${reply.body}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+
+		</table>
 	</div>
 </section>
 
