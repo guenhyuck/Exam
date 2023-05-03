@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	let ReplyModify__submitFormDone = false;
 
-	function ReplyeModify__submitForm(form) {
+	function ReplyModify__submitForm(form) {
 		if (ReplyModify__submitFormDone) {
 			return;
 		}
@@ -26,7 +26,7 @@
 <section class="mt-8 text-xl">
 		<div class="container mx-auto px-3">
 				<div class="table-box-type-1">
-						<form action="../reply/doModify" method="POST" onsubmit="ReplyeModify__submit(this); return false">
+						<form action="../reply/doModify" method="POST" onsubmit="ReplyModify__submit(this); return false">
 								<input type="hidden" name="id" value="${reply.id }" />
 								<table>
 										<colgroup>

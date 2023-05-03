@@ -27,6 +27,23 @@ public class UsrMemberController {
 		return "usr/member/checkPw";
 	}
 	
+
+	@RequestMapping("/usr/member/doCheckPw")
+	@ResponseBody
+	public String doCheckPw(String loginPw) {
+		
+		if (Ut.empty(loginPw)) {
+			return rq.jsHitoryBackOnView("비밀번호를 입력 하세요");
+	    }
+		
+		if(rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return rq.jsHitoryBackOnView("비밀번호가 다릅니다");
+		}
+
+
+		return "usr/member/modify";
+	}
+	
 	@RequestMapping("/usr/member/mypage")
 	public String showMypage(HttpSession httpSession) {
 		return "usr/member/mypage";
@@ -36,6 +53,7 @@ public class UsrMemberController {
 	public String showModify(HttpSession httpSession) {
 		return "usr/member/modify";
 	}
+	
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(String loginId, String loginPw,String loginPwConFrim, String name, String nickname, String cellphoneNum,
