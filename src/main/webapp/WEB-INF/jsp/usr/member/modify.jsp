@@ -17,22 +17,18 @@
 
 					<tbody>
 						<tr>
-							<th>번호</th>
+							<th>회원 번호</th>
 							<td>
-								<div class="badge">${article.id}</div>
+								<div class="badge">${member.id}</div>
 							</td>
 						</tr>
 						<tr>
-							<th>작성날짜</th>
-							<td>${article.regDate }</td>
+							<th>가입날짜</th>
+							<td>${member.regDate }</td>
 						</tr>
 						<tr>
-							<th>수정날짜</th>
-							<td>${article.updateDate }</td>
-						</tr>
-						<tr>
-							<th>작성자</th>
-							<td>${article.extra__writer }</td>
+							<th>회원이름</th>
+							<td>${member.name}</td>
 						</tr>
 						<tr>
 							<th>제목</th>
@@ -50,26 +46,15 @@
 						<tr>
 							<th></th>
 							<td>
-								<button type="submit" value="수정" />
-								수정
-								</button>
+						<a class="btn-text-link btn btn-active btn-ghost" href="../member/modify?id=${member.id }">수정</a>
 							</td>
 						</tr>
 					</tbody>
 
 				</table>
-			</form>
 		</div>
 		<div class="btns">
 			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-
-			<c:if test="${article.actorCanModify }">
-				<a class="btn-text-link btn btn-active btn-ghost" href="../article/modify?id=${article.id }">수정</a>
-			</c:if>
-			<c:if test="${article.actorCanDelete }">
-				<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-					href="../article/doDelete?id=${article.id }">삭제</a>
-			</c:if>
 		</div>
 	</div>
 </section>

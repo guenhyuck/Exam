@@ -44,14 +44,13 @@
 						<tr>
 							<th>회원 정보 수정</th>
 							<td>
-							<a class="btn-text-link btn btn-active btn-ghost" href="../member/modify?id=${member.id }">회원 정보 수정</a>
+							<a class="btn-text-link btn btn-active btn-ghost" href="../member/checkPw?loginPw=${member.loginPw }">회원 정보 수정</a>
 							</td>
 						</tr>
 						<tr>
 							<th>회원 탈퇴</th>
 							<td>
-								<a class="btn-text-link btn btn-active btn-ghost" onclick="if(confirm('정말 삭제하시겠습니까?')==false) return false;"
-					href="../member/doDelete?id=${member.id }">회원 탈퇴</a>
+								<a class="btn-text-link btn btn-active btn-ghost" href="../member/checkPw?loginPw=${member.loginPw }">회원 탈퇴</a>
 							</td>
 						</tr>
 					</tbody>

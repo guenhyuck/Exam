@@ -22,6 +22,10 @@ public class UsrMemberController {
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
+	@RequestMapping("/usr/member/checkPw")
+	public String showCheckPw(HttpSession httpSession) {
+		return "usr/member/checkPw";
+	}
 	
 	@RequestMapping("/usr/member/mypage")
 	public String showMypage(HttpSession httpSession) {
