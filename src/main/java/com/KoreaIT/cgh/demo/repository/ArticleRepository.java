@@ -11,19 +11,16 @@ import com.KoreaIT.cgh.demo.vo.Article;
 
 @Mapper
 public interface ArticleRepository {
-	
+
 	@Insert("""
-	INSERT INTO article
-	SET regDate = NOW(),
-	updateDate =NOW(),
-	memberId = #{memberId},
-	boardId = #{boardId},
-	title =#{title},
-	`body`= #{body}
-	""")
-		
-
-
+			INSERT INTO article
+			SET regDate = NOW(),
+			updateDate = NOW(),
+			memberId = #{memberId},
+			boardId = #{boardId},
+			title =#{title},
+			`body`= #{body}
+				""")
 	public void writeArticle(int memberId, int boardId, String title, String body);
 
 	@Select("""
@@ -153,7 +150,6 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseBadReationPoint(int relId);
-	
 
 	@Update("""
 			<script>
@@ -174,4 +170,3 @@ public interface ArticleRepository {
 	public int decreaseBadReationPoint(int relId);
 
 }
-

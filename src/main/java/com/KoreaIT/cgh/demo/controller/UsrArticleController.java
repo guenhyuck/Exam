@@ -32,7 +32,9 @@ public class UsrArticleController {
 	private Rq rq;
 	@Autowired
 	private ReactionPointService reactionPointService;
-	
+
+
+  
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam(defaultValue = "1") int boardId,
 			@RequestParam(defaultValue = "title,body") String searchKeywordTypeCode,
@@ -46,9 +48,18 @@ public class UsrArticleController {
 		int pagesCount = (int) Math.ceil(articlesCount / (double) itemsInAPage);
 		List<Article> articles = articleService.getForPrintArticles(boardId, itemsInAPage, page, searchKeywordTypeCode,
 				searchKeyword);
+
+//		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+//
+//		int repliesCount = replies.size();
+//
+//		model.addAttribute("repliesCount", repliesCount);
+
 		model.addAttribute("searchKeywordTypeCode", searchKeywordTypeCode);
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("board", board);
+
+  
 		model.addAttribute("boardId", boardId);
 		model.addAttribute("page", page);
 		model.addAttribute("pagesCount", pagesCount);
@@ -116,41 +127,31 @@ public class UsrArticleController {
 		}
 		return rq.jsReplace(Ut.f("%d번 글이 생성되었습니다", id), replaceUri);
 	}
-	
-	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
-
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
-
 		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(),
 				"article", id);
-		
-		
-	    List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(),"article",id);
-	    
-	    int repliesCount = replies.size();
 
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "article", id);
+
+		int repliesCount = replies.size();
+
+		model.addAttribute("repliesCount", repliesCount);
 		model.addAttribute("article", article);
 		model.addAttribute("actorCanMakeReactionRd", actorCanMakeReactionRd);
 		model.addAttribute("actorCanMakeReaction", actorCanMakeReactionRd.isSuccess());
-		model.addAttribute("repliesCount", repliesCount);
 
 		if (actorCanMakeReactionRd.getResultCode().equals("F-2")) {
 			int sumReactionPointByMemberId = (int) actorCanMakeReactionRd.getData1();
-
 			if (sumReactionPointByMemberId > 0) {
 				model.addAttribute("actorCanCancelGoodReaction", true);
 			} else {
 				model.addAttribute("actorCanCancelBadReaction", true);
 			}
 		}
-
 		return "usr/article/detail";
 	}
-
-
-  
 	@RequestMapping("/usr/article/doIncreaseHitCountRd")
 	@ResponseBody
 	public ResultData doIncreaseHitCountRd(int id) {

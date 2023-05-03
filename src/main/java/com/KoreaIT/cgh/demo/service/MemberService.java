@@ -31,7 +31,7 @@ public class MemberService {
 		}
 		
 		
-		memberRepository.join(loginId, loginPw,loginPwConFrim, name, nickname, cellphoneNum, email);
+		memberRepository.doJoin(loginId, loginPw,loginPwConFrim, name, nickname, cellphoneNum, email);
 
 		int id = memberRepository.getLastInsertId();
 		

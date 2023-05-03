@@ -47,12 +47,15 @@ CREATE TABLE `member`(
     delDate DATETIME COMMENT '탈퇴 날짜'
 );
 
+# 회원  테이블 구조 변경 - loginPwFrim 추가
+ALTER TABLE `member` ADD COLUMN loginPwConFrim CHAR(60) NOT NULL AFTER `loginPw`;
 # 회원 테스트데이터 생성 (관리자)
 INSERT INTO `member` 
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'admin',
 loginPw = 'admin',
+loginPwConFrim = 'admin',
 `authLevel` = 7,
 `name` = '관리자',
 `nickname` = '관리자',
@@ -65,6 +68,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
+loginPwConFrim = 'test1',
 `name` = '회원1',
 `nickname` = '회원1',
 cellphoneNum = '01043214321',
@@ -75,6 +79,7 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
+loginPwConFrim = 'test2',
 `name` = '회원2',
 `nickname` = '회원2',
 cellphoneNum = '01067896789',
@@ -82,6 +87,7 @@ email = 'zxcv@gmail.com';
 
 # 게시물 테이블 구조 변경 - memberId 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
+
 
 UPDATE article 
 SET memberId = 2
@@ -255,13 +261,22 @@ relId = 2,
 # 댓글 관련 테이블에 추천 관련 컬럼 추가
 ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# 댓글 테이블에 인덱스 추가 
+ALTER TABLE `SB_AM_04`.`reply`  ADD  KEY `relTypeCodeId` (`relTypeCode` , `relId`);
 	
 ###################################################################확인부
 SELECT * FROM article;
-SELECT * FROM `member`;
+`SB_AM_04`
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM reply;
+
+
+EXPLAIN SELECT R.*, M.nickname AS extra__writer
+FROM reply AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id;
  
 
 SELECT *

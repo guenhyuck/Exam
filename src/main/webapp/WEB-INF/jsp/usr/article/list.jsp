@@ -34,7 +34,6 @@
 					<col width="140" />
 					<col width="140" />
 					<col width="140" />
-					<col width="140" />
 				</colgroup>
 				<thead>
 					<tr>
@@ -45,7 +44,6 @@
 						<th>조회수</th>
 						<th>좋아요</th>
 						<th>싫어요</th>
-						<th>댓글수</th>
 					</tr>
 				</thead>
 				<tbody>
