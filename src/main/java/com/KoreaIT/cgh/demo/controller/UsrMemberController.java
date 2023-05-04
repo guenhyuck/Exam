@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.KoreaIT.cgh.demo.service.MemberService;
@@ -27,15 +28,7 @@ public class UsrMemberController {
 	public String showMypage(HttpSession httpSession) {
 		return "usr/member/myPage";
 	}
-	@RequestMapping("/usr/member/loginForWrite")
-	public String dologinForWrite(HttpSession httpSession) {
-		boolean loginForWriteRd = false;
-		if(loginForWriteRd != false) {
-			return "usr/article/write";
-			
-		}
-		return "usr/member/loginForWrite";
-	}
+	
 	
 	@RequestMapping("/usr/member/checkPw")
 	public String showCheckPw(HttpSession httpSession) {
@@ -156,32 +149,29 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		if (rq.isLogined()) {
 			return Ut.jsHitoryBack("F-5", "이미 로그인 상태입니다");
-		}
 
+		}
 		if (Ut.empty(loginId)) {
 			return Ut.jsHitoryBack("F-1", "아이디를 입력해주세요");
 		}
 		if (Ut.empty(loginPw)) {
 			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
 		}
-
 		Member member = memberService.getMemberByLoginId(loginId);
-
 		if (member == null) {
 			return Ut.jsHitoryBack("F-3", Ut.f("%s는 존재하지 않는 아이디입니다", loginId));
 		}
-
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return Ut.jsHitoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
 		}
 
 		rq.login(member);
 
-		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getName()), "/");
+		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getName()), afterLoginUri);
 	}
 
 	@RequestMapping("/usr/member/doLogout")
