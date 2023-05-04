@@ -30,7 +30,7 @@
 		</div>
 				<div class="join">
 			로그인 비밀번호 확인 : <input autocomplete="off" type="text" placeholder="비밀번호를 재입력해주세요"
-				name="loginPwConFrim" />
+				name="loginPw" />
 		</div>
 				<div class="join">
 			이름 : <input autocomplete="off" type="text" placeholder="이름을 입력해주세요"

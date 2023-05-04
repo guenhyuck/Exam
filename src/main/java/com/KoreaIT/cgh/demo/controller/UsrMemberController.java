@@ -109,10 +109,10 @@ public class UsrMemberController {
 		if (Ut.empty(loginPw)) {
 			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
 		}
-		if (Ut.empty(loginPwConFrim)) {
+		if (Ut.empty(loginPw)) {
 	        return Ut.jsHitoryBack("F-8", "비밀번호 확인을 입력해주세요");
 	    }
-	    if (!loginPw.equals(loginPwConFrim)) {
+	    if (!loginPw.equals(loginPw)) {
 	        return Ut.jsHitoryBack("F-9", "비밀번호와 비밀번호 확인이 일치하지 않습니다");
 	    }
 		if (Ut.empty(name)) {
