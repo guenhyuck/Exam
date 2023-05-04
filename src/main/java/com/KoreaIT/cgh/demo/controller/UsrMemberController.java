@@ -23,9 +23,9 @@ public class UsrMemberController {
 	private Rq rq;
 	
 	
-	@RequestMapping("/usr/member/mypage")
+	@RequestMapping("/usr/member/myPage")
 	public String showMypage(HttpSession httpSession) {
-		return "usr/member/mypage";
+		return "usr/member/myPage";
 	}
 	
 	@RequestMapping("/usr/member/checkPw")
