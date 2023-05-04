@@ -132,9 +132,22 @@ public class Rq {
 		print(Ut.jsReplace(msg, replaceUri));
 
 	}
+	
 	public String getLoginUri() {
 		return "../member/login?afterLoginUri=" + getAfterLoginUri();
 	}
+	
+	public String getLogoutUri() {
+		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
+	}
+
+	private String getAfterLogoutUri() {
+
+		String requestUri = req.getRequestURI();
+
+		return getEncodedCurrentUri();
+	}
+
 	private String getAfterLoginUri() {
 //		로그인 후 접근 불가 페이지
 
@@ -142,7 +155,7 @@ public class Rq {
 
 		switch (requestUri) {
 		case "/usr/member/login":
-		case "/usr/member/join":
+//		case "/usr/member/join":
 			return Ut.getEncodedUri(paramMap.get("afterLoginUri"));
 
 		}
