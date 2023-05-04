@@ -13,7 +13,6 @@ public class Member {
 	private String updateDate;
 	private String loginId;
 	private String loginPw;
-	private String loginPwConFrim;
 	private int authLevel;
 	private String name;
 	private String nickname;
