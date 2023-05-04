@@ -102,9 +102,6 @@ public class Rq {
 		return currentUri;
 	}
 
-	public String getEncodedCurrentUri() {
-		return Ut.getEncodedCurrentUri(getCurrentUri());
-	}
 
 	// Rq 객체 생성 유도
 
@@ -128,4 +125,15 @@ public class Rq {
 		print(Ut.jsReplace(msg, replaceUri));
 
 	}
+	public String getLoginUri() {
+		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+	}
+	private String getAfterLoginUri() {
+		return getEncodedCurrentUri();
+	}
+
+	public String getEncodedCurrentUri() {
+		return Ut.getEncodedCurrentUri(getCurrentUri());
+	}
+	
 }
