@@ -39,10 +39,15 @@
 						<td>${rq.loginedMember.email }</td>
 					</tr>
 					<tr>
-						<th></th>
+						<th>회원 정보수정</th>
 						<td>
 							<a href="../member/checkPw?replaceUri=${Ut.getEncodedUri('../member/modify') }" class="btn btn-active btn-ghost">회원정보
 								수정</a>
+						</td>
+						<tr>
+						<th>회원 탈퇴</th>
+						<td>
+							<a href="../member/checkPw?replaceUri=${Ut.getEncodedUri('../member/delete') }" class="btn btn-active btn-ghost">회원탈퇴</a>
 						</td>
 					</tr>
 				</tbody>

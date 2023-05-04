@@ -15,7 +15,7 @@ public class MemberService {
 		this.memberRepository = memberRepository;
 	}
 	// 서비스 메서드
-	public ResultData<Integer> join(String loginId, String loginPw,String loginPwConFrim, String name, String nickname, String cellphoneNum, String email) {
+	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
       //로그인 아이디 중복체크
 		Member existsMember = getMemberByLoginId(loginId);
 
@@ -31,7 +31,7 @@ public class MemberService {
 		}
 		
 		
-		memberRepository.doJoin(loginId, loginPw,loginPwConFrim, name, nickname, cellphoneNum, email);
+		memberRepository.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		int id = memberRepository.getLastInsertId();
 		
@@ -49,6 +49,9 @@ public class MemberService {
 		return memberRepository.getMemberById(id);
 	}
 	
-
+	public ResultData modify(int id, String loginPw, String name, String nickname, String cellphoneNum, String email) {
+		memberRepository.modify(id,loginPw, name, nickname, cellphoneNum, email);
+		return ResultData.from("S-1", "회원 정보 수정이 완료되었습니다");
+	}
 
 }

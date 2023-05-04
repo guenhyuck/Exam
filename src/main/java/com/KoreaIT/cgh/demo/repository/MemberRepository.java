@@ -3,6 +3,7 @@ package com.KoreaIT.cgh.demo.repository;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.KoreaIT.cgh.demo.vo.Member;
 
@@ -15,13 +16,12 @@ public interface MemberRepository {
 			updateDate = NOW(),
 			loginId = #{loginId},
 			loginPw = #{loginPw},
-			loginPwConFrim = #{loginPwConFrim},
 			`name` = #{name},
 			nickname = #{nickname},
 			cellphoneNum = #{cellphoneNum},
 			email = #{email}
 			""")
-	void doJoin(String loginId, String loginPw,String loginPwConFrim, String name, String nickname, String cellphoneNum, String email);
+	void doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email);
 
 	@Select("""
 			SELECT *
@@ -50,6 +50,33 @@ public interface MemberRepository {
 			""")
 	Member getMemberByNameAndEmail(String name, String email);
 	
+	@Update("""
+			<script>
+			UPDATE `member`
+			<set>
+				<if test="loginPw != null">
+					loginPw = #{loginPw},
+				</if>
+				<if test="name != null">
+					name = #{name},
+				</if>
+				<if test="nickname != null">
+					nickname = #{nickname},
+				</if>
+				<if test="cellphoneNum != null">
+					cellphoneNum = #{cellphoneNum},
+				</if>
+				<if test="email != null">
+					email = #{email},
+				</if>
+				updateDate= NOW()
+			</set>
+			WHERE id = #{id}
+			</script>
+			""")
+	void modify(int id, String loginPw, String name, String nickname, String cellphoneNum, String email);
+
+
 
 
 }
