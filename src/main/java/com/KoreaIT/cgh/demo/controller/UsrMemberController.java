@@ -27,6 +27,15 @@ public class UsrMemberController {
 	public String showMypage(HttpSession httpSession) {
 		return "usr/member/myPage";
 	}
+	@RequestMapping("/usr/member/loginForWrite")
+	public String dologinForWrite(HttpSession httpSession) {
+		boolean loginForWriteRd = false;
+		if(loginForWriteRd != false) {
+			return "usr/article/write";
+			
+		}
+		return "usr/member/loginForWrite";
+	}
 	
 	@RequestMapping("/usr/member/checkPw")
 	public String showCheckPw(HttpSession httpSession) {

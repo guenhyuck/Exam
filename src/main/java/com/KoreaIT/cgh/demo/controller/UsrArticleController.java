@@ -111,6 +111,7 @@ public class UsrArticleController {
 	public String showWrite(String title, String body) {
 		return "usr/article/write";
 	}
+	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
 	public String doWrite(int boardId, String title, String body, String replaceUri) {

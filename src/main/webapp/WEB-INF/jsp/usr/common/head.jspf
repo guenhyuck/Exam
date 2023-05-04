@@ -25,7 +25,9 @@
 <header>
 		<div class=" h-20 flex container mx-auto text-4xl">
 				<a href="#" class=" flex items-center px-3">
-						<img src="https://previews.123rf.com/images/yupiramos/yupiramos1703/yupiramos170312447/74389048-%EA%B7%80%EC%97%AC%EC%9A%B4-%EC%9E%91%EC%9D%80-%EC%83%88-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-%EB%A0%88%EC%9D%B4-%EC%85%98-%EB%94%94%EC%9E%90%EC%9D%B8.jpg" alt="" />
+						<img
+								src="https://previews.123rf.com/images/yupiramos/yupiramos1703/yupiramos170312447/74389048-%EA%B7%80%EC%97%AC%EC%9A%B4-%EC%9E%91%EC%9D%80-%EC%83%88-%EC%95%84%EC%9D%B4%EC%BD%98-%EB%B2%A1%ED%84%B0-%EC%9D%BC%EB%9F%AC%EC%8A%A4%ED%8A%B8-%EB%A0%88%EC%9D%B4-%EC%85%98-%EB%94%94%EC%9E%90%EC%9D%B8.jpg"
+								alt="" />
 
 				</a>
 
@@ -54,11 +56,18 @@
 								</ul>
 						</li>
 						</li>
-						<li class="hover:underline">
-								<a class="h-full px-3 flex items-center" href="/usr/article/write">
-										<span>WRITE</span>
+						<c:if test="${!rq.isLogined() }">
+						<a class="h-full px-3 flex items-center" href="/usr/member/loginForWrite">
+						<span>WRITE</span>
 								</a>
-						</li>
+						</c:if>
+						<c:if test="${rq.isLogined() }">
+								<li class="hover:underline">
+										<a class="h-full px-3 flex items-center" href="/usr/article/write">
+												<span>WRITE</span>
+										</a>
+								</li>
+						</c:if>
 						<li class="hover:underline">
 								<a class="h-full px-3 flex items-center" href="/usr/member/join">
 										<span>JOIN</span>
@@ -71,7 +80,7 @@
 										</a>
 								</li>
 						</c:if>
-												<c:if test="${rq.isLogined() }">
+						<c:if test="${rq.isLogined() }">
 								<li class="hover:underline">
 										<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
 												<span>MYPAGE</span>
