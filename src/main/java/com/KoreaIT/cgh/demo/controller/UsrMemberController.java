@@ -39,11 +39,11 @@ public class UsrMemberController {
 	public String doCheckPw(String loginPw,String replaceUri) {
 
 		if (Ut.empty(loginPw)) {
-			return rq.jsHitoryBackOnView("비밀번호 입력해");
+			return rq.jsHitoryBackOnView("비밀번호 입력 해주세요");
 		}
 
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
-			return rq.jsHitoryBack("","비밀번호 틀림");
+			return rq.jsHitoryBack("","비밀번호 불일치");
 		}
 
 		return rq.jsReplace("", replaceUri);
@@ -63,16 +63,16 @@ public class UsrMemberController {
 			loginPw = null;
 		}
 		if (Ut.empty(name)) {
-			return rq.jsHitoryBackOnView("name 입력해");
+			return rq.jsHitoryBackOnView("name 입력 해주세요");
 		}
 		if (Ut.empty(nickname)) {
-			return rq.jsHitoryBackOnView("nickname 입력해");
+			return rq.jsHitoryBackOnView("nickname 입력 해주세요");
 		}
 		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHitoryBackOnView("cellphoneNum 입력해");
+			return rq.jsHitoryBackOnView("cellphoneNum 입력 해주세요");
 		}
 		if (Ut.empty(email)) {
-			return rq.jsHitoryBackOnView("email 입력해");
+			return rq.jsHitoryBackOnView("email 입력 해주세요");
 		}
 
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum,

@@ -15,7 +15,7 @@
 		if (form.loginPw.value.length > 0) {
 			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 			if (form.loginPwConfirm.value.length == 0) {
-				alert('비번 확인 써라');
+				alert('비번 확인 써주세요');
 				form.loginPwConfirm.focus();
 				return;
 			}
@@ -30,19 +30,19 @@
 		form.cellphoneNum.value = form.cellphoneNum.value.trim();
 		form.email.value = form.email.value.trim();
 		if (form.name.value.length == 0) {
-			alert('이름 써라');
+			alert('이름 써주세요');
 			form.name.focus();
 		}
 		if (form.nickname.value.length == 0) {
-			alert('이름 써라');
+			alert('이름 써주세요');
 			form.nickname.focus();
 		}
 		if (form.cellphoneNum.value.length == 0) {
-			alert('cellphoneNum 써라');
+			alert('cellphoneNum 써주세요');
 			form.cellphoneNum.focus();
 		}
 		if (form.email.value.length == 0) {
-			alert('email 써라');
+			alert('email 써주세요');
 			form.email.focus();
 		}
 		MemberModify__submitFormDone = true;

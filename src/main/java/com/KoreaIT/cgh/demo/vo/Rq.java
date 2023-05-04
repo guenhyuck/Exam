@@ -24,6 +24,7 @@ public class Rq {
 	private int loginedMemberId;
 	@Getter
 	private Member loginedMember;
+	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	private HttpSession session;
@@ -115,5 +116,10 @@ public class Rq {
 	
 	public boolean isNotLogined() {
 		return !isLogined;
+	}
+
+	public void run() {
+	
+		
 	}
 }
