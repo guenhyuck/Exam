@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MEMBER CHECKPW" />
+<c:set var="pageTitle" value="MEMBER CheckPw" />
 <%@ include file="../common/head.jspf"%>
 <hr />
 
@@ -12,7 +12,6 @@
 					<colgroup>
 						<col width="200" />
 					</colgroup>
-
 					<tbody>
 						<tr>
 							<th>아이디</th>
@@ -37,10 +36,7 @@
 		</div>
 		<div class="btns">
 			<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
-
-
 		</div>
 	</div>
 </section>
-
 <%@ include file="../common/foot.jspf"%>
