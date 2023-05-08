@@ -41,11 +41,11 @@ public class UsrMemberController {
 	public String doCheckPw(String loginPw,String replaceUri) {
 
 		if (Ut.empty(loginPw)) {
-			return rq.jsHitoryBackOnView("비밀번호 입력 해주세요");
+			return rq.jsHitsoryBackOnView("비밀번호 입력 해주세요");
 		}
 
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
-			return rq.jsHitoryBack("","비밀번호 불일치");
+			return rq.jsHistoryBack("","비밀번호 불일치");
 		}
 
 		return rq.jsReplace("", replaceUri);
@@ -65,16 +65,16 @@ public class UsrMemberController {
 			loginPw = null;
 		}
 		if (Ut.empty(name)) {
-			return rq.jsHitoryBackOnView("name 입력 해주세요");
+			return rq.jsHitsoryBackOnView("name 입력 해주세요");
 		}
 		if (Ut.empty(nickname)) {
-			return rq.jsHitoryBackOnView("nickname 입력 해주세요");
+			return rq.jsHitsoryBackOnView("nickname 입력 해주세요");
 		}
 		if (Ut.empty(cellphoneNum)) {
-			return rq.jsHitoryBackOnView("cellphoneNum 입력 해주세요");
+			return rq.jsHitsoryBackOnView("cellphoneNum 입력 해주세요");
 		}
 		if (Ut.empty(email)) {
-			return rq.jsHitoryBackOnView("email 입력 해주세요");
+			return rq.jsHitsoryBackOnView("email 입력 해주세요");
 		}
 
 		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, cellphoneNum,
@@ -106,28 +106,28 @@ public class UsrMemberController {
 			String email) {
 
 		if (Ut.empty(loginId)) {
-			return Ut.jsHitoryBack("F-1", "아이디를 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "아이디를 입력해주세요");
 		}
 		if (Ut.empty(loginPw)) {
-			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
 		}
 		if (Ut.empty(name)) {
-			return Ut.jsHitoryBack("F-3", "이름을 입력해주세요");
+			return Ut.jsHistoryBack("F-3", "이름을 입력해주세요");
 		}
 		if (Ut.empty(nickname)) {
-			return Ut.jsHitoryBack("F-4", "닉네임을 입력해주세요");
+			return Ut.jsHistoryBack("F-4", "닉네임을 입력해주세요");
 		}
 		if (Ut.empty(cellphoneNum)) {
-			return Ut.jsHitoryBack("F-5", "전화번호를 입력해주세요");
+			return Ut.jsHistoryBack("F-5", "전화번호를 입력해주세요");
 		}
 		if (Ut.empty(email)) {
-			return Ut.jsHitoryBack("F-6", "이메일을 입력해주세요");
+			return Ut.jsHistoryBack("F-6", "이메일을 입력해주세요");
 		}
 
 		ResultData<Integer> joinRd = memberService.join(loginId, loginPw, name, nickname, cellphoneNum, email);
 
 		if (joinRd.isFail()) {
-			return Ut.jsHitoryBack("F-7","다시 확인해 주세요");
+			return rq.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());
 		}
 
 		Member member = memberService.getMemberById(joinRd.getData1());
@@ -146,21 +146,21 @@ public class UsrMemberController {
 	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		if (rq.isLogined()) {
-			return Ut.jsHitoryBack("F-5", "이미 로그인 상태입니다");
+			return Ut.jsHistoryBack("F-5", "이미 로그인 상태입니다");
 
 		}
 		if (Ut.empty(loginId)) {
-			return Ut.jsHitoryBack("F-1", "아이디를 입력해주세요");
+			return Ut.jsHistoryBack("F-1", "아이디를 입력해주세요");
 		}
 		if (Ut.empty(loginPw)) {
-			return Ut.jsHitoryBack("F-2", "비밀번호를 입력해주세요");
+			return Ut.jsHistoryBack("F-2", "비밀번호를 입력해주세요");
 		}
 		Member member = memberService.getMemberByLoginId(loginId);
 		if (member == null) {
-			return Ut.jsHitoryBack("F-3", Ut.f("%s는 존재하지 않는 아이디입니다", loginId));
+			return Ut.jsHistoryBack("F-3", Ut.f("%s는 존재하지 않는 아이디입니다", loginId));
 		}
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return Ut.jsHitoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
+			return Ut.jsHistoryBack("F-4", Ut.f("비밀번호가 일치하지 않습니다"));
 		}
 
 		rq.login(member);
@@ -177,7 +177,7 @@ public class UsrMemberController {
 	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
 
 		if (!rq.isLogined()) {
-			return Ut.jsHitoryBack("F-1", "이미 로그아웃 상태입니다");
+			return Ut.jsHistoryBack("F-1", "이미 로그아웃 상태입니다");
 		}
 
 		rq.logout();
