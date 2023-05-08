@@ -57,11 +57,11 @@ public class ReplyController {
 	public String showModify(Model model, int id) {
 		Reply reply = replyService.getForPrintReplise(rq.getLoginedMemberId(), id);
 		if (reply == null) {
-			return rq.jsHistoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다!", id));
+			return rq.jsHitsoryBackOnView(Ut.f("%d번 댓글은 존재하지 않습니다!", id));
 		}
 		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), reply);
 		if (actorCanModifyRd.isFail()) {
-			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
+			return rq.jsHitsoryBackOnView(actorCanModifyRd.getMsg());
 		}
 		
 		Article article = articleService.getArticle(reply.getRelId());
