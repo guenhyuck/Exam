@@ -164,6 +164,10 @@ public class UsrMemberController {
 		}
 
 		rq.login(member);
+		
+		// 우리가 갈 수 있는 경로를 경우의 수로 표현 
+		// 인코딩
+		// 그 외에는 처리 불가 -> 메인으로 보내자
 
 		return Ut.jsReplace("S-1", Ut.f("%s님 환영합니다", member.getName()), afterLoginUri);
 	}
