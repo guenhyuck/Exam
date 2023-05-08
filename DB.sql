@@ -48,14 +48,15 @@ CREATE TABLE `member`(
 );
 
 # 회원  테이블 구조 변경 - loginPwFrim 추가
-ALTER TABLE `member` ADD COLUMN loginPwConFrim CHAR(60) NOT NULL AFTER `loginPw`;
+#ALTER TABLE `member` ADD COLUMN loginPwConFirm char(60) NOT NULL AFTER `loginPw`;
+
+
 # 회원 테스트데이터 생성 (관리자)
 INSERT INTO `member` 
 SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'admin',
 loginPw = 'admin',
-loginPwConFrim = 'admin',
 `authLevel` = 7,
 `name` = '관리자',
 `nickname` = '관리자',
@@ -68,7 +69,6 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
-loginPwConFrim = 'test1',
 `name` = '회원1',
 `nickname` = '회원1',
 cellphoneNum = '01043214321',
@@ -79,7 +79,6 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
-loginPwConFrim = 'test2',
 `name` = '회원2',
 `nickname` = '회원2',
 cellphoneNum = '01067896789',
@@ -267,7 +266,7 @@ ALTER TABLE `SB_AM_04`.`reply`  ADD  KEY `relTypeCodeId` (`relTypeCode` , `relId
 	
 ###################################################################확인부
 SELECT * FROM article;
-`SB_AM_04`
+SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM reply;
@@ -300,6 +299,7 @@ FROM reactionPoint AS RP
 WHERE RP.relTypeCode = 'article'
 AND RP.relId = 3
 AND RP.memberId = 2
+
 
 
 
