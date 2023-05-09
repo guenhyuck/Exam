@@ -1,5 +1,7 @@
 package com.KoreaIT.cgh.demo.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,41 +24,37 @@ public class UsrMemberController {
 	private MemberService memberService;
 	@Autowired
 	private Rq rq;
-	
-	
+
 	@RequestMapping("/usr/member/myPage")
 	public String showMypage(HttpSession httpSession) {
 		return "usr/member/myPage";
 	}
-	
-	
+
 	@RequestMapping("/usr/member/checkPw")
 	public String showCheckPw(HttpSession httpSession) {
 		return "usr/member/checkPw";
 	}
-	
 
 	@RequestMapping("/usr/member/doCheckPw")
 	@ResponseBody
-	public String doCheckPw(String loginPw,String replaceUri) {
+	public String doCheckPw(String loginPw, String replaceUri) {
 
 		if (Ut.empty(loginPw)) {
 			return rq.jsHitsoryBackOnView("비밀번호 입력 해주세요");
 		}
 
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
-			return rq.jsHistoryBack("","비밀번호 불일치");
+			return rq.jsHistoryBack("", "비밀번호 불일치");
 		}
 
 		return rq.jsReplace("", replaceUri);
 	}
 
-	
 	@RequestMapping("/usr/member/modify")
 	public String showModify(HttpSession httpSession) {
 		return "usr/member/modify";
 	}
-	
+
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
 	public String doModify(String loginPw, String name, String nickname, String cellphoneNum, String email) {
@@ -82,19 +80,19 @@ public class UsrMemberController {
 
 		return rq.jsReplace(modifyRd.getMsg(), "../member/myPage");
 	}
-	
+
 	@RequestMapping("/usr/member/delete")
 	public String showDelete(HttpSession httpSession) {
 		return "usr/member/delete";
 	}
+
 	@RequestMapping("/usr/member/doDelete")
 	@ResponseBody
-	public String doDelete(int id,String loginId) {
+	public String doDelete(int id, String loginId) {
 		return loginId;
 
 	}
-	
-	
+
 	@RequestMapping("/usr/member/join")
 	public String showJoin(HttpSession httpSession) {
 		return "usr/member/join";
@@ -135,6 +133,24 @@ public class UsrMemberController {
 		return Ut.jsReplace("S-1", Ut.f("%s님이 가입하셨습니다", member.getNickname()), "/");
 	}
 
+	@RequestMapping("/usr/member/getLoginIdDup")
+	@ResponseBody
+	public ResultData getLoginIdDup(String loginId) {
+
+		if (Ut.empty(loginId)) {
+			return ResultData.from("F-1", "아이디를 입력해주세요");
+		}
+
+		Member existsMember = memberService.getMemberByLoginId(loginId);
+
+		if (existsMember != null) {
+			return ResultData.from("F-2", "사용중인 아이디입니다","loginId",loginId);
+
+		}
+
+
+		return ResultData.from("S-1", "사용 가능한 아이디입니다","loginId",loginId);
+	}
 
 	@RequestMapping("/usr/member/login")
 	public String showLogin(HttpSession httpSession) {
@@ -164,8 +180,8 @@ public class UsrMemberController {
 		}
 
 		rq.login(member);
-		
-		// 우리가 갈 수 있는 경로를 경우의 수로 표현 
+
+		// 우리가 갈 수 있는 경로를 경우의 수로 표현
 		// 인코딩
 		// 그 외에는 처리 불가 -> 메인으로 보내자
 

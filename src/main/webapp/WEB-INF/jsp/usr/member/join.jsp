@@ -5,6 +5,7 @@
 
 <script>
 	let submitJoinFormDone = false;
+	let validLoginId = "";
 	function submitJoinForm(form) {
 		if (submitJoinFormDone) {
 			alert('처리중입니다');
@@ -15,9 +16,15 @@
 			alert('아이디를 입력해주세요');
 			return;
 		}
+		if (form.loginId.value != validLoginId) {
+			alert('사용할 수 없는 아이디야');
+			form.loginId.focus();
+			return;
+		}
 		form.loginPw.value = form.loginPw.value.trim();
 		if (form.loginPw.value == 0) {
 			alert('비밀번호를 입력해주세요');
+
 			return;
 		}
 		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
@@ -53,9 +60,29 @@
 		submitJoinFormDone = true;
 		form.submit();
 	}
+	function checkLoginIdDup(el) {
+		$('.checkDup-msg').empty();
+		const form = $(el).closest('form').get(0);
+		if (form.loginId.value.length == 0) {
+			validLoginId = '';
+			return;
+		}
+		$.get('../member/getLoginIdDup', {
+			isAjax : 'Y',
+			loginId : form.loginId.value
+		}, function(data) {
+			$('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
+			if (data.success) {
+				validLoginId = data.data1;
+			} else {
+				validLoginId = '';
+			}
+		}, 'json');
+	}
 </script>
 
 <section class="mt-8 text-xl">
+
 	<div class="container mx-auto px-3">
 		<form class="table-box-type-1" method="POST" action="../member/doJoin" onsubmit="submitJoinForm(this); return false;">
 			<input type="hidden" name="afterLoginUri" value="${param.afterLoginUri}" />
@@ -63,15 +90,17 @@
 				<colgroup>
 					<col width="200" />
 				</colgroup>
-
 				<tbody>
 					<tr>
 						<th>아이디</th>
 						<td>
-							<input name="loginId" class="w-full input input-bordered  max-w-xs" placeholder="아이디를 입력해주세요" />
+							<input onkeyup="checkLoginIdDup(this);" name="loginId" class="w-full input input-bordered  max-w-xs"
+								placeholder="아이디를 입력해주세요"  autocomplete="off"/>
+							<div class="checkDup-msg"></div>
 						</td>
 					</tr>
 					<tr>
+
 						<th>비밀번호</th>
 						<td>
 							<input name="loginPw" class="w-full input input-bordered  max-w-xs" placeholder="비밀번호를 입력해주세요" />
@@ -114,14 +143,11 @@
 						</td>
 					</tr>
 				</tbody>
-
 			</table>
 		</form>
 	</div>
-
 	<div class="container mx-auto btns">
 		<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
 	</div>
-
 </section>
 <%@ include file="../common/foot.jspf"%>
