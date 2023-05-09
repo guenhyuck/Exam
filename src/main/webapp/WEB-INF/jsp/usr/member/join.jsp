@@ -63,21 +63,22 @@
 	function checkLoginIdDup(el) {
 		$('.checkDup-msg').empty();
 		const form = $(el).closest('form').get(0);
-		if (form.loginId.value.length == 0) {
-			validLoginId = '';
-			return;
+		if (form.loginId.value.length < 4) { 
+			 $('.login-id-error-msg').text('로그인 ID는 4글자 이상 입력해야 합니다.');
+		} else {
+			$('.login-id-error-msg').empty();
+			$.get('../member/getLoginIdDup', {
+				isAjax : 'Y',
+				loginId : form.loginId.value
+			}, function(data) {
+				$('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
+				if (data.success) {
+					validLoginId = data.data1;
+				} else {
+					validLoginId = '';
+				}
+			}, 'json');
 		}
-		$.get('../member/getLoginIdDup', {
-			isAjax : 'Y',
-			loginId : form.loginId.value
-		}, function(data) {
-			$('.checkDup-msg').html('<div class="mt-2">' + data.msg + '</div>')
-			if (data.success) {
-				validLoginId = data.data1;
-			} else {
-				validLoginId = '';
-			}
-		}, 'json');
 	}
 </script>
 
@@ -97,6 +98,7 @@
 							<input onkeyup="checkLoginIdDup(this);" name="loginId" class="w-full input input-bordered  max-w-xs"
 								placeholder="아이디를 입력해주세요"  autocomplete="off"/>
 							<div class="checkDup-msg"></div>
+							<div class="login-id-error-msg"></div>
 						</td>
 					</tr>
 					<tr>
