@@ -21,4 +21,9 @@ public class UsrAPITestController {
 		return "usr/home/APITest3";
 	}
 
+	@RequestMapping("/usr/home/APITest4")
+	public String APITest4() {
+		return "usr/home/APITest4";
+	}
+
 }
