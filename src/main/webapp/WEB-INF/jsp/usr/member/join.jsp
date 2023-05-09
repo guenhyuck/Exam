@@ -63,6 +63,9 @@
 	function checkLoginIdDup(el) {
 		$('.checkDup-msg').empty();
 		const form = $(el).closest('form').get(0);
+		if(validLoginId == form.loginId.value){
+			return;
+		}
 		if (form.loginId.value.length < 4) { 
 			 $('.login-id-error-msg').text('로그인 ID는 4글자 이상 입력해야 합니다.');
 		} else {
