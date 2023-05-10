@@ -39,6 +39,13 @@
 																<button type="submit" onclick="encryptAndSubmitForm()">로그인</button>
 														</td>
 												</tr>
+																								<tr>
+														<th></th>
+														<td>
+																<a class="btn btn-active btn-ghost" href="${rq.findLoginIdUri }">아이디 찾기</a>
+																<a class="btn btn-active btn-ghost" href="${rq.findLoginPwUri }">비밀번호 찾기</a>
+														</td>
+												</tr>
 										</tbody>
 								</table>
 						</form>

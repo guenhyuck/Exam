@@ -49,7 +49,7 @@ public interface MemberRepository {
 			AND email = #{email}
 			""")
 	Member getMemberByNameAndEmail(String name, String email);
-	
+
 	@Update("""
 			<script>
 			UPDATE `member`
@@ -75,8 +75,6 @@ public interface MemberRepository {
 			</script>
 			""")
 	void modify(int id, String loginPw, String name, String nickname, String cellphoneNum, String email);
-
-
 
 
 }

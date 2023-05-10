@@ -32,18 +32,22 @@
 		if (form.name.value.length == 0) {
 			alert('이름 써주세요');
 			form.name.focus();
+			return;
 		}
 		if (form.nickname.value.length == 0) {
-			alert('이름 써주세요');
+			alert('닉네임 써주세요');
 			form.nickname.focus();
+			return;
 		}
 		if (form.cellphoneNum.value.length == 0) {
 			alert('cellphoneNum 써주세요');
 			form.cellphoneNum.focus();
+			return;
 		}
 		if (form.email.value.length == 0) {
 			alert('email 써주세요');
 			form.email.focus();
+			return;
 		}
 		MemberModify__submitFormDone = true;
 		form.submit();
