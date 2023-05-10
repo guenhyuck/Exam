@@ -60,14 +60,16 @@ function Theme__applyTo(themeName) {
 <link rel="stylesheet" href="/resource/common.css" />
 <link rel="shortcut icon" href="/resource/favicon.ico" />
 <script src="/resource/common.js" defer="defer"></script>
-
 </head>
 <body>
+
+
 	<header>
 		<div class=" h-20 flex container mx-auto text-3xl">
 			<a href="/" class=" flex items-center px-3 logo">
 				<span>로고</span>
 			</a>
+
 			<div class="flex-grow"></div>
 
 			<ul class="flex">
@@ -80,8 +82,9 @@ function Theme__applyTo(themeName) {
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/">
 						<span>HOME</span>
->
+					</a>
 				</li>
+
 				<li class="hover:underline">
 					<a class="h-full px-3 flex items-center" href="/usr/article/list">
 						<span>LIST</span>
@@ -90,7 +93,6 @@ function Theme__applyTo(themeName) {
 						<li class="hover:underline">
 							<a href="/usr/article/list?boardId=1">NOTICE</a>
 						</li>
-
 						<li class="hover:underline">
 							<a href="/usr/article/list?boardId=2">FREE</a>
 						</li>
@@ -140,6 +142,7 @@ function Theme__applyTo(themeName) {
 			</ul>
 		</div>
 	</header>
+
 	<section class="my-3 text-2xl">
 		<div class="container mx-auto px-3">
 			<h1>${pageTitle }&nbsp;PAGE</h1>
