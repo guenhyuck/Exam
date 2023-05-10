@@ -37,7 +37,7 @@ CREATE TABLE `member`(
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     loginId CHAR(20) NOT NULL,
-    loginPw CHAR(60) NOT NULL,
+    loginPw CHAR(100) NOT NULL,
     `authLevel` SMALLINT(2) UNSIGNED DEFAULT 3 COMMENT '권한 레벨 (3=일반,7=관리자)',
     `name` CHAR(20) NOT NULL,
     nickname CHAR(20) NOT NULL,
@@ -46,10 +46,6 @@ CREATE TABLE `member`(
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴 여부 (0=탈퇴 전, 1=탈퇴 후)',
     delDate DATETIME COMMENT '탈퇴 날짜'
 );
-
-# 회원  테이블 구조 변경 - loginPwFrim 추가
-#ALTER TABLE `member` ADD COLUMN loginPwConFirm char(60) NOT NULL AFTER `loginPw`;
-
 
 # 회원 테스트데이터 생성 (관리자)
 INSERT INTO `member` 
@@ -86,7 +82,6 @@ email = 'zxcv@gmail.com';
 
 # 게시물 테이블 구조 변경 - memberId 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
-
 
 UPDATE article 
 SET memberId = 2
@@ -146,7 +141,6 @@ CREATE TABLE reactionPoint (
     relTypeCode CHAR(50) NOT NULL COMMENT '관련 데이터 타입 코드',
     relId INT(10) NOT NULL COMMENT '관련 데이터 번호',
     `point` INT(10) NOT NULL
-
 );
 
 # reactionPoint 테스트 데이터
@@ -212,71 +206,86 @@ ON A.id = RP_SUM.relId
 SET A.goodReactionPoint = RP_SUM.goodReactionPoint,
 A.badReactionPoint = RP_SUM.badReactionPoint;
 
-
-
-
-################ 댓글 테이블 생성
-
+# reply 테이블 생성
 CREATE TABLE reply (
- id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
     relTypeCode CHAR(50) NOT NULL COMMENT '관련 데이터 타입 코드',
     relId INT(10) NOT NULL COMMENT '관련 데이터 번호',
-	`body` TEXT NOT NULL
-
+    `body`TEXT NOT NULL
 );
-### 댓글 테스트 데이터 생성
 
-# 2번 회원이 1번 글에
+# 2번 회원이 1번 글에 
 INSERT INTO reply
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 relTypeCode = 'article',
 relId = 1,
-`body` = '댓글1';
+`body` = '댓글 1';
 
-# 3번 회원이 1번 글에
+# 2번 회원이 1번 글에 
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 2';
+
+# 3번 회원이 1번 글에 
 INSERT INTO reply
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 3,
 relTypeCode = 'article',
 relId = 1,
-`body` = '댓글1';
+`body` = '댓글 3';
 
-# 3번 회원이 2번 글에
+# 3번 회원이 1번 글에 
 INSERT INTO reply
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 3,
+memberId = 2,
 relTypeCode = 'article',
 relId = 2,
-`body` = '댓글4';
+`body` = '댓글 4';
 
-
-# 댓글 관련 테이블에 추천 관련 컬럼 추가
+# 댓글 테이블에 추천 관련 컬럼 추가
 ALTER TABLE reply ADD COLUMN goodReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 ALTER TABLE reply ADD COLUMN badReactionPoint INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
-# 댓글 테이블에 인덱스 추가 
-ALTER TABLE `SB_AM_04`.`reply`  ADD  KEY `relTypeCodeId` (`relTypeCode` , `relId`);
-	
-###################################################################확인부
+# 댓글 테이블에 인덱스 추가
+ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`);
+
+# 기존의 회원 비번을 암호화
+UPDATE `member`
+SET loginPw = SHA2(loginPw,256);
+
+
+###################################################################
 SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
-SELECT * FROM reply;
+SELECT * FROM `reply`;
 
+SELECT SHA2('hello',256);
 
+SELECT R.*, M.nickname AS extra__writer
+				FROM reply AS R
+				LEFT JOIN `member` AS M
+				ON R.memberId = M.id
+				
 EXPLAIN SELECT R.*, M.nickname AS extra__writer
 FROM reply AS R
 LEFT JOIN `member` AS M
-ON R.memberId = M.id;
- 
+ON R.memberId = M.id
+WHERE R.relTypeCode = 'article'
+AND R.relId = 1
+ORDER BY R.id DESC
 
 SELECT *
 FROM reactionPoint AS RP
@@ -299,7 +308,6 @@ FROM reactionPoint AS RP
 WHERE RP.relTypeCode = 'article'
 AND RP.relId = 3
 AND RP.memberId = 2
-
 
 
 

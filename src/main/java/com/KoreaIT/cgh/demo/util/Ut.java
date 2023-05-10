@@ -2,6 +2,9 @@ package com.KoreaIT.cgh.demo.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +114,7 @@ public class Ut {
 		}
 
 	}
+
 	public static String getEncodedUri(String uri) {
 
 		try {
@@ -136,6 +140,7 @@ public class Ut {
 
 		return param;
 	}
+
 	public static String getAttr(Map map, String attrName, String defaultValue) {
 
 		if (map.containsKey(attrName)) {
@@ -144,5 +149,24 @@ public class Ut {
 
 		return defaultValue;
 	}
+	// sha256
+		public static String sha256(String input) {
+			try {
+				MessageDigest md = MessageDigest.getInstance("SHA-256");
+				byte[] hash = md.digest(input.getBytes("UTF-8"));
+				StringBuffer hexString = new StringBuffer();
 
+				for (int i = 0; i < hash.length; i++) {
+					String hex = Integer.toHexString(0xff & hash[i]);
+					if (hex.length() == 1)
+						hexString.append('0');
+					hexString.append(hex);
+				}
+
+				return hexString.toString();
+			} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
 }

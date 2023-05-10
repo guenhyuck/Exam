@@ -75,7 +75,6 @@ html[data-theme="dark"] .btn-theme-toggle>span:last-child {
 header>div>ul>li>ul {
 	display: none;
 	position: absolute;
-	background-color: white;
 }
 
 header>div>ul>li:hover>ul {
