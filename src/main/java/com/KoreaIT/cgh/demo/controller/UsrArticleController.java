@@ -42,7 +42,7 @@ public class UsrArticleController {
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "1") int page) {
 		Board board = boardService.getBoardById(boardId);
 		if (board == null) {
-			return rq.jsHitsoryBackOnView("없는 게시판이야");
+			return rq.jsHistoryBackOnView("없는 게시판이야");
 		}
 		int articlesCount = articleService.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 		int itemsInAPage = 10;
@@ -72,11 +72,11 @@ public class UsrArticleController {
 	public String showModify(Model model, int id) {
 		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		if (article == null) {
-			return rq.jsHitsoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
+			return rq.jsHistoryBackOnView(Ut.f("%d번 글은 존재하지 않습니다!", id));
 		}
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMemberId(), article);
 		if (actorCanModifyRd.isFail()) {
-			return rq.jsHitsoryBackOnView(actorCanModifyRd.getMsg());
+			return rq.jsHistoryBackOnView(actorCanModifyRd.getMsg());
 		}
 		model.addAttribute("article", article);
 		return "usr/article/modify";

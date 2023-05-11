@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="MEMBER MYPAGE" />
+<c:set var="pageTitle" value="나의 정보" />
 <%@ include file="../common/head.jspf"%>
 <%@ page import="com.KoreaIT.cgh.demo.util.Ut"%>
 <hr />

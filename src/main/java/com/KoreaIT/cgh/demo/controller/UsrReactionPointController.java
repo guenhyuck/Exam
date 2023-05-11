@@ -53,7 +53,7 @@ public class UsrReactionPointController {
 		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(),
 				relTypeCode, relId);
 		if (actorCanMakeReactionRd.isSuccess()) {
-			return rq.jsHitsoryBackOnView(actorCanMakeReactionRd.getMsg());
+			return rq.jsHistoryBackOnView(actorCanMakeReactionRd.getMsg());
 		}
 		ResultData rd = reactionPointService.deleteGoodReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
 		if (rd.isFail()) {
@@ -70,7 +70,7 @@ public class UsrReactionPointController {
 		ResultData actorCanMakeReactionRd = reactionPointService.actorCanMakeReaction(rq.getLoginedMemberId(),
 				relTypeCode, relId);
 		if (actorCanMakeReactionRd.isSuccess()) {
-			return rq.jsHitsoryBackOnView(actorCanMakeReactionRd.getMsg());
+			return rq.jsHistoryBackOnView(actorCanMakeReactionRd.getMsg());
 		}
 		ResultData rd = reactionPointService.deleteBadReactionPoint(rq.getLoginedMemberId(), relTypeCode, relId);
 		if (rd.isFail()) {

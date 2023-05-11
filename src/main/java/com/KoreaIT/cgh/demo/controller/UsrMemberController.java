@@ -124,7 +124,7 @@ public class UsrMemberController {
 	@ResponseBody
 	public String doCheckPw(String loginPw, String replaceUri) {
 		if (Ut.empty(loginPw)) {
-			return rq.jsHitsoryBackOnView("비밀번호 입력해");
+			return rq.jsHistoryBackOnView("비밀번호 입력해");
 		}
 
 		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
