@@ -13,6 +13,12 @@ public class UsrHomeController {
 	public UsrHomeController(Rq rq) {
 		this.rq = rq;
 	}
+	
+	@RequestMapping("/usr/home/beforeMain")
+	public String showbeforeMain() {
+		rq.run();
+		return "usr/home/beforeMain";
+	}
 	@RequestMapping("/usr/home/main")
 	public String showMain() {
 		rq.run();
