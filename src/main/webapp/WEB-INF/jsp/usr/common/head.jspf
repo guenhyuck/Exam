@@ -62,91 +62,88 @@ function Theme__applyTo(themeName) {
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
+<header>
+  <div class="flex items-center justify-between h-20 container mx-auto">
+    <a href="/" class="flex items-center logo">
+      <img class="logo" src="https://blog.kakaocdn.net/dn/sYIfu/btqwx2UHXws/iYNMv58dIMfX5N9YCw9CKK/img.jpg" alt="로고" />
+      <span></span>
+    </a>
 
+    <ul class="flex items-center">
+      <li class="hover:underline">
+        <a class="h-full px-3 flex items-center" href="javascript:Theme__toggle();">
+          <span>🌞</span>
+          <span>🌚</span>
+        </a>
+      </li>
+      <li class="hover:underline">
+        <a class="h-full px-3 flex items-center" href="/">
+          <span>홈으로</span>
+								</a>
+						</li>
 
-	<header>
-		<div class=" h-20 flex container mx-auto text-3xl">
-			<a href="/" class=" flex items-center px-3 logo">
-				<span>로고</span>
-			</a>
-
-			<div class="flex-grow"></div>
-
-			<ul class="flex">
-				<li class="">
-					<a class="h-full px-3 flex items-center btn-theme-toggle" href="javascript:Theme__toggle();">
-						<span>🌞</span>
-						<span>🌚</span>
-					</a>
-				</li>
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/">
-						<span>HOME</span>
-					</a>
-				</li>
-
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/article/list">
-						<span>LIST</span>
-					</a>
-					<ul class="z-10 ">
 						<li class="hover:underline">
-							<a href="/usr/article/list?boardId=1">NOTICE</a>
+								<a class="h-full px-3 flex items-center" href="/usr/article/list">
+										<span>게시판</span>
+								</a>
+								<ul class="z-10 ">
+										<li class="hover:underline">
+												<a href="/usr/article/list?boardId=1">대전의 맛</a>
+										</li>
+										<li class="hover:underline">
+												<a href="/usr/article/list?boardId=2">대전의 멋</a>
+										</li>
+										<li class="hover:underline">
+												<a href="/usr/article/list?boardId=3">대전의 편의</a>
+										</li>
+								</ul>
 						</li>
 						<li class="hover:underline">
-							<a href="/usr/article/list?boardId=2">FREE</a>
+								<a class="h-full px-3 flex items-center" href="/usr/article/write">
+										<span>글쓰기</span>
+								</a>
 						</li>
+						<c:if test="${!rq.logined }">
+								<li class="hover:underline">
+										<a class="h-full px-3 flex items-center" href="${rq.loginUri }">
+												<span>로그인</span>
+										</a>
+								</li>
+						</c:if>
+						<c:if test="${!rq.logined}">
+								<li class="hover:underline">
+										<a class="h-full px-3 flex items-center" href="${rq.joinUri }">
+												<span>회원가입</span>
+										</a>
+								</li>
+						</c:if>
+						<c:if test="${rq.logined }">
+								<li class="hover:underline">
+										<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
+												<span>마이메이지</span>
+										</a>
+								</li>
+						</c:if>
+						<c:if test="${rq.logined }">
+								<li class="hover:underline">
+										<a class="h-full px-3 flex items-center" href="${rq.logoutUri }">
+												<span>로그아웃</span>
+										</a>
+								</li>
+						</c:if>
 						<li class="hover:underline">
-							<a href="/usr/article/list?boardId=3">QnA</a>
+								<a class="h-full px-3 flex items-center" href="/usr/home/APITest4">
+										<span>API</span>
+								</a>
 						</li>
-					</ul>
-				</li>
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/article/write">
-						<span>WRITE</span>
-					</a>
-				</li>
-				<c:if test="${!rq.logined }">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="${rq.loginUri }">
-							<span>LOGIN</span>
-						</a>
-					</li>
-				</c:if>
-				<c:if test="${!rq.logined}">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="${rq.joinUri }">
-							<span>JOIN</span>
-						</a>
-					</li>
-				</c:if>
-				<c:if test="${rq.logined }">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="/usr/member/myPage">
-							<span>MYPAGE</span>
-						</a>
-					</li>
-				</c:if>
-				<c:if test="${rq.logined }">
-					<li class="hover:underline">
-						<a class="h-full px-3 flex items-center" href="${rq.logoutUri }">
-							<span>LOGOUT</span>
-						</a>
-					</li>
-				</c:if>
-				<li class="hover:underline">
-					<a class="h-full px-3 flex items-center" href="/usr/home/APITest4">
-						<span>API</span>
-					</a>
-				</li>
 
-			</ul>
-		</div>
-	</header>
+				</ul>
+				</div>
+		</header>
 
-	<section class="my-3 text-2xl">
-		<div class="container mx-auto px-3">
-			<h1>${pageTitle }&nbsp;PAGE</h1>
-		</div>
-	</section>
-	<main>
+		<section class="my-3 text-2xl">
+				<div class="container mx-auto px-3">
+						<h1>${pageTitle }&nbsp;PAGE</h1>
+				</div>
+		</section>
+		<main>
