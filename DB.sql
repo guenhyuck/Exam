@@ -57,7 +57,7 @@ loginPw = 'admin',
 `name` = '관리자',
 `nickname` = '관리자',
 cellphoneNum = '01012341234',
-email = 'abcdef@gmail.com';
+email = 'guenhyuckstudy@gmail.com';
 
 # 회원 테스트데이터 생성 (일반)
 INSERT INTO `member` 
@@ -68,7 +68,7 @@ loginPw = 'test1',
 `name` = '회원1',
 `nickname` = '회원1',
 cellphoneNum = '01043214321',
-email = 'abcd@gmail.com';
+email = 'guenhyuckstudy@gmail.com';
 
 INSERT INTO `member` 
 SET regDate = NOW(),
@@ -78,7 +78,7 @@ loginPw = 'test2',
 `name` = '회원2',
 `nickname` = '회원2',
 cellphoneNum = '01067896789',
-email = 'zxcv@gmail.com';
+email = 'guenhyuckstudy@gmail.com';
 
 # 게시물 테이블 구조 변경 - memberId 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
@@ -264,7 +264,11 @@ ALTER TABLE `SB_AM_04`.`reply` ADD KEY `relTypeCodeId` (`relTypeCode` , `relId`)
 UPDATE `member`
 SET loginPw = SHA2(loginPw,256);
 
-
+# 회원 아이디 찾기
+SELECT loginId 
+FROM `member` 
+WHERE `name` = '회원1'
+AND email = 'abcd@gmail.com';
 ###################################################################
 SELECT * FROM article;
 SELECT * FROM `member`;
