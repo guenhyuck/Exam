@@ -127,7 +127,7 @@ body {
 	width: 100%;
 	height: 100vh;
 	font-family: 'Montserrat', sans-serif;
-	background-color: #343d4b;
+	background-color: #87CEEB;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
