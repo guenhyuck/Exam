@@ -14,10 +14,17 @@ public class WeatherController {
 		this.rq = rq;
 	}
 	
-	@RequestMapping("/weather/weather")
+	// 날씨 (보여주기식)
+	@RequestMapping("/weather/weather/weather")
 	public String showweather() {
 		rq.run();
-		return "/weather/weather";
+		return "/weather/weather/weather";
+	}
+	// 날씨 (실시간)
+	@RequestMapping("/weather/weather/weather2")
+	public String showweather2() {
+		rq.run();
+		return "/weather/weather/weather2";
 	}
 
 }
