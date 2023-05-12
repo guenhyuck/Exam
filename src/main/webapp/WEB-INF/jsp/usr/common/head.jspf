@@ -213,11 +213,7 @@ function (WeatherResult) {
 												</a>
 										</li>
 								</c:if>
-								<li class="hover:underline">
-										<a class="h-full px-3 flex items-center" href="/usr/home/APITest4">
-												<span>API</span>
-										</a>
-								</li>
+				
 
 								<c:if test="${rq.admin}">
 										<li class="hover:underline">
@@ -277,10 +273,7 @@ function (WeatherResult) {
 												</ul>
 										</div>
 
-										<a href="#" class="nav__link">
-												<ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-												<span class="nav_name">Analytics</span>
-										</a>
+									
 
 										<div href="#" class="nav__link collapse">
 												<ion-icon name="people-outline" class="nav__icon"></ion-icon>
@@ -297,6 +290,10 @@ function (WeatherResult) {
 
 												</ul>
 										</div>
+											<a href="/usr/home/APITest4" class="nav__link">
+												<ion-icon name="navigate-outline"></ion-icon>
+												<span class="nav_name">길찾기</span>
+										</a>
 										<c:if test="${!rq.logined }">
 												<a href="/usr/member/login" class="nav__link">
 														<ion-icon name="log-in-outline"></ion-icon>
