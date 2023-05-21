@@ -91,4 +91,8 @@ public class MemberService {
 		return members;
 	}
 
+	public Member getMemberByEmail(String email) {
+		return memberRepository.getMemberByEmail(email);
+	}
+
 }

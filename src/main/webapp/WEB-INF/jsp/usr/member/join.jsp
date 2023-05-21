@@ -20,7 +20,7 @@
 			return;
 		}
 		if (form.loginId.value != validLoginId) {
-			alert('사용할 수 없는 아이디야');
+			alert('사용 불가능한 아이디!');
 			form.loginId.focus();
 			return;
 		}
@@ -65,6 +65,7 @@
 	}
 	
 	
+	
 	const checkLoginIdDupDebounced = _.debounce(checkLoginIdDup, 1000);
 	
 	function checkLoginIdDup(el) {
@@ -89,8 +90,37 @@
 				}
 			}, 'json');
 			
+
+			
 		}
 	}
+	
+	const checkEmailDupDebounced = _.debounce(checkEmailDup, 1000);
+
+	function checkEmailDup(el) {
+	    $('.checkEDup-msg').empty();
+	    const form = $(el).closest('form').get(0);
+	    if (validEmail === form.email.value) {
+	        return;
+	    }
+	    if (form.email.value.length < 8) {
+	        $('.email-error-msg').text('이메일은 8글자 이상 입력해야 합니다.');
+	    } else {
+	        $('.email-error-msg').empty();
+	        $.get('../member/getEmailDup', {
+	            isAjax: 'Y',
+	            email: form.email.value
+	        }, function (data) {
+	            $('.checkEDup-msg').html('<div class="mt-2">' + data.msg + '</div>');
+	            if (data.success) {
+	                validEmail = data.data1;
+	            } else {
+	                validEmail = '';
+	            }
+	        }, 'json');
+	    }
+	}
+
 </script>
 
 <section class="mt-8 text-xl">
@@ -146,7 +176,10 @@
 					<tr>
 						<th>이메일</th>
 						<td>
-							<input name="email" class="w-full input input-bordered  max-w-xs" placeholder="이메일을 입력해주세요" />
+							<input onkeyup="checkEmailDupDebounced(this);" name="email" class="w-full input input-bordered  max-w-xs" placeholder="이메일을 입력해주세요" autocomplete="off" />
+						
+						 	<div class="checkEDup-msg"></div>
+							<div class="email-error-msg"></div>
 						</td>
 					</tr>
 					<tr>

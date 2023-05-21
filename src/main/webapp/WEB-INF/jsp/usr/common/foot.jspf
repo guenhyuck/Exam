@@ -2,39 +2,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </main>
 </body>
-<div class="flex items-center justify-center">
-  <ul>
-    <li class="hover:underline">
-      <a class="h-full px-3 flex items-center" href="javascript:Theme__toggle();">
-        <button onclick="toggleTheme()">절전모드</button>
-        <span id="sun" style="display: none;">🌞</span>
-        <span id="moon">🌚</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-<style>
-  #sun {
-    display: none;
-  }
-</style>
-
-<script>
-  function toggleTheme() {
-    var sunSpan = document.getElementById('sun');
-    var moonSpan = document.getElementById('moon');
-
-    if (sunSpan.style.display === 'none') {
-      sunSpan.style.display = 'inline';
-      moonSpan.style.display = 'none';
-    } else {
-      sunSpan.style.display = 'none';
-      moonSpan.style.display = 'inline';
-    }
-  }
-</script>
-
-
-
 </html>
