@@ -176,7 +176,8 @@
 					<tr>
 						<th>이메일</th>
 						<td>
-							<input onkeyup="checkEmailDupDebounced(this);" name="email" class="w-full input input-bordered  max-w-xs" placeholder="이메일을 입력해주세요" autocomplete="off" />
+							<input onkeyup="checkEmailDupDebounced(this);" name="email" 
+							class="w-full input input-bordered  max-w-xs" placeholder="이메일을 입력해주세요" autocomplete="off" />
 						
 						 	<div class="checkEDup-msg"></div>
 							<div class="email-error-msg"></div>
